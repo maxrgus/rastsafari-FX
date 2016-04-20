@@ -126,6 +126,9 @@ public class LocationEditDialogController {
 		if (locationField.getText() == null || locationField.getText().length() == 0) {
 			errorMessage += "Plats är inte ifyllt \n";
 		}
+		if (minParticipantBox.getValue() > maxParticipantBox.getValue()){
+			errorMessage += "Minimum antal deltagare är fler än max antal \n";
+		}
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
