@@ -3,6 +3,7 @@ package com.rastsafari;
 import java.io.IOException;
 
 import com.rastsafari.model.SafariLocation;
+import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.LocationEditDialogController;
 import com.rastsafari.view.LocationMapController;
 import com.rastsafari.view.MainFrameController;
@@ -33,6 +34,7 @@ public class MainApp extends Application {
 		
 		initRootLayout();
 		showMainFrame();
+		showCustomerCategoryView();
 				
 	}
 	/**
@@ -150,6 +152,28 @@ public class MainApp extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	public void showCustomerCategoryView() {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/CustomerCategoryView.fxml"));
+			AnchorPane categoryView = (AnchorPane) uiLoader.load();
+			
+			Stage categoryStage = new Stage();
+			categoryStage.setTitle("Kundkategorier");
+			categoryStage.initModality(Modality.WINDOW_MODAL);
+			categoryStage.initOwner(dialogStage);
+			Scene scene = new Scene(categoryView);
+			categoryStage.setScene(scene);
+			
+			CustomerCategoryController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			
+			categoryStage.show();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	/*

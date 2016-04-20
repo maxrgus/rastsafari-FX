@@ -18,7 +18,7 @@ public class CustomerCategoryList {
 	private void getCategoriesFromDatabase(){
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
-		double pi;
+		
 		try{
 			Statement statement = c.createStatement();
 			String sql = "SELECT * FROM customerCategory;";
@@ -29,7 +29,7 @@ public class CustomerCategoryList {
 				categories.add(new CustomerCategory(
 						rs.getInt("id"),
 						rs.getString("categoryName"),
-						pi = rs.getInt("priceIndex")));
+						rs.getDouble("priceIndex")));
 			}
 			rs.close();
 		} catch (Exception e){

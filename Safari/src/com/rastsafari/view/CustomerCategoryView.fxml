@@ -6,18 +6,17 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="900.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<AnchorPane prefHeight="500.0" prefWidth="900.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rastsafari.view.CustomerCategoryController">
    <children>
       <SplitPane dividerPositions="0.7933333333333333" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="background">
                <children>
-                  <TableView layoutX="6.0" layoutY="14.0" prefHeight="499.0" prefWidth="535.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="categoryTable" layoutX="6.0" layoutY="14.0" prefHeight="499.0" prefWidth="535.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="197.0" text="Kategori" />
-                      <TableColumn prefWidth="250.0" text="Antal kunder" />
-                        <TableColumn minWidth="0.0" prefWidth="250.0" text="PrisIndex" />
+                      <TableColumn fx:id="categoryName" prefWidth="197.0" text="Kategori" />
+                      <TableColumn fx:id="nrCustomers" prefWidth="250.0" text="Antal kunder" />
+                        <TableColumn fx:id="priceIndex" minWidth="0.0" prefWidth="250.0" text="PrisIndex" />
                     </columns>
                   </TableView>
                </children>
