@@ -1,6 +1,5 @@
 package com.rastsafari.view;
 
-import java.awt.TextField;
 
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.CustomerMaintenance;
@@ -10,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class EditCustomerCategoryDialogController {
