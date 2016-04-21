@@ -2,9 +2,11 @@ package com.rastsafari;
 
 import java.io.IOException;
 
+import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.SafariLocation;
 import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
+import com.rastsafari.view.EditCustomerCategoryDialogController;
 import com.rastsafari.view.LocationEditDialogController;
 import com.rastsafari.view.LocationMapController;
 import com.rastsafari.view.MainFrameController;
@@ -183,6 +185,33 @@ public class MainApp extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public boolean showCategoryEditDialog(CustomerCategory category){
+		try{
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/EditCustomerCategoryDialog.fxml"));
+			AnchorPane editCategory = (AnchorPane) uiLoader.load();
+			
+			Stage editStage = new Stage();
+			editStage.setTitle("Redigera kategori");
+			editStage.initModality(Modality.WINDOW_MODAL);
+			editStage.initOwner(categoryStage);
+			Scene scene = new Scene(editCategory);
+			editStage.setScene(scene);
+			
+			EditCustomerCategoryDialogController controller = uiLoader.getController();
+			controller.setCategoryStage(editStage); 
+			controller.setCategory(category);
+			
+			editStage.showAndWait();
+			
+			return controller.isOkClicked();
+		}catch(IOException se){
+			se.printStackTrace();
+			return false;		
+			
+		}
+		
 	}
 	public void showCustomerRegisterView() {
 		try {

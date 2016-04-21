@@ -24,8 +24,8 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="401.0" prefWidth="235.0" styleClass="background">
                <children>
                   <Button layoutX="36.0" layoutY="234.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Skapa" />
-                  <Button layoutX="36.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Redigera" />
-                  <Button layoutX="36.0" layoutY="321.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Ta bort" />
+                  <Button layoutX="36.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleEditCategory" prefHeight="25.0" prefWidth="120.0" text="Redigera" />
+                  <Button layoutX="36.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleDeleteCategory" prefHeight="25.0" prefWidth="120.0" text="Ta bort" />
                   <Button layoutX="36.0" layoutY="436.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Tillbaka" />
                </children>
             </AnchorPane>

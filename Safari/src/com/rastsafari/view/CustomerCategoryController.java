@@ -1,10 +1,16 @@
 package com.rastsafari.view;
 
+import java.util.Optional;
+
 import com.rastsafari.MainApp;
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.CustomerCategoryList;
+import com.rastsafari.model.CustomerMaintenance;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -21,7 +27,10 @@ public class CustomerCategoryController {
 	
 	//Reference main app
 	private MainApp mainApp;
-	private CustomerCategoryList list;
+	private CustomerCategoryList list; 
+	
+	// Reference CustomerMaintenance
+	CustomerMaintenance maintenance = new CustomerMaintenance();
 	
 	public CustomerCategoryController() {
 		list = new CustomerCategoryList();
@@ -36,5 +45,57 @@ public class CustomerCategoryController {
 		this.mainApp = mainApp;
 		categoryTable.setItems(list.getCustomerCategoryList());
 	}
+	@FXML
+	private void handleEditCategory(){
+		CustomerCategory selectedCategory = categoryTable.getSelectionModel().getSelectedItem();
+		if(selectedCategory != null){
+			boolean okClicked = mainApp.showCategoryEditDialog(selectedCategory);
+		}else{ 
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("Inget Markerat");
+			alert.setHeaderText("Ingen kategori vald");
+			alert.setContentText("Vänligen välj en kategori som sak redigeras");
+			
+			alert.showAndWait();
+				
+			}
+		}
+	@FXML
+	private void handleNewCategory(){
+		CustomerCategory tempCategory = new CustomerCategory();
+		boolean okClicked = mainApp.showCategoryEditDialog(tempCategory);
+		if(okClicked) {
+			tempCategory.setId(maintenance.generateCategoryId());
+			list.getCustomerCategoryList().add(tempCategory); 
+			maintenance.insertCategoryInDb(tempCategory);
+		}
+	}
 	
-}
+	@FXML
+	private void handleDeleteCategory(){
+		int selectedIndex = categoryTable.getSelectionModel().getSelectedIndex();
+		CustomerCategory category = categoryTable.getSelectionModel().getSelectedItem();
+		if(selectedIndex >= 0) {
+			Alert alert = new Alert(AlertType.CONFIRMATION); 
+			alert.setTitle("Bekräfta");
+			alert.setHeaderText("Bekräfta borttagning");
+			alert.setContentText("Vill du verkligen ta bort denna kategori?");
+			
+			Optional<ButtonType> result = alert.showAndWait();
+			if(result.get() == ButtonType.OK){
+				categoryTable.getItems().remove(selectedIndex); 
+				maintenance.removeCategoryFromDB(category.getId());
+			}
+		} else{
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("Inget markerat");
+			alert.setHeaderText("Ingen kategori markerad");
+			alert.setContentText("Vänligen markera kategorin du vill raderad");
+			alert.showAndWait();
+		}
+	}
+	}
+	
+
