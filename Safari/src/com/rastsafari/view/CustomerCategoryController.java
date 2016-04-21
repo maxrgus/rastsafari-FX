@@ -30,7 +30,7 @@ public class CustomerCategoryController {
 	private CustomerCategoryList list; 
 	
 	// Reference CustomerMaintenance
-	CustomerMaintenance maintenance = new CustomerMaintenance();
+	private CustomerMaintenance maintenance = new CustomerMaintenance();
 	
 	public CustomerCategoryController() {
 		list = new CustomerCategoryList();
@@ -69,6 +69,7 @@ public class CustomerCategoryController {
 			tempCategory.setId(maintenance.generateCategoryId());
 			list.getCustomerCategoryList().add(tempCategory); 
 			maintenance.insertCategoryInDb(tempCategory);
+			
 		}
 	}
 	
@@ -96,6 +97,8 @@ public class CustomerCategoryController {
 			alert.showAndWait();
 		}
 	}
+	
+	
 	}
 	
 

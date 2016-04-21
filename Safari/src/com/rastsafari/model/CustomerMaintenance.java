@@ -92,7 +92,8 @@ public class CustomerMaintenance {
 				
 		}try{
 			String update = "UPDATE customerCategory SET categoryName = '"+category.getCategoryName()+
-					"', priceIndex = "+category.getPriceIndex();
+					"', priceIndex = "+category.getPriceIndex()+
+					" WHERE id = "+category.getId();
 			s.executeUpdate(update);
 		}catch(SQLException se){
 			se.printStackTrace();
@@ -114,7 +115,8 @@ public class CustomerMaintenance {
 					"', familyName = '"+customer.getLName()+
 					"', email = '"+customer.getEMail()+
 					"', phoneDay = '"+customer.getDNumber()+
-					"', phoneNight = '"+customer.getNNumber();
+					"', phoneNight = '"+customer.getNNumber()+
+					" WHERE id = "+customer.getid()+"=";
 			s.executeUpdate(update);
 			
 		}catch(SQLException se){

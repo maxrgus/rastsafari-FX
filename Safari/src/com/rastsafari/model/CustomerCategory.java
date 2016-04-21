@@ -13,10 +13,10 @@ public class CustomerCategory {
 	private DoubleProperty priceIndex;
 	
 	public CustomerCategory(){
-		this(0,null,null);
+		this(0,null,0);
 	}
 	
-	public CustomerCategory(int id, String categoryName, Double priceIndex){
+	public CustomerCategory(int id, String categoryName, double priceIndex){
 		this.id = new SimpleIntegerProperty(id);
 		this.categoryName = new SimpleStringProperty(categoryName);
 		this.priceIndex = new SimpleDoubleProperty(priceIndex);
