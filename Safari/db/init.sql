@@ -1,3 +1,4 @@
+PRAGMA encoding = "UTF-8";
 DROP TABLE IF EXISTS safariLocation;
 DROP TABLE if EXISTS gearReq;
 
@@ -11,17 +12,17 @@ CREATE TABLE safariLocation (
        isActive             integer);
 
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('StorsjÃ¶n', 'Laxfiske', '59.1234459,12.1212122', 4, 8, 1);
+VALUES ('Storsjön', 'Laxfiske', '59.1234459,12.1212122', 4, 8, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('StorsjÃ¶n', 'Ã–ringsfiske', '59.1234459,12.1212122', 6, 12, 1);
+VALUES ('Storsjön', 'Ã–ringsfiske', '59.1234459,12.1212122', 6, 12, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('SvartetjÃ¤rn', 'GÃ¤ddfiske', '59.1234459,12.1212122', 8, 16, 1);
+VALUES ('Svartetjörn', 'GÃ¤ddfiske', '59.1234459,12.1212122', 8, 16, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('SvartetjÃ¤rn', 'Metning fÃ¶r barn', '59.1234459,12.1212122', 8, 16, 1);
+VALUES ('Svartetjörn', 'Metning fÃ¶r barn', '59.1234459,12.1212122', 8, 16, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('GunnliseÃ¥', 'Flugfiske', '59.1234459,12.1212122', 5, 10, 1);
+VALUES ('Gunnliseå', 'Flugfiske', '59.1234459,12.1212122', 5, 10, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('LÃ¥ngÃ¥n', 'Kanotsafari', '59.1234459,12.1212122', 3, 6, 1);
+VALUES ('Långån', 'Kanotsafari', '59.1234459,12.1212122', 3, 6, 1);
 
 CREATE TABLE gearReq (
        sid		integer,
