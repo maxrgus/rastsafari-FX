@@ -8,26 +8,26 @@ import javafx.beans.property.StringProperty;
 public class Customer {
 
 private IntegerProperty id;
-private StringProperty fName;
-private StringProperty lName;
+private StringProperty  fName;
+private StringProperty  lName;
 private IntegerProperty pNumber;
-private StringProperty eMail;
+private StringProperty  eMail;
 private IntegerProperty dNumber;
 private IntegerProperty nNumber;
-private StringProperty category;
+private StringProperty  category;
 
 public Customer(){
 	this(0,null,null,0,null,0,0,null);
 }
 
 public Customer(int id, String fName, String lName,int pNumber, String eMail, int dNumber, int nNumber, String category){
-	this.id=new SimpleIntegerProperty(id);
-	this.fName= new SimpleStringProperty(fName);
-	this.lName= new SimpleStringProperty(lName);
-	this.pNumber= new SimpleIntegerProperty(pNumber);
-	this.eMail= new SimpleStringProperty(eMail);
-	this.dNumber= new SimpleIntegerProperty(dNumber);
-	this.nNumber= new SimpleIntegerProperty(nNumber);
+	this.id=       new SimpleIntegerProperty(id);
+	this.fName=    new SimpleStringProperty(fName);
+	this.lName=    new SimpleStringProperty(lName);
+	this.pNumber=  new SimpleIntegerProperty(pNumber);
+	this.eMail=    new SimpleStringProperty(eMail);
+	this.dNumber=  new SimpleIntegerProperty(dNumber);
+	this.nNumber=  new SimpleIntegerProperty(nNumber);
 	this.category= new SimpleStringProperty(category);
 }
 
