@@ -10,25 +10,25 @@ public class Customer {
 private IntegerProperty id;
 private StringProperty  fName;
 private StringProperty  lName;
-private IntegerProperty pNumber;
+private StringProperty pNumber;
 private StringProperty  eMail;
-private IntegerProperty dNumber;
-private IntegerProperty nNumber;
-private StringProperty  category;
+private StringProperty dNumber;
+private StringProperty nNumber;
+private IntegerProperty  category;
 
 public Customer(){
-	this(0,null,null,0,null,0,0,null);
+	this(0,null,null,null,null,null,null,0);
 }
 
-public Customer(int id, String fName, String lName,int pNumber, String eMail, int dNumber, int nNumber, String category){
+public Customer(int id, String fName, String lName,String pNumber, String eMail, String dNumber, String nNumber, int category){
 	this.id=       new SimpleIntegerProperty(id);
 	this.fName=    new SimpleStringProperty(fName);
 	this.lName=    new SimpleStringProperty(lName);
-	this.pNumber=  new SimpleIntegerProperty(pNumber);
+	this.pNumber=  new SimpleStringProperty(pNumber);
 	this.eMail=    new SimpleStringProperty(eMail);
-	this.dNumber=  new SimpleIntegerProperty(dNumber);
-	this.nNumber=  new SimpleIntegerProperty(nNumber);
-	this.category= new SimpleStringProperty(category);
+	this.dNumber=  new SimpleStringProperty(dNumber);
+	this.nNumber=  new SimpleStringProperty(nNumber);
+	this.category= new SimpleIntegerProperty(category);
 }
 
 public int getid(){
@@ -76,17 +76,17 @@ public StringProperty lNameProperty(){
 	return lName;
 	
 }
-public int getPNumber(){
+public String getPNumber(){
 	
 	return pNumber.get();
 }
 
-public void setPNumber(int pNumber){
+public void setPNumber(String pNumber){
 	this.pNumber.set(pNumber);
 	
 }
 
-public IntegerProperty pNumberProperty(){
+public StringProperty pNumberProperty(){
 	return pNumber;
 }
 
@@ -108,46 +108,46 @@ public StringProperty eMailProperty(){
 }
 
 
-public int getDNumber(){
+public String getDNumber(){
 	
 	return dNumber.get();
 }
 
-public void setDNumber(int dNumber){
+public void setDNumber(String dNumber){
 	this.dNumber.set(dNumber);
 	
 }
 
-public IntegerProperty dNumberProperty(){
+public StringProperty dNumberProperty(){
 	
 	return dNumber;
 }
 
 
-public int getNNumber(){
+public String getNNumber(){
 	
 	return nNumber.get();
 }
 
-public void setNNumber(int nNumber){
+public void setNNumber(String nNumber){
 	this.nNumber.set(nNumber);
 }
 
-public IntegerProperty nNumberProperty(){
+public StringProperty nNumberProperty(){
 	return nNumber;
 }
 
 
-public String getCategory(){
+public int getCategory(){
 	
 	return category.get();
 }
 
-public void setCategory(String category){
+public void setCategory(int category){
 	this.category.set(category);
 }
 
-public StringProperty categoryProperty(){
+public IntegerProperty categoryProperty(){
 	return category;
 }
 
