@@ -23,7 +23,9 @@ public class MainApp extends Application {
 	
 	private Stage primaryStage;
 	private Stage dialogStage;
+	private Stage categoryStage;
 	private BorderPane rootLayout;
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -87,7 +89,7 @@ public class MainApp extends Application {
 			
 			//Create dialog stage
 			dialogStage = new Stage();
-			dialogStage.setTitle("Safarimål");
+			dialogStage.setTitle("Safarimï¿½l");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(safariLocationView);
@@ -135,7 +137,7 @@ public class MainApp extends Application {
 			
 			//Create dialog stage
 			Stage editStage = new Stage();
-			editStage.setTitle("Redigera Safarimål");
+			editStage.setTitle("Redigera Safarimï¿½l");
 			editStage.initModality(Modality.WINDOW_MODAL);
 			editStage.initOwner(dialogStage);
 			Scene scene = new Scene(editDialog);
@@ -161,7 +163,7 @@ public class MainApp extends Application {
 			uiLoader.setLocation(MainApp.class.getResource("view/CustomerCategoryView.fxml"));
 			AnchorPane categoryView = (AnchorPane) uiLoader.load();
 			
-			Stage categoryStage = new Stage();
+			categoryStage = new Stage();
 			categoryStage.setTitle("Kundkategorier");
 			categoryStage.initModality(Modality.WINDOW_MODAL);
 			categoryStage.initOwner(dialogStage);
