@@ -25,5 +25,9 @@ public class LocationMapController {
 		WebEngine engine = map.getEngine();
 		engine.load(url);
 	}
+	@FXML
+	public void handleOk(){
+		dialogStage.close();
+	}
 	
 }
