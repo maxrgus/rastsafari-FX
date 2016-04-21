@@ -2,30 +2,26 @@ package com.rastsafari.model;
 
 import java.sql.*;
 
+import org.sqlite.SQLiteConfig;
+
 public class SafariDatabase {
     public Connection createConnection() {
         Connection localConn = null;
 
         try {
-            Class.forName("org.sqlite.JDBC"); //Sqlite-drivrutin
+            Class.forName(org.sqlite.JDBC.class.getCanonicalName()); //Sqlite-drivrutin
+            
         } catch (ClassNotFoundException cnfe) {
             System.err.println("Couldn't find driver class:");
             System.out.println(cnfe.getMessage());
             System.exit(1);
         }
         System.out.println("Allt OK");
-
-        //TA INTE BORT! Alexander behöver för netbeans
-        /*try {
-            localConn = DriverManager.getConnection("jdbc:sqlite:rastsafari.db");
-        } catch (SQLException se) {
-            System.out.println("Couldn't connect: print out a stack trace and exit.");
-            System.out.println(se.getMessage());
-            System.exit(1);
-        }*/
-
         try {
-            localConn = DriverManager.getConnection("jdbc:sqlite:db/rastsafari.db");
+        	String url = "jdbc:sqlite:db/rastsafari.db";
+        	SQLiteConfig config = new SQLiteConfig();
+        	config.setEncoding(SQLiteConfig.Encoding.UTF8);
+            localConn = DriverManager.getConnection(url, config.toProperties());
         } catch (SQLException se) {
             System.out.println("Couldn't connect: print out a stack trace and exit.");
             System.out.println(se.getMessage());
