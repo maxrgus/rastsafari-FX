@@ -8,6 +8,7 @@ import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.LocationEditDialogController;
 import com.rastsafari.view.LocationMapController;
 import com.rastsafari.view.MainFrameController;
+import com.rastsafari.view.RootLayoutController;
 import com.rastsafari.view.SafariLocationViewController;
 
 import javafx.application.Application;
@@ -37,7 +38,7 @@ public class MainApp extends Application {
 		
 		initRootLayout();
 		showMainFrame();
-		showCustomerRegisterView();
+		
 				
 	}
 	/**
@@ -54,6 +55,10 @@ public class MainApp extends Application {
 			// Show the scene
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
+			
+			RootLayoutController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			
 			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -5,24 +5,23 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane prefHeight="500.0" prefWidth="1200.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<BorderPane prefHeight="500.0" prefWidth="1200.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rastsafari.view.RootLayoutController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar fx:id="topMenu" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Arkiv">
+          <Menu fx:id="file" mnemonicParsing="false" text="Arkiv">
             <items>
-              <MenuItem mnemonicParsing="false" text="Avsluta" />
+              <MenuItem mnemonicParsing="false" onAction="#handleFileExit" text="Avsluta" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Kund">
+          <Menu fx:id="customer" mnemonicParsing="false" text="Kund">
             <items>
               <MenuItem mnemonicParsing="false" text="Ny kund" />
-                  <MenuItem mnemonicParsing="false" text="Kundregister" />
-                  <MenuItem mnemonicParsing="false" text="Kundkategorier" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleCustomerRegister" text="Kundregister" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleCustomerCategory" text="Kundkategorier" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Hjälp">
+          <Menu fx:id="help" mnemonicParsing="false" text="Hjälp">
             <items>
               <MenuItem mnemonicParsing="false" text="Om" />
             </items>
