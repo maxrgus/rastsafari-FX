@@ -29,10 +29,10 @@
                <children>
                   <ButtonBar layoutX="390.0" layoutY="13.0" prefHeight="66.0" prefWidth="484.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="0.0">
                     <buttons>
-                      <Button defaultButton="true" mnemonicParsing="false" text="Ny.." />
-                        <Button mnemonicParsing="false" text="Redigera" />
-                        <Button mnemonicParsing="false" text="Radera" />
-                        <Button mnemonicParsing="false" text="Tillbaka" />
+                      <Button defaultButton="true" mnemonicParsing="false" onAction="#handleNewCustomer" text="Ny.." />
+                        <Button mnemonicParsing="false" onAction="#handleEditCustomer" text="Redigera" />
+                        <Button mnemonicParsing="false" onAction="#handleDeleteCustomer" text="Radera" />
+                        <Button mnemonicParsing="false" onAction="#handleBackButton" text="Tillbaka" />
                     </buttons>
                   </ButtonBar>
                   <Button layoutX="14.0" layoutY="21.0" mnemonicParsing="false" text="Skicka mejl" />

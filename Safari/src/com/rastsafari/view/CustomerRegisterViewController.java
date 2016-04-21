@@ -1,10 +1,16 @@
 package com.rastsafari.view;
 
+import java.util.Optional;
+
 import com.rastsafari.MainApp;
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerList;
+import com.rastsafari.model.CustomerMaintenance;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -27,6 +33,7 @@ public class CustomerRegisterViewController {
 	//Reference the main app
 	private MainApp mainApp;
 	private CustomerList list;
+	private CustomerMaintenance maintenance = new CustomerMaintenance();
 	
 	public CustomerRegisterViewController() {
 		list = new CustomerList();
@@ -44,6 +51,65 @@ public class CustomerRegisterViewController {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		customerTable.setItems(list.getCustomerList());
+	}
+	@FXML
+	private void handleEditCustomer() {
+		Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+		if (selectedCustomer != null) {
+			boolean okClicked = mainApp.showEditCustomerDialog(selectedCustomer,"Redigera Kund");
+			if (okClicked) {
+				selectedCustomer.setAllNumber();
+				maintenance.updateCustomerInDb(selectedCustomer);
+			}
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getCustomerRegisterStage());
+			alert.setTitle("Inget markerat");
+			alert.setHeaderText("Ingen kund markerad");
+			alert.setContentText("Vänligen välj en kund som ska redigeras");
+			
+			alert.showAndWait();
+		}
+	}
+	@FXML
+	private void handleNewCustomer() {
+		Customer tempCustomer = new Customer();
+		boolean okClicked = mainApp.showEditCustomerDialog(tempCustomer, "Ny kund");
+		if (okClicked) {
+			tempCustomer.setId(maintenance.generateCustomerId());
+			tempCustomer.setAllNumber();
+			list.getCustomerList().add(tempCustomer);
+			maintenance.insertCustomerInDb(tempCustomer);
+		}
+	}
+	@FXML
+	private void handleDeleteCustomer() {
+		int selectedIndex = customerTable.getSelectionModel().getSelectedIndex();
+		Customer customer = customerTable.getSelectionModel().getSelectedItem();
+		if (selectedIndex >= 0) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Bekräfta");
+			alert.setHeaderText("Bekräfta borttagning");
+			alert.setContentText("Vill du verkligen ta bort" + customer.getFName() +
+					" " + customer.getLName());
+			Optional<ButtonType> result = alert.showAndWait();
+			if(result.get() == ButtonType.OK) {
+				customerTable.getItems().remove(selectedIndex);
+				maintenance.removeCustomerFromDB(customer.getid());
+			}
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getCustomerRegisterStage());
+			alert.setTitle("Inget markerat");
+			alert.setHeaderText("Ingen kund markerad");
+			alert.setContentText("Vänligen markera en kund som du vill radera");
+			
+			alert.showAndWait();
+		}
+	}
+	@FXML
+	private void handleBackButton() {
+		mainApp.getCustomerRegisterStage().close();
 	}
 	
 }

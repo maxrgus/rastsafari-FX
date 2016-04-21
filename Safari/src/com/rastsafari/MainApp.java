@@ -2,11 +2,13 @@ package com.rastsafari;
 
 import java.io.IOException;
 
+import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.SafariLocation;
 import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
+import com.rastsafari.view.EditCustomerDialogController;
 import com.rastsafari.view.LocationEditDialogController;
 import com.rastsafari.view.LocationMapController;
 import com.rastsafari.view.MainFrameController;
@@ -27,6 +29,7 @@ public class MainApp extends Application {
 	private Stage primaryStage;
 	private Stage dialogStage;
 	private Stage categoryStage;
+	private Stage customerRegisterStage;
 	private BorderPane rootLayout;
 	
 	
@@ -219,7 +222,7 @@ public class MainApp extends Application {
 			uiLoader.setLocation(MainApp.class.getResource("view/CustomerRegisterView.fxml"));
 			AnchorPane customerRegisterView = (AnchorPane) uiLoader.load();
 			
-			Stage customerRegisterStage = new Stage();
+			customerRegisterStage = new Stage();
 			customerRegisterStage.setTitle("Kundregister");
 			customerRegisterStage.initModality(Modality.WINDOW_MODAL);
 			customerRegisterStage.initOwner(dialogStage);
@@ -234,6 +237,32 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	public boolean showEditCustomerDialog(Customer customer, String editOrNew) {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/EditCustomerDialog.fxml"));
+			AnchorPane editDialog = (AnchorPane) uiLoader.load();
+			
+			Stage editStage = new Stage();
+			editStage.setTitle(editOrNew);
+			editStage.initModality(Modality.WINDOW_MODAL);
+			editStage.initOwner(customerRegisterStage);
+			Scene scene = new Scene(editDialog);
+			editStage.setScene(scene);
+			
+			EditCustomerDialogController controller = uiLoader.getController();
+			controller.setStage(editStage);
+			controller.setCustomer(customer);
+			controller.setHeaderLabel(editOrNew);
+			
+			editStage.showAndWait();
+			
+			return controller.isOkClicked();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	/*
 	 * Returns the main stage.
 	 * @return
@@ -241,7 +270,9 @@ public class MainApp extends Application {
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
-	
+	public Stage getCustomerRegisterStage() {
+		return customerRegisterStage;
+	}
 
 	public static void main(String[] args) {
 		launch(args);

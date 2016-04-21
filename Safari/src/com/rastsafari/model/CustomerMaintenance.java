@@ -63,19 +63,12 @@ public class CustomerMaintenance {
 	}
 		
 	public void removeCustomerFromDB(int id){
-			String idNr = Integer.toString(id);
-			Statement s = null;
 			SafariDatabase sd = new SafariDatabase();
 			Connection c = sd.createConnection();
 			try{
-				s = c.createStatement();
-			}
-			catch(SQLException se){
-				se.printStackTrace();
-			}
-			try{
-				String remove = "DELETE FROM customer where id = '"+idNr+"';";
-				s.execute(remove);
+				Statement s = c.createStatement();
+				String remove = "DELETE FROM customer where id == "+id+";";
+				s.executeUpdate(remove);
 			}catch(SQLException se){
 				se.printStackTrace();
 			}
@@ -99,7 +92,7 @@ public class CustomerMaintenance {
 			se.printStackTrace();
 		}
 	}
-	public void updateCategoryInDb(Customer customer){
+	public void updateCustomerInDb(Customer customer){
 		Statement s = null;
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -110,13 +103,13 @@ public class CustomerMaintenance {
 				
 		}try{
 			String update = "UPDATE customer SET customerCatID = "+customer.getid()+
-					"', SSID = '"+customer.getPNumber()+
+					", SSID = '"+customer.getPNumber()+
 					"', givenName = '"+customer.getFName()+
 					"', familyName = '"+customer.getLName()+
 					"', email = '"+customer.getEMail()+
 					"', phoneDay = '"+customer.getDNumber()+
 					"', phoneNight = '"+customer.getNNumber()+
-					" WHERE id = "+customer.getid()+"=";
+					"' WHERE id == "+customer.getid()+";";
 			s.executeUpdate(update);
 			
 		}catch(SQLException se){
