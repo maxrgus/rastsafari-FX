@@ -14,6 +14,7 @@ private StringProperty pNumber;
 private StringProperty  eMail;
 private StringProperty dNumber;
 private StringProperty nNumber;
+private StringProperty allNumber;
 private IntegerProperty  category;
 
 public Customer(){
@@ -29,6 +30,7 @@ public Customer(int id, String fName, String lName,String pNumber, String eMail,
 	this.dNumber=  new SimpleStringProperty(dNumber);
 	this.nNumber=  new SimpleStringProperty(nNumber);
 	this.category= new SimpleIntegerProperty(category);
+	this.allNumber = new SimpleStringProperty(dNumber + "/" + nNumber);
 }
 
 public int getid(){
@@ -106,7 +108,15 @@ public StringProperty eMailProperty(){
 	return eMail;
 	
 }
-
+public StringProperty allNumberProperty() {
+	return allNumber;
+}
+public String getAllNumber() {
+	return allNumber.get();
+}
+public void setAllNumber() {
+	this.allNumber.set(this.dNumber.get() + "/" + this.nNumber.get());
+}
 
 public String getDNumber(){
 	

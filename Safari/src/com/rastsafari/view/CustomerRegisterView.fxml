@@ -7,21 +7,20 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="900.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<AnchorPane prefHeight="400.0" prefWidth="900.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rastsafari.view.CustomerRegisterViewController">
    <children>
       <SplitPane dividerPositions="0.8266331658291457" layoutX="82.0" layoutY="49.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView layoutX="22.0" layoutY="14.0" prefHeight="326.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="customerTable" layoutX="22.0" layoutY="14.0" prefHeight="326.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="42.20001220703125" text="ID" />
-                      <TableColumn prefWidth="197.8000030517578" text="Personnummer" />
-                        <TableColumn prefWidth="130.19998168945312" text="Förnamn" />
-                        <TableColumn minWidth="9.4000244140625" prefWidth="141.0" text="Efternamn" />
-                        <TableColumn minWidth="7.800048828125" prefWidth="181.199951171875" text="E-post" />
-                        <TableColumn minWidth="0.0" prefWidth="191.79998779296875" text="Telefon" />
+                      <TableColumn fx:id="idColumn" prefWidth="42.20001220703125" text="ID" />
+                      <TableColumn fx:id="ssIdColumn" prefWidth="197.8000030517578" text="Personnummer" />
+                        <TableColumn fx:id="givenNameColumn" prefWidth="130.19998168945312" text="Förnamn" />
+                        <TableColumn fx:id="familyNameColumn" minWidth="9.4000244140625" prefWidth="141.0" text="Efternamn" />
+                        <TableColumn fx:id="emailColumn" minWidth="7.800048828125" prefWidth="181.199951171875" text="E-post" />
+                        <TableColumn fx:id="phoneColumn" minWidth="0.0" prefWidth="191.79998779296875" text="Telefon" />
                     </columns>
                   </TableView>
                </children>
