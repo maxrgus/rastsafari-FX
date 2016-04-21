@@ -21,9 +21,13 @@ public class LocationMapController {
 		this.dialogStage = dialogStage;
 	}
 	public void setUrl(String location) {
-		this.url = "http://maps.google.se/maps/" + location;
+		this.url = "http://maps.google.se/maps/@" + location;
 		WebEngine engine = map.getEngine();
 		engine.load(url);
+	}
+	@FXML
+	public void handleOk(){
+		dialogStage.close();
 	}
 	
 }

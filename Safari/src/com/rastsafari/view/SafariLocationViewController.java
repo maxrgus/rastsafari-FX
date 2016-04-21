@@ -3,10 +3,13 @@ package com.rastsafari.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 import com.rastsafari.MainApp;
 import com.rastsafari.model.SafariLocation;
@@ -109,8 +112,17 @@ public class SafariLocationViewController {
     	int selectedIndex = safariLocationTable.getSelectionModel().getSelectedIndex();
     	SafariLocation location = safariLocationTable.getSelectionModel().getSelectedItem();
     	if (selectedIndex >= 0) {
-    		safariLocationTable.getItems().remove(selectedIndex);
-    		maintenance.removeFromDB(location.getId());
+    		Alert alert = new Alert(AlertType.CONFIRMATION);
+    		alert.setTitle("Bekräfta");
+    		alert.setHeaderText("Bekräfta borttagning");
+    		alert.setContentText("Vill du verkligen ta bort den här medlemmen?");
+
+    		Optional<ButtonType> result = alert.showAndWait();
+    		if (result.get() == ButtonType.OK){
+    		    safariLocationTable.getItems().remove(selectedIndex);
+        		maintenance.removeFromDB(location.getId());
+    		} 
+    		
     	} else {
     		//Nothing selected
     		Alert alert = new Alert(AlertType.WARNING);
