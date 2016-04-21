@@ -8,6 +8,8 @@ import com.rastsafari.model.CustomerMaintenance;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class EditCustomerCategoryDialogController {
@@ -36,16 +38,50 @@ public class EditCustomerCategoryDialogController {
 			
 	} 
 	
+	public boolean isOkClicked(){
+		return okClicked;
+	}
 
 	@FXML
 	private void handleOK(){
-		
+		if(isInputValid()){
+			category.setCategoryName(categoryNameField.getText());
+			category.setPriceIndex(Double.parseDouble(priceIndexField.getText()));	
+			
+			okClicked = true;
+			maintenance.updateCategoryInDb(category);
+			categoryStage.close();
+			}
 	}
 	
-	/*private boolean isInputValid(){
+	@FXML
+	private void handleCancel(){
+		categoryStage.close();
+	}
+	
+	private boolean isInputValid(){
 		String errorMessage = "";
-		if(categoryNameField.get)
-	}**/
+		if(categoryNameField.getText() == null || categoryNameField.getText().length() == 0) {
+			errorMessage += "Kategori är inte ifyllt!\n"; 
+		} // Validering för siffra måste tilläggas
+		if(priceIndexField.getText() == null || priceIndexField.getText().length() == 0 ) {
+			errorMessage += "PrisIndex är inte ifyllt!\n";
+		}
+		
+		if(errorMessage.length() == 0){
+			return true;
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(categoryStage);
+			alert.setTitle("Felaktig inmatning");
+			alert.setHeaderText("Vänligen fyll i fälten");
+			alert.setContentText(errorMessage);
+			
+			alert.showAndWait();
+			return false;
+		}
+	}
 	
 	
 
