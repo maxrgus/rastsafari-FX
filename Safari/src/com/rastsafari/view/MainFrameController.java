@@ -37,4 +37,8 @@ public class MainFrameController {
 	private void handleSafariLocationView() {
 		mainApp.showSafariLocationView();
 	}
+	@FXML
+	private void handleApplicationExit() {
+		System.exit(1);
+	}
 }
