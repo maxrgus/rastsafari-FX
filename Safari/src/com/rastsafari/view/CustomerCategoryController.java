@@ -26,14 +26,12 @@ public class CustomerCategoryController {
 	private TableColumn<CustomerCategory, Double> priceIndex;
 	
 	//Reference main app
-	private MainApp mainApp;
-	private CustomerCategoryList list; 
+	private MainApp mainApp; 
 	
 	// Reference CustomerMaintenance
 	private CustomerMaintenance maintenance = new CustomerMaintenance();
 	
 	public CustomerCategoryController() {
-		list = new CustomerCategoryList();
 	}
 	@FXML
 	private void initialize() {
@@ -43,7 +41,7 @@ public class CustomerCategoryController {
 	}
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-		categoryTable.setItems(list.getCustomerCategoryList());
+		categoryTable.setItems(mainApp.getCategoryList());
 	}
 	@FXML
 	private void handleEditCategory(){
@@ -67,7 +65,7 @@ public class CustomerCategoryController {
 		boolean okClicked = mainApp.showCategoryEditDialog(tempCategory);
 		if(okClicked) {
 			tempCategory.setId(maintenance.generateCategoryId());
-			list.getCustomerCategoryList().add(tempCategory); 
+			mainApp.getCategoryList().add(tempCategory); 
 			maintenance.insertCategoryInDb(tempCategory);
 			
 		}

@@ -7,12 +7,17 @@ import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerList;
 import com.rastsafari.model.CustomerMaintenance;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class CustomerRegisterViewController {
 	@FXML
@@ -29,14 +34,19 @@ public class CustomerRegisterViewController {
 	private TableColumn<Customer, String> emailColumn;
 	@FXML
 	private TableColumn<Customer, String> phoneColumn;
+	@FXML
+	private TextField filterField;
 	
 	//Reference the main app
 	private MainApp mainApp;
-	private CustomerList list;
+	
 	private CustomerMaintenance maintenance = new CustomerMaintenance();
+	private SortedList<Customer> customersSorted;
+	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
+	
+	private boolean isFiltered;
 	
 	public CustomerRegisterViewController() {
-		list = new CustomerList();
 	}
 	@FXML
 	private void initialize() {
@@ -50,7 +60,46 @@ public class CustomerRegisterViewController {
 	}
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-		customerTable.setItems(list.getCustomerList());
+		customerList.addAll(mainApp.getCustomerList());
+		customerTable.setItems(customerList);
+	}
+	@FXML
+	private void handleSearch() {
+		//Wrap in a filtered list for filtering.
+		FilteredList<Customer> customersFiltered = new FilteredList<>(customerList, p -> true);
+				
+		//add listener to filterField
+		filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+			customersFiltered.setPredicate(customer -> {
+				//If filter text is empty, display all customers.
+				if (newValue == null || newValue.isEmpty()) {
+					isFiltered = true;
+					return true;
+				}
+				
+				String lowerCaseFilter = newValue.toLowerCase();
+				
+				if (customer.getFName().toLowerCase().contains(lowerCaseFilter)) {
+					isFiltered = true;
+					return true;
+				} else if (customer.getLName().toLowerCase().contains(lowerCaseFilter)) {
+					isFiltered = true;
+					return true;
+				} else if (customer.getPNumber().toLowerCase().contains(lowerCaseFilter)) {
+					isFiltered = true;
+					return true;
+				} else if (customer.getEMail().toLowerCase().contains(lowerCaseFilter)) {
+					isFiltered = true;
+					return true;
+				}
+				isFiltered = true;
+				return false; // Does not match
+			});
+		});
+		customersSorted = new SortedList<>(customersFiltered);
+		customersSorted.comparatorProperty().bind(customerTable.comparatorProperty());
+		
+		customerTable.setItems(customersSorted);
 	}
 	@FXML
 	private void handleEditCustomer() {
@@ -78,7 +127,7 @@ public class CustomerRegisterViewController {
 		if (okClicked) {
 			tempCustomer.setId(maintenance.generateCustomerId());
 			tempCustomer.setAllNumber();
-			list.getCustomerList().add(tempCustomer);
+			mainApp.getCustomerList().add(tempCustomer);
 			maintenance.insertCustomerInDb(tempCustomer);
 		}
 	}
@@ -90,11 +139,17 @@ public class CustomerRegisterViewController {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Bekräfta");
 			alert.setHeaderText("Bekräfta borttagning");
-			alert.setContentText("Vill du verkligen ta bort" + customer.getFName() +
+			alert.setContentText("Vill du verkligen ta bort " + customer.getFName() +
 					" " + customer.getLName());
 			Optional<ButtonType> result = alert.showAndWait();
 			if(result.get() == ButtonType.OK) {
-				customerTable.getItems().remove(selectedIndex);
+				//customerTable.getItems().remove(selectedIndex);
+				if (isFiltered) {
+					int sourceIndex = customersSorted.getSourceIndexFor(customerList, selectedIndex);
+					customerList.remove(sourceIndex);
+				} else {
+					customerTable.getItems().remove(selectedIndex);
+				}
 				maintenance.removeCustomerFromDB(customer.getid());
 			}
 		} else {

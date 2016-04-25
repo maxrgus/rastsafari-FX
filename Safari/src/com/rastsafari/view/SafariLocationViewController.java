@@ -1,5 +1,7 @@
 package com.rastsafari.view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -43,8 +45,8 @@ public class SafariLocationViewController {
     private MainApp mainApp;
     private Stage dialogStage;
     
-    private SafariLocationList list = new SafariLocationList();
     private SafariMaintenance maintenance = new SafariMaintenance();
+    private ObservableList<SafariLocation> locationList = FXCollections.observableArrayList();
     
     
     /**
@@ -79,8 +81,8 @@ public class SafariLocationViewController {
     public void setDialogStage(Stage dialogStage, MainApp mainApp) {
     	this.dialogStage = dialogStage;
     	this.mainApp = mainApp;
-
-    	safariLocationTable.setItems(list.getSafariLocationList());
+    	
+    	safariLocationTable.setItems(mainApp.getLocationList());
     }
     private void showSafariLocationDetails(SafariLocation sl) {
     	if (sl != null) {
@@ -145,7 +147,7 @@ public class SafariLocationViewController {
     	boolean okClicked = mainApp.showLocationEditDialog(tempLocation);
     	if (okClicked) {
     		tempLocation.setId(maintenance.generateId());
-    		list.getSafariLocationList().add(tempLocation);
+    		mainApp.getLocationList().add(tempLocation);
     		maintenance.insertLocationInDb(tempLocation);
     	}
     }

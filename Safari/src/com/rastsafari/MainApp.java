@@ -4,7 +4,10 @@ import java.io.IOException;
 
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
+import com.rastsafari.model.CustomerCategoryList;
+import com.rastsafari.model.CustomerList;
 import com.rastsafari.model.SafariLocation;
+import com.rastsafari.model.SafariLocationList;
 import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
@@ -16,6 +19,11 @@ import com.rastsafari.view.RootLayoutController;
 import com.rastsafari.view.SafariLocationViewController;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -23,14 +31,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class MainApp extends Application {
 	
 	private Stage primaryStage;
+	private Stage bootStage;
 	private Stage dialogStage;
 	private Stage categoryStage;
 	private Stage customerRegisterStage;
 	private BorderPane rootLayout;
+	
+	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
+	private ObservableList<CustomerCategory> categoryList = FXCollections.observableArrayList();
+	private ObservableList<SafariLocation> locationList = FXCollections.observableArrayList();
 	
 	
 	@Override
@@ -41,10 +55,51 @@ public class MainApp extends Application {
 		// Set app icon
 		this.primaryStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 		
+		initSystem();
 		initRootLayout();
 		showMainFrame();
 		
 				
+	}
+	private void initSystem() {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/BootView.fxml"));
+			AnchorPane bootLayout = (AnchorPane) uiLoader.load();
+			Scene scene = new Scene(bootLayout);
+			bootStage = new Stage();
+			bootStage.setScene(scene);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Task<Void> sleeper = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				try {
+					CustomerList list = new CustomerList();
+					CustomerCategoryList cat = new CustomerCategoryList();
+					SafariLocationList loclist = new SafariLocationList();
+					customerList.addAll(list.getCustomerList());
+					categoryList.addAll(cat.getCustomerCategoryList());
+					locationList.addAll(loclist.getSafariLocationList());
+					Thread.sleep(2500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+		};
+		sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			@Override
+			public void handle(WorkerStateEvent event) {
+				bootStage.hide();
+				
+			}
+		});
+		new Thread(sleeper).start();
+		bootStage.initStyle(StageStyle.UNDECORATED);
+		bootStage.showAndWait();
+		
 	}
 	/**
 	 * Init the root layout
@@ -110,6 +165,7 @@ public class MainApp extends Application {
 			controller.setDialogStage(dialogStage,this);
 			
 			// Show the dialog and wait until user closes it
+			dialogStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			dialogStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -132,7 +188,7 @@ public class MainApp extends Application {
 			controller.setUrl(location);
 			controller.setDialogStage(mapStage);
 			
-			
+			mapStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			mapStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -159,6 +215,7 @@ public class MainApp extends Application {
 			controller.setSafariLocation(location);
 			
 			//Show the dialog and wait until close.
+			editStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			editStage.showAndWait();
 			
 			return controller.isOkClicked();
@@ -183,6 +240,7 @@ public class MainApp extends Application {
 			CustomerCategoryController controller = uiLoader.getController();
 			controller.setMainApp(this);
 			
+			categoryStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			categoryStage.show();
 			
 		} catch (IOException e) {
@@ -206,6 +264,7 @@ public class MainApp extends Application {
 			controller.setCategoryStage(editStage); 
 			controller.setCategory(category);
 			
+			editStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			editStage.showAndWait();
 			
 			return controller.isOkClicked();
@@ -220,7 +279,7 @@ public class MainApp extends Application {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
 			uiLoader.setLocation(MainApp.class.getResource("view/CustomerRegisterView.fxml"));
-			AnchorPane customerRegisterView = (AnchorPane) uiLoader.load();
+			BorderPane customerRegisterView = (BorderPane) uiLoader.load();
 			
 			customerRegisterStage = new Stage();
 			customerRegisterStage.setTitle("Kundregister");
@@ -231,7 +290,7 @@ public class MainApp extends Application {
 			
 			CustomerRegisterViewController controller = uiLoader.getController();
 			controller.setMainApp(this);
-			
+			customerRegisterStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			customerRegisterStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -254,7 +313,7 @@ public class MainApp extends Application {
 			controller.setStage(editStage);
 			controller.setCustomer(customer);
 			controller.setHeaderLabel(editOrNew);
-			
+			editStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			editStage.showAndWait();
 			
 			return controller.isOkClicked();
@@ -272,6 +331,15 @@ public class MainApp extends Application {
 	}
 	public Stage getCustomerRegisterStage() {
 		return customerRegisterStage;
+	}
+	public ObservableList<Customer> getCustomerList() {
+		return customerList;
+	}
+	public ObservableList<CustomerCategory> getCategoryList() {
+		return categoryList;
+	}
+	public ObservableList<SafariLocation> getLocationList() {
+		return locationList;
 	}
 
 	public static void main(String[] args) {
