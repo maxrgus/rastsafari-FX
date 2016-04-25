@@ -16,7 +16,6 @@
           </Menu>
           <Menu fx:id="customer" mnemonicParsing="false" text="Kund">
             <items>
-              <MenuItem mnemonicParsing="false" text="Ny kund" />
                   <MenuItem mnemonicParsing="false" onAction="#handleCustomerRegister" text="Kundregister" />
                   <MenuItem mnemonicParsing="false" onAction="#handleCustomerCategory" text="Kundkategorier" />
             </items>
