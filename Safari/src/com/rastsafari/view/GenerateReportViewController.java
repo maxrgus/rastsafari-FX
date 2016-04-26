@@ -25,6 +25,8 @@ public class GenerateReportViewController {
 	public void handleGenerate() {
 		fileChooser = new FileChooser();
 		fileChooser.setTitle("Spara rapport");
+		fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 		File file = fileChooser.showSaveDialog(primaryStage);
 		
 	}
