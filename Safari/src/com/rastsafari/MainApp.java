@@ -12,6 +12,7 @@ import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
 import com.rastsafari.view.EditCustomerDialogController;
+import com.rastsafari.view.GenerateReportViewController;
 import com.rastsafari.view.LocationEditDialogController;
 import com.rastsafari.view.LocationMapController;
 import com.rastsafari.view.MainFrameController;
@@ -320,6 +321,30 @@ public class MainApp extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	public void showGenereateReportView() {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/GenerateReportView.fxml"));
+			BorderPane reportView = (BorderPane) uiLoader.load();
+			
+			Stage reportStage = new Stage();
+			reportStage.setTitle("Generera rapport");
+			reportStage.initModality(Modality.WINDOW_MODAL);
+			reportStage.initOwner(primaryStage);
+			Scene scene = new Scene(reportView);
+			reportStage.setScene(scene);
+			
+			GenerateReportViewController controller = uiLoader.getController();
+			controller.setStage(reportStage);
+			
+			reportStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			reportStage.showAndWait();
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	/*

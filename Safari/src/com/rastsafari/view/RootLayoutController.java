@@ -45,6 +45,10 @@ public class RootLayoutController {
 	private void handleCustomerCategory(){
 		mainApp.showCustomerCategoryView();
 	}
+	@FXML
+	private void handleGenerateReport() {
+		mainApp.showGenereateReportView();
+	}
 	
 	
 
