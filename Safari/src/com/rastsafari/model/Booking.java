@@ -11,21 +11,23 @@ public class Booking {
 	private	IntegerProperty bookingNr;
 	private IntegerProperty paymentNr;
 	private IntegerProperty invoiceNr;
+	private IntegerProperty ocrNr;
 	private IntegerProperty safariId;
 	private StringProperty date;
 	private StringProperty hour;
 	private StringProperty endHour;
 	
 	public Booking(){
-		this(0,0,0,0,0,null,null,null);
+		this(0,0,0,0,0,0,null,null,null);
 	}
 	
-public Booking(int id, int bookingNr, int paymentNr, int invoiceNr, int safariId, String date,
+public Booking(int id, int bookingNr, int paymentNr, int invoiceNr,int ocrNr, int safariId, String date,
 	String hour, String endHour){
 		this.id= 			new SimpleIntegerProperty(id);
 		this.bookingNr= 	new SimpleIntegerProperty(bookingNr);
 		this.paymentNr= 	new SimpleIntegerProperty(paymentNr); 
 		this.invoiceNr= 	new SimpleIntegerProperty(invoiceNr);
+		this.ocrNr=			new SimpleIntegerProperty(ocrNr);
 		this.safariId= 		new SimpleIntegerProperty(safariId);
 		this.date= 			new SimpleStringProperty(date);
 		this.hour= 			new SimpleStringProperty(hour);
@@ -78,6 +80,18 @@ public Booking(int id, int bookingNr, int paymentNr, int invoiceNr, int safariId
 	
 	public IntegerProperty invoiceNrProperty(){
 		return invoiceNr;
+	}
+	
+	public int getOcrNr(){
+		return ocrNr.get();
+	}
+	
+	public void setOcrNr(int ocrNr){
+		this.ocrNr.set(ocrNr);
+	}
+	
+	public IntegerProperty ocrNrProperty(){
+		return ocrNr;
 	}
 	
 	public int getSafarId(){
