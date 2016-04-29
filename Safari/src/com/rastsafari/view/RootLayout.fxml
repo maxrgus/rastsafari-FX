@@ -20,6 +20,11 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleCustomerCategory" text="Kundkategorier" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Utrustning">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleGearView" text="Utrustningslista" />
+              </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Rapport">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleGenerateReport" text="Generera rapport" />

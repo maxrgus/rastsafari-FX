@@ -49,6 +49,10 @@ public class RootLayoutController {
 	private void handleGenerateReport() {
 		mainApp.showGenereateReportView();
 	}
+	@FXML
+	private void handleGearView() {
+		mainApp.showGearListView();
+	}
 	
 	
 
