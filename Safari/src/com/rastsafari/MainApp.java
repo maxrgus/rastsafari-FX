@@ -8,6 +8,7 @@ import com.rastsafari.model.CustomerCategoryList;
 import com.rastsafari.model.CustomerList;
 import com.rastsafari.model.SafariLocation;
 import com.rastsafari.model.SafariLocationList;
+import com.rastsafari.view.BookingViewController;
 import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
@@ -39,6 +40,7 @@ public class MainApp extends Application {
 	private Stage primaryStage;
 	private Stage bootStage;
 	private Stage dialogStage;
+	private Stage bookingStage;
 	private Stage categoryStage;
 	private Stage customerRegisterStage;
 	private BorderPane rootLayout;
@@ -168,6 +170,32 @@ public class MainApp extends Application {
 			// Show the dialog and wait until user closes it
 			dialogStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			dialogStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void showBookingView(){
+		try {
+			//Load BookingView.fxml
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/BookingView.fxml"));
+			AnchorPane bookingView = (AnchorPane) uiLoader.load();
+			
+			//Create dialog stage
+			bookingStage = new Stage();
+			bookingStage.setTitle("Bokning");
+			bookingStage.initModality(Modality.WINDOW_MODAL);
+			bookingStage.initOwner(primaryStage);
+			Scene scene = new Scene(bookingView);
+			bookingStage.setScene(scene);
+			
+			// Set the location into the controller.
+			BookingViewController controller = uiLoader.getController();
+			controller.setBookingStage(bookingStage,this);
+			
+			// Show the dialog and wait until user closes it
+			bookingStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			bookingStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
