@@ -6,12 +6,15 @@ import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.CustomerCategoryList;
 import com.rastsafari.model.CustomerList;
+import com.rastsafari.model.Gear;
+import com.rastsafari.model.GearList;
 import com.rastsafari.model.SafariLocation;
 import com.rastsafari.model.SafariLocationList;
 import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
 import com.rastsafari.view.EditCustomerDialogController;
+import com.rastsafari.view.GearViewController;
 import com.rastsafari.view.GenerateReportViewController;
 import com.rastsafari.view.LocationEditDialogController;
 import com.rastsafari.view.LocationMapController;
@@ -46,6 +49,7 @@ public class MainApp extends Application {
 	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
 	private ObservableList<CustomerCategory> categoryList = FXCollections.observableArrayList();
 	private ObservableList<SafariLocation> locationList = FXCollections.observableArrayList();
+	private ObservableList<Gear> gearList = FXCollections.observableArrayList();
 	
 	
 	@Override
@@ -80,9 +84,11 @@ public class MainApp extends Application {
 					CustomerList list = new CustomerList();
 					CustomerCategoryList cat = new CustomerCategoryList();
 					SafariLocationList loclist = new SafariLocationList();
+					GearList gList = new GearList();
 					customerList.addAll(list.getCustomerList());
 					categoryList.addAll(cat.getCustomerCategoryList());
 					locationList.addAll(loclist.getSafariLocationList());
+					gearList.addAll(gList.getGearList());
 					Thread.sleep(2500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -347,6 +353,29 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	public void showGearListView() {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/GearView.fxml"));
+			BorderPane gearView = (BorderPane) uiLoader.load();
+			
+			Stage gearStage = new Stage();
+			gearStage.setTitle("Utrustning");
+			gearStage.initModality(Modality.WINDOW_MODAL);
+			gearStage.initOwner(primaryStage);
+			Scene scene = new Scene(gearView);
+			gearStage.setScene(scene);
+			
+			GearViewController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			
+			gearStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			gearStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	/*
 	 * Returns the main stage.
 	 * @return
@@ -365,6 +394,9 @@ public class MainApp extends Application {
 	}
 	public ObservableList<SafariLocation> getLocationList() {
 		return locationList;
+	}
+	public ObservableList<Gear> getGearList() {
+		return gearList;
 	}
 
 	public static void main(String[] args) {
