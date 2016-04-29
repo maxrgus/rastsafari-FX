@@ -38,6 +38,10 @@ public class MainFrameController {
 		mainApp.showSafariLocationView();
 	}
 	@FXML
+	private void handleBookingView(){
+		mainApp.showBookingView();
+	}
+	@FXML
 	private void handleApplicationExit() {
 		System.exit(1);
 	}
