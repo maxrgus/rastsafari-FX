@@ -73,8 +73,17 @@ public class StorageDB implements Storage {
 	}
 
 	public void addSafari(Safari s) {
-		// TODO Auto-generated method stub
-		
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "INSERT INTO safari (safariLocationId,date,hour,endHour,minParticipants,maxParticipants,price) " +
+						 "VALUES ("+s.getLocation().getId()+",'"+s.getDate()+"','"+s.getStartTime()+"','"+s.getEndTime()+
+						 "',"+s.getMinParticipants()+","+s.getMaxParticipants()+","+s.getPrice()+");";
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -147,8 +156,18 @@ public class StorageDB implements Storage {
 
 	
 	public void updateSafari(Safari s) {
-		// TODO Auto-generated method stub
-		
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "UPDATE safari SET safariLocationId = '"+s.getLocation().getId()+"'" +
+						 ", date = '"+s.getDate()+"', hour = '"+s.getStartTime()+", endHour = '" +
+						 s.getEndTime()+"', minParticipants = "+s.getMinParticipants()+", maxParticpants = " +
+						 s.getMaxParticipants()+", price = "+s.getPrice()+" WHERE id = "+s.getId()+";";
+			st.executeUpdate(sql);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 	}
 
 	
@@ -210,7 +229,16 @@ public class StorageDB implements Storage {
 
 	
 	public void removeSafari(Safari s) {
-		// TODO Auto-generated method stub
+		int id = s.getId();
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "DELETE FROM safari WHERE id=="+id+";";
+			st.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -460,6 +488,23 @@ public class StorageDB implements Storage {
 	      }
 	      id++;
 	      return id;
-	    }
+    }
+	public int generateSafariId() {
+		int id = 0;
+		Statement s = null;
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+	        s = c.createStatement();
+	        String sql = "SELECT MAX(id) FROM safari;";
+	        ResultSet rs = s.executeQuery(sql);
+	        id = rs.getInt(1);
+	        rs.close();
+	      } catch(Exception e) {
+	    	  System.out.println(e);
+	      }
+	      id++;
+	      return id;
+	}
 
 }
