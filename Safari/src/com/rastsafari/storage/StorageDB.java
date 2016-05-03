@@ -346,17 +346,33 @@ public class StorageDB implements Storage {
 		
 		try{
 			Statement statement = c.createStatement();
-			String sql = "SELECT * FROM Booking;";
+			String sql = "SELECT Booking.bookingNr,customer.*,safari.id,safariLocation.*,safari.date,safari.hour,safari.endHour,safari.price FROM Booking,customer,safari,safariLocation " +
+						 "WHERE Booking.customerId == customer.id AND Booking.safariId == safari.id AND safari.safariLocationId == safariLocation.id;";
 			
 			ResultSet rs = statement.executeQuery(sql);
-			Statement statement2 = c.createStatement();
-			ResultSet rs2;
-			
 			while(rs.next()){
-				rs2 = statement2.executeQuery("SELECT * FROM Customer where id = "+rs.getInt(2));
-				System.out.println(rs2);
-
-				
+				bookings.add(new Booking(
+						rs.getInt(1),
+						new Customer(rs.getInt(2),
+									 rs.getString(5),
+									 rs.getString(6),
+									 rs.getString(4),
+									 rs.getString(6),
+									 rs.getString(7),
+									 rs.getString(8),
+									 rs.getInt(3)),
+						new Safari(rs.getInt(12),
+								   new SafariLocation(rs.getInt(13),
+										   			  rs.getString(14),
+										   			  rs.getString(15),
+										   			  rs.getString(16),
+										   			  rs.getInt(17),
+										   			  rs.getInt(18),
+										   			  rs.getInt(19)),
+								   rs.getString(20),
+								   rs.getString(21),
+								   rs.getString(22),
+								   rs.getInt(23))));
 			}
 			rs.close();
 		} catch (Exception e){

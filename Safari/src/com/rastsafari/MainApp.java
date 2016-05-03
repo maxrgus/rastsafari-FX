@@ -2,6 +2,7 @@ package com.rastsafari;
 
 import java.io.IOException;
 
+import com.rastsafari.model.Booking;
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.Gear;
@@ -53,6 +54,7 @@ public class MainApp extends Application {
 	private ObservableList<SafariLocation> locationList = FXCollections.observableArrayList();
 	private ObservableList<Gear> gearList = FXCollections.observableArrayList();
 	private ObservableList<Safari> safariList = FXCollections.observableArrayList();
+	private ObservableList<Booking> bookingList = FXCollections.observableArrayList();
 	
 	
 	@Override
@@ -90,6 +92,7 @@ public class MainApp extends Application {
 					locationList.addAll(s.getLocationsFromStorage());
 					gearList.addAll(s.getGearFromStorage());
 					safariList.addAll(s.getSafarisFromStorage());
+					bookingList.addAll(s.getBookingsFromStorage());
 					Thread.sleep(2500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -451,6 +454,9 @@ public class MainApp extends Application {
 	}
 	public ObservableList<Safari> getSafariList() {
 		return safariList;
+	}
+	public ObservableList<Booking> getBookingList() {
+		return bookingList;
 	}
 
 	public static void main(String[] args) {

@@ -13,12 +13,12 @@
    <children>
       <BorderPane layoutX="205.0" layoutY="111.0" prefHeight="356.0" prefWidth="800.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="bookingTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn prefWidth="120.0" text="ID" />
-                <TableColumn prefWidth="205.0" text="Kundnamn" />
-                  <TableColumn minWidth="3.0" prefWidth="175.0" text="Safari" />
-                  <TableColumn minWidth="0.0" prefWidth="295.0" text="Datum" />
+                <TableColumn fx:id="idColumn" prefWidth="120.0" text="ID" />
+                <TableColumn fx:id="customerColumn" prefWidth="205.0" text="Kundnamn" />
+                  <TableColumn fx:id="safariColumn" minWidth="3.0" prefWidth="175.0" text="Safari" />
+                  <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="295.0" text="Datum" />
               </columns>
             </TableView>
          </top>
