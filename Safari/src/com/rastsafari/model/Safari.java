@@ -1,6 +1,8 @@
 package com.rastsafari.model;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -15,11 +17,12 @@ public class Safari {
 	private StringProperty endTime;
 	private IntegerProperty minParticipants;
 	private IntegerProperty maxParticipants;
+	private DoubleProperty price;
 	
 	private ObservableList<Booking> bookedCustomers;
 	
 	public Safari(int id, SafariLocation location, String date, String startTime,
-				  String endTime) {
+				  String endTime, int price) {
 		this.id = new SimpleIntegerProperty(id);
 		this.location = location;
 		this.date = new SimpleStringProperty(date);
@@ -27,11 +30,12 @@ public class Safari {
 		this.endTime = new SimpleStringProperty(endTime);
 		this.minParticipants = new SimpleIntegerProperty(location.getMinParticipant());
 		this.maxParticipants = new SimpleIntegerProperty(location.getMaxParticipant());
+		this.price = new SimpleDoubleProperty(price);
 		this.bookedCustomers = FXCollections.observableArrayList();
 		
 	}
 	public Safari() {
-		this(0,null,null,null,null);
+		this(0,null,null,null,null,0);
 	}
 	
 	public int getId() {
@@ -93,6 +97,15 @@ public class Safari {
 	}
 	public IntegerProperty getMaxParticipantsProperty() {
 		return maxParticipants;
+	}
+	public double getPrice() {
+		return price.get();
+	}
+	public void setPrice(double price) {
+		this.price.set(price);
+	}
+	public DoubleProperty getPriceProperty() {
+		return price;
 	}
 	public void addBookingToList(Booking b) {
 		bookedCustomers.add(b);
