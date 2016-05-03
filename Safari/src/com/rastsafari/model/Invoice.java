@@ -15,8 +15,8 @@ public class Invoice {
 	
 	public Invoice(int id, Booking b, Customer c){
 		this.id =  	new	SimpleIntegerProperty(id);
-		this.b= 	new Booking();
-		this.c=		new Customer();
+		this.b=		b;
+		this.c=		c;
 	}
 	
 	public int getId(){
