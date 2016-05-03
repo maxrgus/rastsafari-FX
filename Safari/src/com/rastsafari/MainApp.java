@@ -15,6 +15,7 @@ import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
 import com.rastsafari.view.EditCustomerDialogController;
+import com.rastsafari.view.EditSafariDialogController;
 import com.rastsafari.view.GearViewController;
 import com.rastsafari.view.GenerateReportViewController;
 import com.rastsafari.view.LocationEditDialogController;
@@ -46,6 +47,7 @@ public class MainApp extends Application {
 	private Stage dialogStage;
 	private Stage bookingStage;
 	private Stage categoryStage;
+	private Stage safariStage;
 	private Stage customerRegisterStage;
 	private BorderPane rootLayout;
 	
@@ -359,6 +361,36 @@ public class MainApp extends Application {
 			return false;
 		}
 	}
+	public boolean showEditSafariDialog(Safari safari, String label) {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/EditSafariDialog.fxml"));
+			AnchorPane editDialog = (AnchorPane) uiLoader.load();
+			
+			Stage editStage = new Stage();
+			editStage.setTitle(label);
+			editStage.initModality(Modality.WINDOW_MODAL);
+			editStage.initOwner(safariStage);
+			
+			Scene scene = new Scene(editDialog);
+			editStage.setScene(scene);
+			
+			EditSafariDialogController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			controller.setStage(editStage);
+			controller.setSafari(safari);
+			controller.setHeaderLabel(label);
+			editStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			editStage.showAndWait();
+			
+			return controller.isOkClicked();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 	public void showGenereateReportView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -412,7 +444,7 @@ public class MainApp extends Application {
 			uiLoader.setLocation(MainApp.class.getResource("view/SafariView.fxml"));
 			BorderPane safariView = (BorderPane) uiLoader.load();
 			
-			Stage safariStage = new Stage();
+			safariStage = new Stage();
 			safariStage.setTitle("Safarier");
 			safariStage.initModality(Modality.WINDOW_MODAL);
 			safariStage.initOwner(dialogStage);
@@ -439,6 +471,9 @@ public class MainApp extends Application {
 	}
 	public Stage getCustomerRegisterStage() {
 		return customerRegisterStage;
+	}
+	public Stage getSafariViewStage() {
+		return safariStage;
 	}
 	public ObservableList<Customer> getCustomerList() {
 		return customerList;

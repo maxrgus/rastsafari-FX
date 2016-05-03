@@ -1,5 +1,7 @@
 package com.rastsafari.view;
 
+import java.util.Optional;
+
 import com.rastsafari.MainApp;
 import com.rastsafari.model.Booking;
 import com.rastsafari.model.Safari;
@@ -10,6 +12,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 public class SafariViewController {
 	@FXML
@@ -64,12 +69,13 @@ public class SafariViewController {
 		dateColumn.setCellValueFactory(cellData -> cellData.getValue().getDateProperty());
 		locationColumn.setCellValueFactory(cellData -> cellData.getValue().getLocation().locationNameProperty());
 		startTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getStartTimeProperty());
-		endTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getStartTimeProperty());
+		endTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getEndTimeProperty());
 		takenSlotsColumn.setCellValueFactory(cellData -> cellData.getValue().getTakenSlotsProperty().asObject());
 		avalibleSlotsColumn.setCellValueFactory(cellData -> cellData.getValue().getAvalibleSlotsProperty().asObject());
 		
 		idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
 		customerColumn.setCellValueFactory(cellData -> cellData.getValue().getCustomer().fullNameProperty());
+		
 		
 		//Clear
 		showSafariDetails(null);
@@ -82,6 +88,17 @@ public class SafariViewController {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		safariTable.setItems(mainApp.getSafariList());
+		for (Safari s : mainApp.getSafariList()) {
+			for (Booking b : mainApp.getBookingList()) {
+				if (b.getSafari().getId() == s.getId()) {
+					s.addBookingToList(b);
+					s.setAvalibleSlots(s.getBookedCustomers());
+					s.setTakenSlots(s.getBookedCustomers());
+				}
+			}
+		}
+		safariTable.getSortOrder().add(dateColumn);
+
 	}
 	
 	private void showSafariDetails(Safari safari) {
@@ -107,6 +124,63 @@ public class SafariViewController {
 			
 			bookingsTable.setItems(null);
 		}
+	}
+	@FXML
+	private void handleEditSafari() {
+		Safari selectedSafari = safariTable.getSelectionModel().getSelectedItem();
+		if (selectedSafari != null) {
+			boolean okClicked = mainApp.showEditSafariDialog(selectedSafari, "Redigera safari");
+			if (okClicked) {
+				storage.updateSafari(selectedSafari);
+			}
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setHeaderText("Inget markerat");
+			alert.setContentText("Vänligen väl ett safari som ska redigeras");
+			
+			alert.showAndWait();
+		}
+	}
+	@FXML
+	private void handleNewSafari() {
+		Safari tempSafari = new Safari();
+		boolean okClicked = mainApp.showEditSafariDialog(tempSafari, "Nytt safari");
+		if (okClicked) {
+			tempSafari.setId(storage.generateSafariId());
+			mainApp.getSafariList().add(tempSafari);
+			storage.addSafari(tempSafari);
+		}
+	}
+	@FXML
+	private void handleDeleteSafari() {
+		int selectedIndex = safariTable.getSelectionModel().getSelectedIndex();
+		Safari safari = safariTable.getSelectionModel().getSelectedItem();
+		if (selectedIndex >= 0) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Bekräfta");
+			alert.setHeaderText("Bekräfta borttagning");
+			alert.setContentText("Vill du verkligen ta bort " + safari.getLocation().getLocationName() +
+								" den " + safari.getDate());
+			
+			Optional<ButtonType> result = alert.showAndWait();
+			if(result.get() == ButtonType.OK) {
+				safariTable.getItems().remove(selectedIndex);
+				storage.removeSafari(safari);
+			}
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("Inget markerat");
+			alert.setHeaderText("Inget safari markerad");
+			alert.setContentText("Vänligen markera ett safari som du vill radera");
+			
+			alert.showAndWait();
+		}
+	}
+	@FXML
+	private void handleDispose() {
+		mainApp.getSafariViewStage().close();
 	}
 }
 

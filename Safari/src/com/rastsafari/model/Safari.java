@@ -31,12 +31,20 @@ public class Safari {
 		this.date = new SimpleStringProperty(date);
 		this.startTime = new SimpleStringProperty(startTime);
 		this.endTime = new SimpleStringProperty(endTime);
-		this.minParticipants = new SimpleIntegerProperty(location.getMinParticipant());
-		this.maxParticipants = new SimpleIntegerProperty(location.getMaxParticipant());
 		this.price = new SimpleDoubleProperty(price);
 		this.bookedCustomers = FXCollections.observableArrayList();
-		this.takenSlots = new SimpleIntegerProperty(bookedCustomers.size());
-		this.avalibleSlots = new SimpleIntegerProperty(location.getMaxParticipant() - bookedCustomers.size());
+		if (location != null) {
+			this.minParticipants = new SimpleIntegerProperty(location.getMinParticipant());
+			this.maxParticipants = new SimpleIntegerProperty(location.getMaxParticipant());
+			this.takenSlots = new SimpleIntegerProperty(bookedCustomers.size());
+			this.avalibleSlots = new SimpleIntegerProperty(location.getMaxParticipant() - bookedCustomers.size());
+		} else {
+			this.minParticipants = new SimpleIntegerProperty();
+			this.maxParticipants = new SimpleIntegerProperty();
+			this.takenSlots = new SimpleIntegerProperty();
+			this.avalibleSlots = new SimpleIntegerProperty();
+		}
+		
 		
 	}
 	public Safari() {
@@ -88,8 +96,8 @@ public class Safari {
 	public int getMinParticipants() {
 		return minParticipants.get();
 	}
-	public void setMinParticipants(int minParticipants) {
-		this.minParticipants.set(minParticipants);
+	public void setMinParticipants(int min) {
+		this.minParticipants.set(min);
 	}
 	public IntegerProperty getMinParticipantsProperty() {
 		return minParticipants;
@@ -121,11 +129,20 @@ public class Safari {
 	public int getTakenSlots() {
 		return takenSlots.get();
 	}
+	public void setTakenSlots(ObservableList<Booking> bookings) {
+		this.takenSlots.set(bookings.size());
+	}
 	public IntegerProperty getAvalibleSlotsProperty() {
 		return avalibleSlots;
 	}
 	public int getAvalibleSlots() {
 		return avalibleSlots.get();
+	}
+	public void setAvalibleSlots(ObservableList<Booking> bookings) {
+		this.avalibleSlots.set(this.getMaxParticipants() - bookings.size());
+	}
+	public void initBookedCustomers() {
+		bookedCustomers = FXCollections.observableArrayList();
 	}
 	public ObservableList<Booking> getBookedCustomers() {
 		return bookedCustomers;

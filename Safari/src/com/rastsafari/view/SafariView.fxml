@@ -74,10 +74,10 @@
          <children>
             <ButtonBar prefHeight="55.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <buttons>
-                <Button defaultButton="true" mnemonicParsing="false" text="Ny.." />
-                  <Button mnemonicParsing="false" text="Redigera" />
-                  <Button mnemonicParsing="false" text="Radera" />
-                  <Button mnemonicParsing="false" text="Tillbaka" />
+                <Button defaultButton="true" mnemonicParsing="false" onAction="#handleNewSafari" text="Ny.." />
+                  <Button mnemonicParsing="false" onAction="#handleEditSafari" text="Redigera" />
+                  <Button mnemonicParsing="false" onAction="#handleDeleteSafari" text="Radera" />
+                  <Button mnemonicParsing="false" onAction="#handleDispose" text="Tillbaka" />
               </buttons>
                <padding>
                   <Insets right="25.0" />
