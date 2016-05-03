@@ -1,3 +1,4 @@
+PRAGMA encoding = "UTF-8";
 DROP TABLE IF EXISTS gear;
 DROP TABLE IF EXISTS gearStock;
 
@@ -7,15 +8,15 @@ CREATE TABLE gear (
   description   varchar(50));
 
 INSERT INTO gear (gearName,description)
-VALUES ('FlugfiskespÃ¶', 'Modell TMC');
+VALUES ('Flugfiskespö', 'Modell TMC');
 INSERT INTO gear (gearName,description)
-VALUES ('SovsÃ¤ck', '175cm');
+VALUES ('Sovsäck', '175cm');
 INSERT INTO gear (gearName,description)
-VALUES ('SovsÃ¤ck', '185cm');
+VALUES ('Sovsäck', '185cm');
 INSERT INTO gear (gearName,description)
-VALUES ('TÃ¤lt', '3man');
+VALUES ('Tält', '3man');
 INSERT INTO gear (gearName,description)
-VALUES ('HavsspÃ¶', 'Modell THC');
+VALUES ('Havsspö', 'Modell THC');
 
 CREATE TABLE gearStock (
   gid           integer PRIMARY KEY,
