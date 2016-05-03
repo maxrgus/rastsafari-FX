@@ -10,6 +10,7 @@ public class Customer {
 private IntegerProperty id;
 private StringProperty  fName;
 private StringProperty  lName;
+private StringProperty 	fullName;
 private StringProperty pNumber;
 private StringProperty  eMail;
 private StringProperty dNumber;
@@ -31,6 +32,7 @@ public Customer(int id, String fName, String lName,String pNumber, String eMail,
 	this.nNumber=  new SimpleStringProperty(nNumber);
 	this.category= new SimpleIntegerProperty(category);
 	this.allNumber = new SimpleStringProperty(dNumber + "/" + nNumber);
+	this.fullName = new SimpleStringProperty(fName + " " + lName);
 }
 
 public int getid(){
@@ -77,6 +79,9 @@ public StringProperty lNameProperty(){
 	
 	return lName;
 	
+}
+public StringProperty fullNameProperty() {
+	return fullName;
 }
 public String getPNumber(){
 	
