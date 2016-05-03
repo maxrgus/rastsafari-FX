@@ -14,11 +14,11 @@ CREATE TABLE safariLocation (
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
 VALUES ('Storsjön', 'Laxfiske', '59.1234459,12.1212122', 4, 8, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('Storsjön', 'Ã–ringsfiske', '59.1234459,12.1212122', 6, 12, 1);
+VALUES ('Storsjön', 'Äringsfiske', '59.1234459,12.1212122', 6, 12, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('Svartetjörn', 'GÃ¤ddfiske', '59.1234459,12.1212122', 8, 16, 1);
+VALUES ('Svartetjörn', 'Gäddfiske', '59.1234459,12.1212122', 8, 16, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('Svartetjörn', 'Metning fÃ¶r barn', '59.1234459,12.1212122', 8, 16, 1);
+VALUES ('Svartetjörn', 'Metning för barn', '59.1234459,12.1212122', 8, 16, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
 VALUES ('Gunnliseå', 'Flugfiske', '59.1234459,12.1212122', 5, 10, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
