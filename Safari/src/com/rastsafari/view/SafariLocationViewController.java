@@ -15,8 +15,8 @@ import java.util.Optional;
 
 import com.rastsafari.MainApp;
 import com.rastsafari.model.SafariLocation;
-import com.rastsafari.model.SafariLocationList;
-import com.rastsafari.model.SafariMaintenance;
+import com.rastsafari.storage.Storage;
+import com.rastsafari.storage.StorageFactory;
 
 public class SafariLocationViewController {
 	@FXML
@@ -45,9 +45,7 @@ public class SafariLocationViewController {
     private MainApp mainApp;
     private Stage dialogStage;
     
-    private SafariMaintenance maintenance = new SafariMaintenance();
-    private ObservableList<SafariLocation> locationList = FXCollections.observableArrayList();
-    
+    private Storage storage = StorageFactory.getStorageDB();    
     
     /**
      * The constructor
@@ -122,7 +120,7 @@ public class SafariLocationViewController {
     		Optional<ButtonType> result = alert.showAndWait();
     		if (result.get() == ButtonType.OK){
     		    safariLocationTable.getItems().remove(selectedIndex);
-        		maintenance.removeFromDB(location.getId());
+        		storage.removeSafariLocation(location);
     		} 
     		
     	} else {
@@ -146,9 +144,9 @@ public class SafariLocationViewController {
     	SafariLocation tempLocation = new SafariLocation();
     	boolean okClicked = mainApp.showLocationEditDialog(tempLocation);
     	if (okClicked) {
-    		tempLocation.setId(maintenance.generateId());
+    		tempLocation.setId(storage.generateLocationId());
     		mainApp.getLocationList().add(tempLocation);
-    		maintenance.insertLocationInDb(tempLocation);
+    		storage.addSafariLocation(tempLocation);
     	}
     }
     /**
@@ -162,7 +160,7 @@ public class SafariLocationViewController {
     		boolean okClicked = mainApp.showLocationEditDialog(selectedLocation);
     		if (okClicked) {
     			showSafariLocationDetails(selectedLocation);
-    			maintenance.updateLocationInDb(selectedLocation);
+    			storage.updateSafariLocation(selectedLocation);
     		}
     	} else {
     		//Nothing selected.

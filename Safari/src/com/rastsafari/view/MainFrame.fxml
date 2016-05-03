@@ -49,7 +49,7 @@
                                 <buttons>
                                   <Button defaultButton="true" mnemonicParsing="false" text="Safariturer" />
                                     <Button mnemonicParsing="false" onAction="#handleSafariLocationView" text="Safarimål" />
-                                    <Button mnemonicParsing="false" text="Bokningar" />
+                                    <Button mnemonicParsing="false" onAction="#handleBookingView" text="Bokningar" />
                                     <Button mnemonicParsing="false" onAction="#handleApplicationExit" prefHeight="33.0" prefWidth="92.0" text="Avsluta" />
                                 </buttons>
                               </ButtonBar>

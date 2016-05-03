@@ -1,7 +1,8 @@
 package com.rastsafari.view;
 
 import com.rastsafari.model.SafariLocation;
-import com.rastsafari.model.SafariMaintenance;
+import com.rastsafari.storage.Storage;
+import com.rastsafari.storage.StorageFactory;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,7 +34,7 @@ public class LocationEditDialogController {
 	
 	private Stage dialogStage;
 	private SafariLocation location;
-	private SafariMaintenance maintenance = new SafariMaintenance();
+	private Storage storage = StorageFactory.getStorageDB();
 	private boolean okClicked = false;
 	private ObservableList<Integer> participantOptions = FXCollections.observableArrayList();
 	private ObservableList<String> isActiveOptions = FXCollections.observableArrayList();
@@ -100,7 +101,7 @@ public class LocationEditDialogController {
 				location.setIsActive(0);
 			}
 			okClicked = true;
-			maintenance.updateLocationInDb(location);
+			storage.updateSafariLocation(location);
 			dialogStage.close();
 		}
 	}

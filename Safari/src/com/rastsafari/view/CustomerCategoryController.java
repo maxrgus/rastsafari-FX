@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import com.rastsafari.MainApp;
 import com.rastsafari.model.CustomerCategory;
-import com.rastsafari.model.CustomerCategoryList;
-import com.rastsafari.model.CustomerMaintenance;
+import com.rastsafari.storage.Storage;
+import com.rastsafari.storage.StorageFactory;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -28,8 +28,7 @@ public class CustomerCategoryController {
 	//Reference main app
 	private MainApp mainApp; 
 	
-	// Reference CustomerMaintenance
-	private CustomerMaintenance maintenance = new CustomerMaintenance();
+	private Storage storage = StorageFactory.getStorageDB();
 	
 	public CustomerCategoryController() {
 	}
@@ -64,9 +63,9 @@ public class CustomerCategoryController {
 		CustomerCategory tempCategory = new CustomerCategory();
 		boolean okClicked = mainApp.showCategoryEditDialog(tempCategory);
 		if(okClicked) {
-			tempCategory.setId(maintenance.generateCategoryId());
+			tempCategory.setId(storage.generateCategoryId());
 			mainApp.getCategoryList().add(tempCategory); 
-			maintenance.insertCategoryInDb(tempCategory);
+			storage.addCustomerCategory(tempCategory);
 			
 		}
 	}
@@ -84,7 +83,7 @@ public class CustomerCategoryController {
 			Optional<ButtonType> result = alert.showAndWait();
 			if(result.get() == ButtonType.OK){
 				categoryTable.getItems().remove(selectedIndex); 
-				maintenance.removeCategoryFromDB(category.getId());
+				storage.removeCustomerCategory(category);
 			}
 		} else{
 			Alert alert = new Alert(AlertType.WARNING);

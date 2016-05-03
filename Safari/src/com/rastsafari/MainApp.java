@@ -4,12 +4,10 @@ import java.io.IOException;
 
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
-import com.rastsafari.model.CustomerCategoryList;
-import com.rastsafari.model.CustomerList;
 import com.rastsafari.model.Gear;
-import com.rastsafari.model.GearList;
 import com.rastsafari.model.SafariLocation;
-import com.rastsafari.model.SafariLocationList;
+import com.rastsafari.storage.Storage;
+import com.rastsafari.storage.StorageFactory;
 import com.rastsafari.view.BookingViewController;
 import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
@@ -83,14 +81,11 @@ public class MainApp extends Application {
 			@Override
 			protected Void call() throws Exception {
 				try {
-					CustomerList list = new CustomerList();
-					CustomerCategoryList cat = new CustomerCategoryList();
-					SafariLocationList loclist = new SafariLocationList();
-					GearList gList = new GearList();
-					customerList.addAll(list.getCustomerList());
-					categoryList.addAll(cat.getCustomerCategoryList());
-					locationList.addAll(loclist.getSafariLocationList());
-					gearList.addAll(gList.getGearList());
+					Storage s = StorageFactory.getStorageDB();
+					customerList.addAll(s.getCustomersFromStorage());
+					categoryList.addAll(s.getCategoriesFromStorage());
+					locationList.addAll(s.getLocationsFromStorage());
+					gearList.addAll(s.getGearFromStorage());
 					Thread.sleep(2500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

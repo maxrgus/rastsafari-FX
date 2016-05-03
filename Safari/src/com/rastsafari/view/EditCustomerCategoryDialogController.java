@@ -2,7 +2,8 @@ package com.rastsafari.view;
 
 
 import com.rastsafari.model.CustomerCategory;
-import com.rastsafari.model.CustomerMaintenance;
+import com.rastsafari.storage.Storage;
+import com.rastsafari.storage.StorageFactory;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +21,7 @@ public class EditCustomerCategoryDialogController {
 	
 	private Stage categoryStage;
 	private CustomerCategory category;
-	private CustomerMaintenance maintenance = new CustomerMaintenance();
+	private Storage storage = StorageFactory.getStorageDB();
 	private boolean okClicked = false;
 	
 	@FXML
@@ -49,7 +50,7 @@ public class EditCustomerCategoryDialogController {
 			category.setPriceIndex(Double.parseDouble(priceIndexField.getText()));	
 			
 			okClicked = true;
-			maintenance.updateCategoryInDb(category);
+			storage.updateCustomerCategory(category);
 			categoryStage.close();
 			}
 	}

@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import com.rastsafari.MainApp;
 import com.rastsafari.model.Customer;
-import com.rastsafari.model.CustomerList;
-import com.rastsafari.model.CustomerMaintenance;
+import com.rastsafari.storage.Storage;
+import com.rastsafari.storage.StorageFactory;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,8 +39,8 @@ public class CustomerRegisterViewController {
 	
 	//Reference the main app
 	private MainApp mainApp;
-	
-	private CustomerMaintenance maintenance = new CustomerMaintenance();
+
+	private Storage storage = StorageFactory.getStorageDB();
 	private SortedList<Customer> customersSorted;
 	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
 	
@@ -108,7 +108,7 @@ public class CustomerRegisterViewController {
 			boolean okClicked = mainApp.showEditCustomerDialog(selectedCustomer,"Redigera Kund");
 			if (okClicked) {
 				selectedCustomer.setAllNumber();
-				maintenance.updateCustomerInDb(selectedCustomer);
+				storage.updateCustomer(selectedCustomer);
 			}
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -125,10 +125,10 @@ public class CustomerRegisterViewController {
 		Customer tempCustomer = new Customer();
 		boolean okClicked = mainApp.showEditCustomerDialog(tempCustomer, "Ny kund");
 		if (okClicked) {
-			tempCustomer.setId(maintenance.generateCustomerId());
+			tempCustomer.setId(storage.generateCustomerId());
 			tempCustomer.setAllNumber();
 			mainApp.getCustomerList().add(tempCustomer);
-			maintenance.insertCustomerInDb(tempCustomer);
+			storage.updateCustomer(tempCustomer);
 		}
 	}
 	@FXML
@@ -150,7 +150,7 @@ public class CustomerRegisterViewController {
 				} else {
 					customerTable.getItems().remove(selectedIndex);
 				}
-				maintenance.removeCustomerFromDB(customer.getid());
+				storage.removeCustomer(customer);
 			}
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
