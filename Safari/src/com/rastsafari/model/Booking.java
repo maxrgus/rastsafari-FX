@@ -10,16 +10,18 @@ public class Booking {
 	private IntegerProperty id;
 	private Customer customer;
 	private Safari safari;
+	private IntegerProperty priceIndex;
 
 	
 	public Booking(){
-		this(0,null,null);
+		this(0,null,null,0);
 	}
 	
-	public Booking(int id,Customer customer, Safari safari){
+	public Booking(int id,Customer customer, Safari safari, int priceIndex){
 		this.id= 			new SimpleIntegerProperty(id);
 		this.customer= 		customer;
 		this.safari= 		safari;
+		this.priceIndex=	new SimpleIntegerProperty(priceIndex);
 
 	}
 	
@@ -40,5 +42,14 @@ public class Booking {
 	
 	public Safari getSafari(){
 		return safari;
+	}
+	public int getPriceIndex(){
+		return priceIndex.get();
+	}
+	public void setPriceIndex(int priceIndex){
+		this.priceIndex.set(priceIndex);
+	}
+	public IntegerProperty priceIndexProperty(){
+		return priceIndex;
 	}
 }

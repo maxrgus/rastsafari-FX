@@ -308,10 +308,31 @@ public class StorageDB implements Storage {
 		return null;
 	}
 
-	@Override
+	
 	public ObservableList<Booking> getBookingsFromStorage() {
-		// TODO Auto-generated method stub
-		return null;
+		ObservableList<Booking> bookings = FXCollections.observableArrayList();
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		
+		try{
+			Statement statement = c.createStatement();
+			String sql = "SELECT * FROM Booking;";
+			
+			ResultSet rs = statement.executeQuery(sql);
+			Statement statement2 = c.createStatement();
+			ResultSet rs2;
+			
+			while(rs.next()){
+				rs2 = statement2.executeQuery("SELECT * FROM Customer where id = "+rs.getInt(2));
+				System.out.println(rs2);
+
+				
+			}
+			rs.close();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return bookings;
 	}
 
 	@Override
