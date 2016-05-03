@@ -26,24 +26,23 @@ VALUES (8, '2020-05-06', '24:00', '03:00', 23, 60);
 CREATE TABLE Booking (
 		bookingNr	integer PRIMARY KEY,
 		customerId	integer,
-		calendarId	integer,
-		invoiceNr	integer,
+		safariId	integer,
 		priceIndex	integer);
 		
-INSERT INTO Booking (bookingNr, customerId, calendarId, invoiceNr, priceIndex)
-VALUES (1, 5, 23, 001, 1);
-INSERT INTO Booking (bookingNr, customerId, calendarId, invoiceNr, priceIndex)
-VALUES (12, 75, 283, 002, 0.7);
-INSERT INTO Booking (bookingNr, customerId, calendarId, invoiceNr, priceIndex)
-VALUES (555, 934, 20023, 002, 0.7);
-INSERT INTO Booking (bookingNr, customerId, calendarId, invoiceNr, priceIndex)
-VALUES (56564, 78235, 238563, 003, 1);
-INSERT INTO Booking (bookingNr, customerId, calendarId, invoiceNr, priceIndex)
-VALUES (24565, 47695, 496723, 004, 1.2);
-INSERT INTO Booking (bookingNr, customerId, calendarId, invoiceNr, priceIndex)
-VALUES (661123, 56171, 98765, 005, 0.8);
-INSERT INTO Booking (bookingNr, customerId, calendarId, invoiceNr, priceIndex)
-VALUES (33344, 66622, 12345, 006, 1.5);
+INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
+VALUES (1, 5, 23, 1);
+INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
+VALUES (12, 75, 283, 0.7);
+INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
+VALUES (555, 123, 20023, 0.7);
+INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
+VALUES (56564, 411, 238563, 1);
+INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
+VALUES (24565, 24, 496723, 1.2);
+INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
+VALUES (661123, 1, 98765, 0.8);
+INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
+VALUES (33344, 67, 12345, 1.5);
 
 CREATE TABLE Invoice (
 		invoiceNr	integer PRIMARY KEY,
