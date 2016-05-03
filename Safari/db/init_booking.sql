@@ -36,7 +36,7 @@ VALUES (12, 75, 283, 0.7);
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
 VALUES (555, 123, 20023, 0.7);
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
-VALUES (56564, 411, 238563, 1);
+VALUES (56564, 410, 238563, 1);
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
 VALUES (24565, 24, 496723, 1.2);
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
