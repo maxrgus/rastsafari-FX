@@ -14,14 +14,14 @@ public class Booking {
 
 	
 	public Booking(){
-		this(0,null,null,0);
+		this(0,null,null);
 	}
 	
-	public Booking(int id,Customer customer, Safari safari, int priceIndex){
+	public Booking(int id,Customer customer, Safari safari){
 		this.id= 			new SimpleIntegerProperty(id);
 		this.customer= 		customer;
 		this.safari= 		safari;
-		this.priceIndex=	new SimpleIntegerProperty(priceIndex);
+		this.priceIndex=	new SimpleIntegerProperty(customer.getCategory());
 
 	}
 	

@@ -35,6 +35,8 @@ public class Safari {
 		this.maxParticipants = new SimpleIntegerProperty(location.getMaxParticipant());
 		this.price = new SimpleDoubleProperty(price);
 		this.bookedCustomers = FXCollections.observableArrayList();
+		this.takenSlots = new SimpleIntegerProperty(bookedCustomers.size());
+		this.avalibleSlots = new SimpleIntegerProperty(location.getMaxParticipant() - bookedCustomers.size());
 		
 	}
 	public Safari() {
@@ -114,14 +116,12 @@ public class Safari {
 		bookedCustomers.add(b);
 	}
 	public IntegerProperty getTakenSlotsProperty() {
-		this.takenSlots.set(bookedCustomers.size());
 		return takenSlots;
 	}
 	public int getTakenSlots() {
 		return takenSlots.get();
 	}
 	public IntegerProperty getAvalibleSlotsProperty() {
-		this.avalibleSlots.set(getMaxParticipants() - bookedCustomers.size());
 		return avalibleSlots;
 	}
 	public int getAvalibleSlots() {
