@@ -19,6 +19,9 @@ public class Safari {
 	private IntegerProperty maxParticipants;
 	private DoubleProperty price;
 	
+	
+	private IntegerProperty takenSlots;
+	private IntegerProperty avalibleSlots;
 	private ObservableList<Booking> bookedCustomers;
 	
 	public Safari(int id, SafariLocation location, String date, String startTime,
@@ -110,7 +113,23 @@ public class Safari {
 	public void addBookingToList(Booking b) {
 		bookedCustomers.add(b);
 	}
-	
+	public IntegerProperty getTakenSlotsProperty() {
+		this.takenSlots.set(bookedCustomers.size());
+		return takenSlots;
+	}
+	public int getTakenSlots() {
+		return takenSlots.get();
+	}
+	public IntegerProperty getAvalibleSlotsProperty() {
+		this.avalibleSlots.set(getMaxParticipants() - bookedCustomers.size());
+		return avalibleSlots;
+	}
+	public int getAvalibleSlots() {
+		return avalibleSlots.get();
+	}
+	public ObservableList<Booking> getBookedCustomers() {
+		return bookedCustomers;
+	}
 }
 
 

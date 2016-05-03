@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.Gear;
+import com.rastsafari.model.Safari;
 import com.rastsafari.model.SafariLocation;
 import com.rastsafari.storage.Storage;
 import com.rastsafari.storage.StorageFactory;
@@ -50,6 +51,7 @@ public class MainApp extends Application {
 	private ObservableList<CustomerCategory> categoryList = FXCollections.observableArrayList();
 	private ObservableList<SafariLocation> locationList = FXCollections.observableArrayList();
 	private ObservableList<Gear> gearList = FXCollections.observableArrayList();
+	private ObservableList<Safari> safariList = FXCollections.observableArrayList();
 	
 	
 	@Override
@@ -420,6 +422,9 @@ public class MainApp extends Application {
 	}
 	public ObservableList<Gear> getGearList() {
 		return gearList;
+	}
+	public ObservableList<Safari> getSafariList() {
+		return safariList;
 	}
 
 	public static void main(String[] args) {
