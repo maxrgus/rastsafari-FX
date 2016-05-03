@@ -346,8 +346,13 @@ public class StorageDB implements Storage {
 		
 		try{
 			Statement statement = c.createStatement();
-			String sql = "SELECT Booking.bookingNr,customer.*,safari.id,safariLocation.*,safari.date,safari.hour,safari.endHour,safari.price FROM Booking,customer,safari,safariLocation " +
-						 "WHERE Booking.customerId == customer.id AND Booking.safariId == safari.id AND safari.safariLocationId == safariLocation.id;";
+			String sql = "SELECT Booking.bookingNr,customer.id, customer.customerCatID, customer.SSID, "
+					+ "customer.givenName, customer.familyName,"
+					+ "customer.email, customer.phoneDay, customer.phoneNight,safari.id,safariLocation.*,"
+					+ "safari.date,safari.hour,safari.endHour,safari.price "
+					+ "FROM Booking,customer,safari,safariLocation " +
+						 "WHERE Booking.customerId == customer.id AND Booking.safariId == safari.id "
+						 + "AND safari.safariLocationId == safariLocation.id;";
 			
 			ResultSet rs = statement.executeQuery(sql);
 			while(rs.next()){
@@ -357,22 +362,22 @@ public class StorageDB implements Storage {
 									 rs.getString(5),
 									 rs.getString(6),
 									 rs.getString(4),
-									 rs.getString(6),
 									 rs.getString(7),
 									 rs.getString(8),
+									 rs.getString(9),
 									 rs.getInt(3)),
-						new Safari(rs.getInt(12),
-								   new SafariLocation(rs.getInt(13),
+						new Safari(rs.getInt(10),
+								   new SafariLocation(rs.getInt(11),
+										   			  rs.getString(12),
+										   			  rs.getString(13),
 										   			  rs.getString(14),
-										   			  rs.getString(15),
-										   			  rs.getString(16),
-										   			  rs.getInt(17),
-										   			  rs.getInt(18),
-										   			  rs.getInt(19)),
+										   			  rs.getInt(15),
+										   			  rs.getInt(16),
+										   			  rs.getInt(17)),
+								   rs.getString(18),
+								   rs.getString(19),
 								   rs.getString(20),
-								   rs.getString(21),
-								   rs.getString(22),
-								   rs.getInt(23))));
+								   rs.getInt(21))));
 			}
 			rs.close();
 		} catch (Exception e){
