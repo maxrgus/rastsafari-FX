@@ -47,7 +47,7 @@
                            <children>
                               <ButtonBar layoutX="-11.0" layoutY="33.0" prefHeight="62.0" prefWidth="593.0" AnchorPane.bottomAnchor="38.0" AnchorPane.rightAnchor="11.0">
                                 <buttons>
-                                  <Button defaultButton="true" mnemonicParsing="false" text="Safariturer" />
+                                  <Button defaultButton="true" mnemonicParsing="false" onAction="#handleSafariView" text="Safariturer" />
                                     <Button mnemonicParsing="false" onAction="#handleSafariLocationView" text="Safarimål" />
                                     <Button mnemonicParsing="false" onAction="#handleBookingView" text="Bokningar" />
                                     <Button mnemonicParsing="false" onAction="#handleApplicationExit" prefHeight="33.0" prefWidth="92.0" text="Avsluta" />

@@ -12,17 +12,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<BorderPane prefHeight="650.0" prefWidth="1000.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<BorderPane prefHeight="650.0" prefWidth="1000.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rastsafari.view.SafariViewController">
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="safariTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="112.0" text="Datum" />
-          <TableColumn prefWidth="157.0" text="Safarimål" />
-            <TableColumn prefWidth="104.60000610351562" text="Starttid" />
-            <TableColumn prefWidth="101.4000244140625" text="Sluttid" />
-            <TableColumn prefWidth="100.0" text="Bokade" />
-            <TableColumn prefWidth="93.20001220703125" text="Lediga" />
+          <TableColumn fx:id="dateColumn" prefWidth="112.0" text="Datum" />
+          <TableColumn fx:id="locationColumn" prefWidth="157.0" text="Safarimål" />
+            <TableColumn fx:id="startTimeColumn" prefWidth="104.60000610351562" text="Starttid" />
+            <TableColumn fx:id="endTimeColumn" prefWidth="101.4000244140625" text="Sluttid" />
+            <TableColumn fx:id="takenSlotsColumn" prefWidth="100.0" text="Bokade" />
+            <TableColumn fx:id="avalibleSlotsColumn" prefWidth="93.20001220703125" text="Lediga" />
         </columns>
       </TableView>
    </center>
@@ -45,25 +44,25 @@
               </rowConstraints>
                <children>
                   <Label text="ID" />
-                  <Label text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="idLabel" text="Label" GridPane.columnIndex="1" />
                   <Label text="Datum" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="dateLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Starttid" GridPane.rowIndex="2" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="startTimeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Sluttid" GridPane.rowIndex="3" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="endTimeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Bokade" GridPane.rowIndex="4" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="takenSlotsLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="Lediga" GridPane.rowIndex="5" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="avalibleSlotsLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text="Pris" GridPane.rowIndex="6" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="priceLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                </children>
             </GridPane>
-            <TableView layoutX="25.0" layoutY="347.0" prefHeight="210.0" prefWidth="275.0">
+            <TableView fx:id="bookingsTable" layoutX="25.0" layoutY="347.0" prefHeight="210.0" prefWidth="275.0">
               <columns>
-                <TableColumn prefWidth="48.4000244140625" text="ID" />
-                <TableColumn prefWidth="222.5999755859375" text="Namn" />
+                <TableColumn fx:id="idColumn" prefWidth="48.4000244140625" text="ID" />
+                <TableColumn fx:id="customerColumn" prefWidth="222.5999755859375" text="Namn" />
               </columns>
             </TableView>
             <Label layoutX="70.0" layoutY="14.0" prefHeight="48.0" prefWidth="185.0" styleClass="label-header" text="Detaljerat" />

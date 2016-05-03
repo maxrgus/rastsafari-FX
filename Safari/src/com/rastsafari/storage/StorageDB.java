@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.rastsafari.model.Booking;
 import com.rastsafari.model.Customer;
@@ -302,10 +305,37 @@ public class StorageDB implements Storage {
 		return gearList;
 	}
 
-	@Override
 	public ObservableList<Safari> getSafarisFromStorage() {
-		// TODO Auto-generated method stub
-		return null;
+		ObservableList<Safari> safaris = FXCollections.observableArrayList();
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement statement = c.createStatement();
+			String sql = "SELECT safari.id,safariLocation.*,safari.date,safari.hour,safari.endhour FROM safari,safariLocation WHERE safariLocation.id == safari.safariLocationId";
+			ResultSet rs = statement.executeQuery(sql);
+			
+			while (rs.next()) {
+				safaris.add(new Safari(
+						rs.getInt(1),
+						new SafariLocation(rs.getInt(2),
+										   rs.getString(3),
+										   rs.getString(4),
+										   rs.getString(5),
+										   rs.getInt(6),
+										   rs.getInt(7),
+										   rs.getInt(8)),
+					   rs.getString(9),
+					   rs.getString(10),
+					   rs.getString(11),
+					   500));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return safaris;
+		
+		
 	}
 
 	

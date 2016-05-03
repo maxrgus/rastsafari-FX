@@ -45,4 +45,8 @@ public class MainFrameController {
 	private void handleApplicationExit() {
 		System.exit(1);
 	}
+	@FXML
+	private void handleSafariView() {
+		mainApp.showSafariView();
+	}
 }

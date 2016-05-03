@@ -77,11 +77,11 @@ public class SafariViewController {
 		safariTable.getSelectionModel().selectedItemProperty().addListener(
 					(observable, oldValue, newValue) -> showSafariDetails(newValue));
 		
-		safariTable.setItems(mainApp.getSafariList());
 		
 	}
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
+		safariTable.setItems(mainApp.getSafariList());
 	}
 	
 	private void showSafariDetails(Safari safari) {

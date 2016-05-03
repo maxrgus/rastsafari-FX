@@ -21,6 +21,7 @@ import com.rastsafari.view.LocationMapController;
 import com.rastsafari.view.MainFrameController;
 import com.rastsafari.view.RootLayoutController;
 import com.rastsafari.view.SafariLocationViewController;
+import com.rastsafari.view.SafariViewController;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -88,6 +89,7 @@ public class MainApp extends Application {
 					categoryList.addAll(s.getCategoriesFromStorage());
 					locationList.addAll(s.getLocationsFromStorage());
 					gearList.addAll(s.getGearFromStorage());
+					safariList.addAll(s.getSafarisFromStorage());
 					Thread.sleep(2500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -397,6 +399,30 @@ public class MainApp extends Application {
 			gearStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			gearStage.showAndWait();
 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void showSafariView() {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/SafariView.fxml"));
+			BorderPane safariView = (BorderPane) uiLoader.load();
+			
+			Stage safariStage = new Stage();
+			safariStage.setTitle("Safarier");
+			safariStage.initModality(Modality.WINDOW_MODAL);
+			safariStage.initOwner(dialogStage);
+			Scene scene = new Scene(safariView);
+			safariStage.setScene(scene);
+			
+			SafariViewController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			
+			safariStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			safariStage.showAndWait();
+			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
