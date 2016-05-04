@@ -11,18 +11,19 @@ CREATE TABLE Safari (
 		endHour				varchar(5),
 		minParticipants		integer,
 		maxParticipants		integer,
-		price				integer);
+		price				integer,
+		guideId				integer);
 		
-INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price)
-VALUES (1, '2016-04-28', '13:00', '15:30',2 ,5, 1000);
-INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price)
-VALUES (2, '2016-05-02', '11:00', '12:45',5, 25, 1450);
-INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price)
-VALUES (3, '2012-12-12', '12:12', '12:13', 1, 5, 850);
-INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price)
-VALUES (4, '2016-09-16', '18:00', '22:30', 7, 10, 599);
-INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price)
-VALUES (8, '2020-05-06', '24:00', '03:00', 23, 60, 10000);
+INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price, guideId)
+VALUES (1, '2016-04-28', '13:00', '15:30',2 ,5, 1000, 1);
+INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price, guideId)
+VALUES (2, '2016-05-02', '11:00', '12:45',5, 25, 1450, 1);
+INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price, guideId)
+VALUES (3, '2012-12-12', '12:12', '12:13', 1, 5, 850, 2);
+INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price, guideId)
+VALUES (4, '2016-09-16', '18:00', '22:30', 7, 10, 599, 3);
+INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price, guideId)
+VALUES (8, '2020-05-06', '24:00', '03:00', 23, 60, 10000, 4);
 
 CREATE TABLE Booking (
 		bookingNr	integer PRIMARY KEY,
