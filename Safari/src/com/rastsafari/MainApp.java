@@ -11,7 +11,7 @@ import com.rastsafari.model.Safari;
 import com.rastsafari.model.SafariLocation;
 import com.rastsafari.storage.Storage;
 import com.rastsafari.storage.StorageFactory;
-//import com.rastsafari.view.BookingDialogController;
+import com.rastsafari.view.BookingDialogController;
 import com.rastsafari.view.BookingViewController;
 import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
