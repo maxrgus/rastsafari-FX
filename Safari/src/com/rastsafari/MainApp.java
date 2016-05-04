@@ -276,7 +276,7 @@ public class MainApp extends Application {
 	public boolean showEditBookingDialog(Booking booking, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/BookingDialog.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("view/BookingDialogView.fxml"));
 			AnchorPane editDialog = (AnchorPane) uiLoader.load();
 			
 			editBookingStage = new Stage();

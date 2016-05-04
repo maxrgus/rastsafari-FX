@@ -1,5 +1,7 @@
 package com.rastsafari.view;
 
+import java.util.Optional;
+
 import com.rastsafari.MainApp;
 import com.rastsafari.model.Booking;
 import com.rastsafari.storage.Storage;
@@ -8,8 +10,11 @@ import com.rastsafari.storage.StorageFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class BookingViewController {
@@ -48,5 +53,62 @@ public class BookingViewController {
     	this.mainApp = mainApp;
     	bookingTable.setItems(mainApp.getBookingList());
     	
+    }
+    @FXML
+    private void handleEditBooking() {
+    	Booking selectedBooking = bookingTable.getSelectionModel().getSelectedItem();
+    	if (selectedBooking != null) {
+    		boolean okClicked = mainApp.showEditBookingDialog(selectedBooking, "Redigera bokning");
+    		if (okClicked) {
+    			storage.updateBooking(selectedBooking);
+    		}
+    	} else {
+    		Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setHeaderText("Inget markerat");
+			alert.setContentText("Vänligen välj en bokning som ska redigeras");
+			
+			alert.showAndWait();
+    	}
+    }
+    @FXML
+    private void handleNewBooking() {
+    	Booking tempBooking = new Booking();
+    	boolean okClicked = mainApp.showEditBookingDialog(tempBooking, "Ny bokning");
+    	if (okClicked) {
+    		tempBooking.setId(storage.generateBookingId());
+    		mainApp.getBookingList().add(tempBooking);
+    		storage.addBooking(tempBooking);
+    	}
+    }
+    @FXML
+    private void handleDeleteBooking() {
+    	int selectedIndex = bookingTable.getSelectionModel().getSelectedIndex();
+    	Booking booking = bookingTable.getSelectionModel().getSelectedItem();
+    	if (selectedIndex >= 0) {
+    		Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Bekräfta");
+			alert.setHeaderText("Bekräfta borttagning");
+			alert.setContentText("Vill du verkligen ta bort bokningen");
+			
+			
+			Optional<ButtonType> result = alert.showAndWait();
+			if(result.get() == ButtonType.OK) {
+				bookingTable.getItems().remove(selectedIndex);
+				storage.removeBooking(booking);
+			}
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("Inget markerat");
+			alert.setHeaderText("Inget safari markerad");
+			alert.setContentText("Vänligen markera ett safari som du vill radera");
+			
+			alert.showAndWait();
+		}
+    }
+    @FXML
+    private void handleDispose() {
+    	mainApp.getBookingStage().close();
     }
 }

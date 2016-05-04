@@ -141,7 +141,7 @@ public class SafariViewController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setHeaderText("Inget markerat");
-			alert.setContentText("Vänligen väl ett safari som ska redigeras");
+			alert.setContentText("Vänligen välj ett safari som ska redigeras");
 			
 			alert.showAndWait();
 		}

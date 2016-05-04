@@ -27,10 +27,10 @@
       <Label layoutX="14.0" layoutY="367.0" prefHeight="25.0" prefWidth="95.0" text="Sök" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" />
       <ButtonBar layoutX="266.0" layoutY="353.0" prefHeight="42.0" prefWidth="506.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="15.0">
         <buttons>
-          <Button defaultButton="true" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" text="Ny" />
-            <Button mnemonicParsing="false" text="Redigera" />
-            <Button mnemonicParsing="false" text="Radera" />
-            <Button mnemonicParsing="false" text="Tillbaka" />
+          <Button defaultButton="true" mnemonicParsing="false" onAction="#handleNewBooking" prefHeight="31.0" prefWidth="130.0" text="Ny" />
+            <Button mnemonicParsing="false" onAction="#handleEditBooking" text="Redigera" />
+            <Button mnemonicParsing="false" onAction="#handleDeleteBooking" text="Radera" />
+            <Button mnemonicParsing="false" onAction="#handleDispose" text="Tillbaka" />
         </buttons>
       </ButtonBar>
    </children>
