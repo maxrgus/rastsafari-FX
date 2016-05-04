@@ -430,7 +430,10 @@ public class StorageDB implements Storage {
 		Connection c = sd.createConnection();
 		try {
 			Statement statement = c.createStatement();
-			String sql = "SELECT safari.id,safariLocation.*,safari.date,safari.hour,safari.endhour FROM safari,safariLocation WHERE safariLocation.id == safari.safariLocationId";
+			String sql = "SELECT safari.id,safariLocation.*,safari.date,safari.hour,safari.endhour,safari.price,guide.* "
+					+ "FROM safari,safariLocation,guide "
+					+ "WHERE safariLocation.id == safari.safariLocationId "
+					+ "AND safari.id == guide.id;";
 			ResultSet rs = statement.executeQuery(sql);
 			
 			while (rs.next()) {
@@ -446,7 +449,11 @@ public class StorageDB implements Storage {
 					   rs.getString(9),
 					   rs.getString(10),
 					   rs.getString(11),
-					   500));
+					   rs.getInt(12),
+					   new Guide(rs.getInt(13),
+							   rs.getString(14),
+							   rs.getString(15),
+							   rs.getString(16))));
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -469,10 +476,12 @@ public class StorageDB implements Storage {
 			String sql = "SELECT Booking.bookingNr,customer.id, customer.customerCatID, customer.SSID, "
 					+ "customer.givenName, customer.familyName,"
 					+ "customer.email, customer.phoneDay, customer.phoneNight,safari.id,safariLocation.*,"
-					+ "safari.date,safari.hour,safari.endHour,safari.price "
-					+ "FROM Booking,customer,safari,safariLocation " +
-						 "WHERE Booking.customerId == customer.id AND Booking.safariId == safari.id "
-						 + "AND safari.safariLocationId == safariLocation.id;";
+					+ "safari.date,safari.hour,safari.endHour,safari.price,guide.* "
+					+ "FROM Booking,customer,safari,safariLocation,guide " +
+						 "WHERE Booking.customerId == customer.id "
+						 + "AND Booking.safariId == safari.id "
+						 + "AND safari.safariLocationId == safariLocation.id "
+						 + "AND safari.guideId == guide.id;";
 			
 			ResultSet rs = statement.executeQuery(sql);
 			while(rs.next()){
@@ -497,7 +506,11 @@ public class StorageDB implements Storage {
 								   rs.getString(18),
 								   rs.getString(19),
 								   rs.getString(20),
-								   rs.getInt(21))));
+								   rs.getInt(21),
+								   new Guide(rs.getInt(22),
+										   rs.getString(23),
+										   rs.getString(24),
+										   rs.getString(25)))));
 			}
 			rs.close();
 		} catch (Exception e){
@@ -552,6 +565,23 @@ public class StorageDB implements Storage {
 			e.printStackTrace();
 		}
 		return guides;
+	}
+	public int generateBookingId(){
+		int id = 0;
+		Statement s = null;
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			s = c.createStatement();
+			String sql = "SELECT MAX(bookingNr) FROM Booking;";
+			ResultSet rs = s.executeQuery(sql);
+			id = rs.getInt(1);
+			rs.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		id++;
+		return id;
 	}
 	@Override
 	public int generateCategoryId(){

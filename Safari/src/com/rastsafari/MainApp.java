@@ -11,7 +11,7 @@ import com.rastsafari.model.Safari;
 import com.rastsafari.model.SafariLocation;
 import com.rastsafari.storage.Storage;
 import com.rastsafari.storage.StorageFactory;
-import com.rastsafari.view.BookingDialogController;
+//import com.rastsafari.view.BookingDialogController;
 import com.rastsafari.view.BookingViewController;
 import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
@@ -98,13 +98,13 @@ public class MainApp extends Application {
 			protected Void call() throws Exception {
 				try {
 					Storage s = StorageFactory.getStorageDB();
+					guideList.addAll(s.getGuidesFromStorage());
 					customerList.addAll(s.getCustomersFromStorage());
 					categoryList.addAll(s.getCategoriesFromStorage());
 					locationList.addAll(s.getLocationsFromStorage());
 					gearList.addAll(s.getGearFromStorage());
 					safariList.addAll(s.getSafarisFromStorage());
 					bookingList.addAll(s.getBookingsFromStorage());
-					guideList.addAll(s.getGuidesFromStorage());
 					Thread.sleep(2500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -273,7 +273,7 @@ public class MainApp extends Application {
 			return false;
 		}
 	}
-	public boolean showEditBookingDialog(Booking booking, String label) {
+	/*public boolean showEditBookingDialog(Booking booking, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
 			uiLoader.setLocation(MainApp.class.getResource("view/BookingDialog.fxml"));
@@ -301,7 +301,7 @@ public class MainApp extends Application {
 			e.printStackTrace();
 			return false;
 		}
-	}
+	}*/
 	public void showCustomerCategoryView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -597,6 +597,9 @@ public class MainApp extends Application {
 	}
 	public Stage getGuideStage() {
 		return guideStage;
+	}
+	public Stage getBookingStage(){
+		return editBookingStage;
 	}
 	public ObservableList<Customer> getCustomerList() {
 		return customerList;

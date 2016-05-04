@@ -42,6 +42,7 @@ public interface Storage {
 	public int generateSafariId();
 	public int generateGearId();
 	public int generateGuideId();
+	public int generateBookingId();
 
 	
 	public ObservableList<SafariLocation> getLocationsFromStorage();
