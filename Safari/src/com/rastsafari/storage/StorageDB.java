@@ -311,7 +311,7 @@ public class StorageDB implements Storage {
 		try {
 			Statement st = c.createStatement();
 			String sql = "DELETE FROM guide WHERE id=="+id+";";
-			st.executeQuery(sql);
+			st.execute(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
