@@ -16,7 +16,11 @@ import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
 import com.rastsafari.view.EditCustomerDialogController;
+<<<<<<< HEAD
+import com.rastsafari.view.EditGearDialogController;
+=======
 import com.rastsafari.view.EditGuideDialogController;
+>>>>>>> branch 'master' of https://github.com/maxrgus/rastsafari-fx.git
 import com.rastsafari.view.EditSafariDialogController;
 import com.rastsafari.view.GearViewController;
 import com.rastsafari.view.GenerateReportViewController;
@@ -52,6 +56,7 @@ public class MainApp extends Application {
 	private Stage categoryStage;
 	private Stage safariStage;
 	private Stage customerRegisterStage;
+	private Stage gearStage;
 	private Stage guideStage;
 	private BorderPane rootLayout;
 	
@@ -420,6 +425,24 @@ public class MainApp extends Application {
 		}
 		
 	}
+	public boolean showEditGearDialog(Gear gear, String editOrNew){
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/GearDialogView.fxml"));
+			AnchorPane editGear = (AnchorPane) uiLoader.load();
+			
+			Stage editStage = new Stage();
+			editStage.setTitle(editOrNew);
+			editStage.initModality(Modality.WINDOW_MODAL);
+			editStage.initOwner(gearStage);
+			Scene scene = new Scene(editGear);
+			editStage.setScene(scene);
+			
+			EditGearDialogController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			controller.setGearStage(editStage);
+			controller.setGear(gear);
+			controller.setHeaderLabel(editOrNew);
 	public boolean showEditGuideDialog(Guide guide, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -478,7 +501,7 @@ public class MainApp extends Application {
 			uiLoader.setLocation(MainApp.class.getResource("view/GearView.fxml"));
 			BorderPane gearView = (BorderPane) uiLoader.load();
 			
-			Stage gearStage = new Stage();
+			gearStage = new Stage();
 			gearStage.setTitle("Utrustning");
 			gearStage.initModality(Modality.WINDOW_MODAL);
 			gearStage.initOwner(primaryStage);
@@ -531,6 +554,9 @@ public class MainApp extends Application {
 	}
 	public Stage getSafariViewStage() {
 		return safariStage;
+	}
+	public Stage getGearStage(){
+		return gearStage;
 	}
 	public ObservableList<Customer> getCustomerList() {
 		return customerList;

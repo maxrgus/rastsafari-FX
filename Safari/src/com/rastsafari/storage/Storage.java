@@ -40,7 +40,9 @@ public interface Storage {
 	public int generateCustomerId();
 	public int generateLocationId();
 	public int generateSafariId();
+	public int generateGearId();
 	public int generateGuideId();
+
 	
 	public ObservableList<SafariLocation> getLocationsFromStorage();
 	public ObservableList<Customer> getCustomersFromStorage();
