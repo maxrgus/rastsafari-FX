@@ -16,6 +16,7 @@ import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
 import com.rastsafari.view.EditCustomerDialogController;
+import com.rastsafari.view.EditGuideDialogController;
 import com.rastsafari.view.EditSafariDialogController;
 import com.rastsafari.view.GearViewController;
 import com.rastsafari.view.GenerateReportViewController;
@@ -418,6 +419,34 @@ public class MainApp extends Application {
 			return false;
 		}
 		
+	}
+	public boolean showEditGuideDialog(Guide guide, String label) {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/EditGuideDialog.fxml"));
+			AnchorPane editDialog = (AnchorPane) uiLoader.load();
+			
+			Stage editStage = new Stage();
+			editStage.setTitle(label);
+			editStage.initModality(Modality.WINDOW_MODAL);
+			editStage.initOwner(guideStage);
+			
+			Scene scene = new Scene(editDialog);
+			editStage.setScene(scene);
+			
+			EditGuideDialogController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			controller.setStage(editStage);
+			controller.setGuide(guide);
+			controller.setHeaderLabel(label);
+			editStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			editStage.showAndWait();
+			
+			return controller.isOkClicked();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	public void showGenereateReportView() {
 		try {
