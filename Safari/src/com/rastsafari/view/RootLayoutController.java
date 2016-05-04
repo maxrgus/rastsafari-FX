@@ -53,6 +53,10 @@ public class RootLayoutController {
 	private void handleGearView() {
 		mainApp.showGearListView();
 	}
+	@FXML
+	private void handleGuideView() {
+		mainApp.showGuideView();
+	}
 	
 	
 

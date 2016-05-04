@@ -12,6 +12,7 @@ import com.rastsafari.model.Booking;
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.Gear;
+import com.rastsafari.model.Guide;
 import com.rastsafari.model.Safari;
 import com.rastsafari.model.SafariDatabase;
 import com.rastsafari.model.SafariLocation;
@@ -80,6 +81,18 @@ public class StorageDB implements Storage {
 			String sql = "INSERT INTO safari (safariLocationId,date,hour,endHour,minParticipants,maxParticipants,price) " +
 						 "VALUES ("+s.getLocation().getId()+",'"+s.getDate()+"','"+s.getStartTime()+"','"+s.getEndTime()+
 						 "',"+s.getMinParticipants()+","+s.getMaxParticipants()+","+s.getPrice()+");";
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void addGuide(Guide g) {
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "INSERT INTO guide (familyName,givenName,email) " +
+						 "VALUES ('"+g.getGivenName()+"','"+g.getFamilyName()+"','"+g.getEmail()+"');";
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -180,6 +193,18 @@ public class StorageDB implements Storage {
 			se.printStackTrace();
 		}
 	}
+	public void updateGuide(Guide g) {
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "UPDATE guide SET givenName = '"+g.getGivenName()+"', familyName = '"+g.getFamilyName()+"', " +
+						 "email = '"+g.getEmail()+"' WHERE id == "+g.getId()+";";
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	
 	public void updateBooking(Booking b) {
@@ -263,6 +288,18 @@ public class StorageDB implements Storage {
 			e.printStackTrace();
 		}
 		
+	}
+	public void removeGuide(Guide g) {
+		int id = g.getId();
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "DELETE FROM guide WHERE id=="+id+";";
+			st.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -471,6 +508,28 @@ public class StorageDB implements Storage {
 		}
 		return categories;
 	}
+	public ObservableList<Guide> getGuidesFromStorage() {
+		ObservableList<Guide> guides = FXCollections.observableArrayList();
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "SELECT * FROM guide;";
+			ResultSet rs = st.executeQuery(sql);
+			
+			while (rs.next()) {
+				guides.add(new Guide(
+						rs.getInt("id"),
+						rs.getString("givenName"),
+						rs.getString("familyName"),
+						rs.getString("email")));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return guides;
+	}
 	public int generateCategoryId(){
 		int id = 0;
 		Statement s = null;
@@ -539,6 +598,7 @@ public class StorageDB implements Storage {
 	      id++;
 	      return id;
 	}
+<<<<<<< HEAD
 	public int generateGearId() {
 		int id = 0;
 		Statement s = null;
@@ -557,5 +617,23 @@ public class StorageDB implements Storage {
 	      return id;
 	}
 
+=======
+	public int generateGuideId() {
+		int id = 0;
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "SELECT MAX(id) FROM guide;";
+			ResultSet rs = st.executeQuery(sql);
+			id = rs.getInt(1);
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		id++;
+		return id;
+	}
+>>>>>>> branch 'master' of https://github.com/maxrgus/rastsafari-fx.git
 
 }

@@ -25,6 +25,11 @@
                 <MenuItem mnemonicParsing="false" onAction="#handleGearView" text="Utrustningslista" />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Guider">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleGuideView" text="Visa Guider" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Rapport">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleGenerateReport" text="Generera rapport" />

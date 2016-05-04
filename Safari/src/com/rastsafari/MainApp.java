@@ -6,6 +6,7 @@ import com.rastsafari.model.Booking;
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.Gear;
+import com.rastsafari.model.Guide;
 import com.rastsafari.model.Safari;
 import com.rastsafari.model.SafariLocation;
 import com.rastsafari.storage.Storage;
@@ -15,10 +16,15 @@ import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
 import com.rastsafari.view.EditCustomerDialogController;
+<<<<<<< HEAD
 import com.rastsafari.view.EditGearDialogController;
+=======
+import com.rastsafari.view.EditGuideDialogController;
+>>>>>>> branch 'master' of https://github.com/maxrgus/rastsafari-fx.git
 import com.rastsafari.view.EditSafariDialogController;
 import com.rastsafari.view.GearViewController;
 import com.rastsafari.view.GenerateReportViewController;
+import com.rastsafari.view.GuideViewController;
 import com.rastsafari.view.LocationEditDialogController;
 import com.rastsafari.view.LocationMapController;
 import com.rastsafari.view.MainFrameController;
@@ -50,7 +56,11 @@ public class MainApp extends Application {
 	private Stage categoryStage;
 	private Stage safariStage;
 	private Stage customerRegisterStage;
+<<<<<<< HEAD
 	private Stage gearStage;
+=======
+	private Stage guideStage;
+>>>>>>> branch 'master' of https://github.com/maxrgus/rastsafari-fx.git
 	private BorderPane rootLayout;
 	
 	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
@@ -59,6 +69,7 @@ public class MainApp extends Application {
 	private ObservableList<Gear> gearList = FXCollections.observableArrayList();
 	private ObservableList<Safari> safariList = FXCollections.observableArrayList();
 	private ObservableList<Booking> bookingList = FXCollections.observableArrayList();
+	private ObservableList<Guide> guideList = FXCollections.observableArrayList();
 	
 	
 	@Override
@@ -97,6 +108,7 @@ public class MainApp extends Application {
 					gearList.addAll(s.getGearFromStorage());
 					safariList.addAll(s.getSafarisFromStorage());
 					bookingList.addAll(s.getBookingsFromStorage());
+					guideList.addAll(s.getGuidesFromStorage());
 					Thread.sleep(2500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -288,6 +300,29 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	public void showGuideView() {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/GuideView.fxml"));
+			BorderPane guideView = (BorderPane) uiLoader.load();
+			
+			guideStage = new Stage();
+			guideStage.setTitle("Guider");
+			guideStage.initModality(Modality.WINDOW_MODAL);
+			guideStage.initOwner(dialogStage);
+			Scene scene = new Scene(guideView);
+			guideStage.setScene(scene);
+			
+			GuideViewController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			
+			guideStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			guideStage.show();
+					
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public boolean showCategoryEditDialog(CustomerCategory category){
 		try{
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -393,6 +428,7 @@ public class MainApp extends Application {
 		}
 		
 	}
+<<<<<<< HEAD
 	public boolean showEditGearDialog(Gear gear, String editOrNew){
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -411,6 +447,27 @@ public class MainApp extends Application {
 			controller.setGearStage(editStage);
 			controller.setGear(gear);
 			controller.setHeaderLabel(editOrNew);
+=======
+	public boolean showEditGuideDialog(Guide guide, String label) {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/EditGuideDialog.fxml"));
+			AnchorPane editDialog = (AnchorPane) uiLoader.load();
+			
+			Stage editStage = new Stage();
+			editStage.setTitle(label);
+			editStage.initModality(Modality.WINDOW_MODAL);
+			editStage.initOwner(guideStage);
+			
+			Scene scene = new Scene(editDialog);
+			editStage.setScene(scene);
+			
+			EditGuideDialogController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			controller.setStage(editStage);
+			controller.setGuide(guide);
+			controller.setHeaderLabel(label);
+>>>>>>> branch 'master' of https://github.com/maxrgus/rastsafari-fx.git
 			editStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			editStage.showAndWait();
 			
@@ -524,6 +581,9 @@ public class MainApp extends Application {
 	}
 	public ObservableList<Booking> getBookingList() {
 		return bookingList;
+	}
+	public ObservableList<Guide> getGuideList() {
+		return guideList;
 	}
 
 	public static void main(String[] args) {
