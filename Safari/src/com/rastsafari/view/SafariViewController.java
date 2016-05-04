@@ -54,6 +54,8 @@ public class SafariViewController {
 	private Label avalibleSlotsLabel;
 	@FXML
 	private Label priceLabel;
+	@FXML
+	private Label guideLabel;
 	
 	
 	//Reference MainApp
@@ -110,6 +112,7 @@ public class SafariViewController {
 			takenSlotsLabel.setText(Integer.toString(safari.getTakenSlots()));
 			avalibleSlotsLabel.setText(Integer.toString(safari.getAvalibleSlots()));
 			priceLabel.setText(Double.toString(safari.getPrice()));
+			guideLabel.setText(safari.getGuide().getGivenName() + " " + safari.getGuide().getFamilyName());
 			
 			bookingsTable.setItems(safari.getBookedCustomers());
 			
@@ -121,6 +124,7 @@ public class SafariViewController {
 			takenSlotsLabel.setText("");
 			avalibleSlotsLabel.setText("");
 			priceLabel.setText("");
+			guideLabel.setText("");
 			
 			bookingsTable.setItems(null);
 		}

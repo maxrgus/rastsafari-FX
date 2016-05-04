@@ -18,6 +18,7 @@ public class Safari {
 	private IntegerProperty minParticipants;
 	private IntegerProperty maxParticipants;
 	private DoubleProperty price;
+	private Guide safariGuide;
 	
 	
 	private IntegerProperty takenSlots;
@@ -25,13 +26,14 @@ public class Safari {
 	private ObservableList<Booking> bookedCustomers;
 	
 	public Safari(int id, SafariLocation location, String date, String startTime,
-				  String endTime, int price) {
+				  String endTime, int price,Guide guide) {
 		this.id = new SimpleIntegerProperty(id);
 		this.location = location;
 		this.date = new SimpleStringProperty(date);
 		this.startTime = new SimpleStringProperty(startTime);
 		this.endTime = new SimpleStringProperty(endTime);
 		this.price = new SimpleDoubleProperty(price);
+		this.safariGuide = guide;
 		this.bookedCustomers = FXCollections.observableArrayList();
 		if (location != null) {
 			this.minParticipants = new SimpleIntegerProperty(location.getMinParticipant());
@@ -48,7 +50,7 @@ public class Safari {
 		
 	}
 	public Safari() {
-		this(0,null,null,null,null,0);
+		this(0,null,null,null,null,0,null);
 	}
 	
 	public int getId() {
@@ -116,6 +118,12 @@ public class Safari {
 	}
 	public void setPrice(double price) {
 		this.price.set(price);
+	}
+	public Guide getGuide() {
+		return safariGuide;
+	}
+	public void setGuide(Guide g) {
+		this.safariGuide = g;
 	}
 	public DoubleProperty getPriceProperty() {
 		return price;

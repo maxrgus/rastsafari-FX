@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import com.rastsafari.MainApp;
+import com.rastsafari.model.Guide;
 import com.rastsafari.model.Safari;
 import com.rastsafari.model.SafariLocation;
 
@@ -36,6 +37,8 @@ public class EditSafariDialogController {
 	private ComboBox<String> endTimeBox;
 	@FXML
 	private TextField priceField;
+	@FXML
+	private ComboBox<Guide> guideBox;
 	
 	//reference owner stage and mainApp
 	private Stage safariStage;
@@ -115,6 +118,22 @@ public class EditSafariDialogController {
 		endTimeBox.getItems().addAll(timeOptions);
 		endTimeBox.setValue(safari.getEndTime());
 		priceField.setText(Double.toString(safari.getPrice()));
+		guideBox.getItems().addAll(mainApp.getGuideList());
+		guideBox.setValue(safari.getGuide());
+		guideBox.setConverter(new StringConverter<Guide>() {
+			@Override
+			public String toString(Guide g) {
+				if (g == null) {
+					return "";
+				} else {
+					return g.getGivenName() + " " + g.getFamilyName();
+				}
+			}
+			@Override
+			public Guide fromString(String string) {
+				return null;
+			}
+		});
 	}
 	public void setStage(Stage safariStage) {
 		this.safariStage = safariStage;
@@ -137,6 +156,7 @@ public class EditSafariDialogController {
 			safari.setStartTime(startTimeBox.getValue());
 			safari.setEndTime(endTimeBox.getValue());
 			safari.setPrice(Double.parseDouble(priceField.getText()));
+			safari.setGuide(guideBox.getValue());
 			if (safari.getBookedCustomers() == null) {
 				safari.initBookedCustomers();
 			}
