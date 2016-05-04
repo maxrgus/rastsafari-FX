@@ -273,7 +273,7 @@ public class MainApp extends Application {
 			return false;
 		}
 	}
-	/*public boolean showEditBookingDialog(Booking booking, String label) {
+	public boolean showEditBookingDialog(Booking booking, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
 			uiLoader.setLocation(MainApp.class.getResource("view/BookingDialog.fxml"));
@@ -301,7 +301,7 @@ public class MainApp extends Application {
 			e.printStackTrace();
 			return false;
 		}
-	}*/
+	}
 	public void showCustomerCategoryView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
