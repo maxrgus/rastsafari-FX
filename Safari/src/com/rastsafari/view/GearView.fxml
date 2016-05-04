@@ -23,10 +23,10 @@
          <children>
             <ButtonBar prefHeight="40.0" prefWidth="583.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="0.0">
               <buttons>
-                  <Button defaultButton="true" mnemonicParsing="false" text="Ny.." />
-                  <Button layoutX="518.0" layoutY="14.0" mnemonicParsing="false" text="Redigera" />
-                  <Button layoutX="518.0" layoutY="14.0" mnemonicParsing="false" text="Ta bort" />
-                  <Button layoutX="518.0" layoutY="14.0" mnemonicParsing="false" text="Tillbaka" />
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#handleNewGear" text="Ny.." />
+                  <Button layoutX="518.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleEditGear" text="Redigera" />
+                  <Button layoutX="518.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleDeleteGear" text="Ta bort" />
+                  <Button layoutX="518.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackButton" text="Tillbaka" />
               </buttons>
             </ButtonBar>
          </children>

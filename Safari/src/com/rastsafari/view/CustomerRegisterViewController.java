@@ -128,7 +128,7 @@ public class CustomerRegisterViewController {
 			tempCustomer.setId(storage.generateCustomerId());
 			tempCustomer.setAllNumber();
 			mainApp.getCustomerList().add(tempCustomer);
-			storage.updateCustomer(tempCustomer);
+			storage.addCustomer(tempCustomer);
 		}
 	}
 	@FXML
@@ -140,7 +140,7 @@ public class CustomerRegisterViewController {
 			alert.setTitle("Bekräfta");
 			alert.setHeaderText("Bekräfta borttagning");
 			alert.setContentText("Vill du verkligen ta bort " + customer.getFName() +
-					" " + customer.getLName());
+					" " + customer.getLName() + "?");
 			Optional<ButtonType> result = alert.showAndWait();
 			if(result.get() == ButtonType.OK) {
 				//customerTable.getItems().remove(selectedIndex);

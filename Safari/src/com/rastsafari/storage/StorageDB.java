@@ -94,7 +94,18 @@ public class StorageDB implements Storage {
 
 	
 	public void addGear(Gear g) {
-		// TODO Auto-generated method stub
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "INSERT INTO gear (gearName,description) " +
+						 "VALUES ('"+g.getGearName()+"','"+g.getDescription()+"');";
+			String sql2= "INSERT INTO gearStock (amount) "+
+						 "VALUES ("+g.getInStock()+");";
+			st.executeUpdate(sql+sql2);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	public void updateSafariLocation(SafariLocation location) {
@@ -178,7 +189,19 @@ public class StorageDB implements Storage {
 
 	
 	public void updateGear(Gear g) {
-		// TODO Auto-generated method stub
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "UPDATE gear SET gearName = '"+g.getGearName()+"'" +
+						 ", description = '"+g.getDescription()+"' "+
+						 "WHERE id = "+g.getId()+";";
+			String sql2 = "UPDATE gearStock SET amount = "+g.getInStock()+" "+
+					 "WHERE gid = "+g.getId()+";";
+			st.executeUpdate(sql+sql2);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
 		
 	}
 
@@ -207,7 +230,7 @@ public class StorageDB implements Storage {
 		try{
 			Statement s = c.createStatement();
 			String remove = "DELETE FROM customer where id == "+id+";";
-			s.executeUpdate(remove);
+			s.execute(remove);
 		}catch(SQLException se){
 			se.printStackTrace();
 		}		
@@ -235,7 +258,7 @@ public class StorageDB implements Storage {
 		try {
 			Statement st = c.createStatement();
 			String sql = "DELETE FROM safari WHERE id=="+id+";";
-			st.executeQuery(sql);
+			st.execute(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -250,7 +273,17 @@ public class StorageDB implements Storage {
 
 	
 	public void removeGear(Gear g) {
-		// TODO Auto-generated method stub
+		int id = g.getId();
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "DELETE FROM gear WHERE id=="+id+";";
+			String sql2= "DELETE FROM gearStock WHERE id=="+id+";";
+			st.execute(sql+sql2);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -506,5 +539,23 @@ public class StorageDB implements Storage {
 	      id++;
 	      return id;
 	}
+	public int generateGearId() {
+		int id = 0;
+		Statement s = null;
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+	        s = c.createStatement();
+	        String sql = "SELECT MAX(id) FROM gear;";
+	        ResultSet rs = s.executeQuery(sql);
+	        id = rs.getInt(1);
+	        rs.close();
+	      } catch(Exception e) {
+	    	  System.out.println(e);
+	      }
+	      id++;
+	      return id;
+	}
+
 
 }
