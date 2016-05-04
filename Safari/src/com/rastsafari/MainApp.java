@@ -11,6 +11,7 @@ import com.rastsafari.model.Safari;
 import com.rastsafari.model.SafariLocation;
 import com.rastsafari.storage.Storage;
 import com.rastsafari.storage.StorageFactory;
+import com.rastsafari.view.BookingDialogController;
 import com.rastsafari.view.BookingViewController;
 import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
@@ -55,6 +56,7 @@ public class MainApp extends Application {
 	private Stage customerRegisterStage;
 	private Stage gearStage;
 	private Stage guideStage;
+	private Stage editBookingStage;
 	private BorderPane rootLayout;
 	
 	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
@@ -266,6 +268,35 @@ public class MainApp extends Application {
 			editStage.showAndWait();
 			
 			return controller.isOkClicked();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public boolean showEditBookingDialog(Booking booking, String label) {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/BookingDialog.fxml"));
+			AnchorPane editDialog = (AnchorPane) uiLoader.load();
+			
+			editBookingStage = new Stage();
+			editBookingStage.setTitle(label);
+			editBookingStage.initModality(Modality.WINDOW_MODAL);
+			editBookingStage.initOwner(bookingStage);
+			Scene scene = new Scene(editDialog);
+			editBookingStage.setScene(scene);
+			
+			BookingDialogController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			controller.setStage(editBookingStage);
+			controller.setBooking(booking);
+			
+			editBookingStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			editBookingStage.showAndWait();
+			
+			return controller.isOkClicked();
+			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
