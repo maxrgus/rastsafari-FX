@@ -6,6 +6,7 @@ import com.rastsafari.model.Booking;
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.Gear;
+import com.rastsafari.model.Guide;
 import com.rastsafari.model.Safari;
 import com.rastsafari.model.SafariLocation;
 import com.rastsafari.storage.Storage;
@@ -18,6 +19,7 @@ import com.rastsafari.view.EditCustomerDialogController;
 import com.rastsafari.view.EditSafariDialogController;
 import com.rastsafari.view.GearViewController;
 import com.rastsafari.view.GenerateReportViewController;
+import com.rastsafari.view.GuideViewController;
 import com.rastsafari.view.LocationEditDialogController;
 import com.rastsafari.view.LocationMapController;
 import com.rastsafari.view.MainFrameController;
@@ -49,6 +51,7 @@ public class MainApp extends Application {
 	private Stage categoryStage;
 	private Stage safariStage;
 	private Stage customerRegisterStage;
+	private Stage guideStage;
 	private BorderPane rootLayout;
 	
 	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
@@ -57,6 +60,7 @@ public class MainApp extends Application {
 	private ObservableList<Gear> gearList = FXCollections.observableArrayList();
 	private ObservableList<Safari> safariList = FXCollections.observableArrayList();
 	private ObservableList<Booking> bookingList = FXCollections.observableArrayList();
+	private ObservableList<Guide> guideList = FXCollections.observableArrayList();
 	
 	
 	@Override
@@ -95,6 +99,7 @@ public class MainApp extends Application {
 					gearList.addAll(s.getGearFromStorage());
 					safariList.addAll(s.getSafarisFromStorage());
 					bookingList.addAll(s.getBookingsFromStorage());
+					guideList.addAll(s.getGuidesFromStorage());
 					Thread.sleep(2500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -282,6 +287,29 @@ public class MainApp extends Application {
 			categoryStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			categoryStage.show();
 			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void showGuideView() {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/GuideView.fxml"));
+			BorderPane guideView = (BorderPane) uiLoader.load();
+			
+			guideStage = new Stage();
+			guideStage.setTitle("Guider");
+			guideStage.initModality(Modality.WINDOW_MODAL);
+			guideStage.initOwner(dialogStage);
+			Scene scene = new Scene(guideView);
+			guideStage.setScene(scene);
+			
+			GuideViewController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			
+			guideStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			guideStage.show();
+					
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -492,6 +520,9 @@ public class MainApp extends Application {
 	}
 	public ObservableList<Booking> getBookingList() {
 		return bookingList;
+	}
+	public ObservableList<Guide> getGuideList() {
+		return guideList;
 	}
 
 	public static void main(String[] args) {
