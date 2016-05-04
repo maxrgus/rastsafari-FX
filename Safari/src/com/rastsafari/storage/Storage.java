@@ -40,11 +40,9 @@ public interface Storage {
 	public int generateCustomerId();
 	public int generateLocationId();
 	public int generateSafariId();
-<<<<<<< HEAD
 	public int generateGearId();
-=======
 	public int generateGuideId();
->>>>>>> branch 'master' of https://github.com/maxrgus/rastsafari-fx.git
+
 	
 	public ObservableList<SafariLocation> getLocationsFromStorage();
 	public ObservableList<Customer> getCustomersFromStorage();

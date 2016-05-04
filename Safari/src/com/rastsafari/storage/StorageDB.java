@@ -598,7 +598,6 @@ public class StorageDB implements Storage {
 	      id++;
 	      return id;
 	}
-<<<<<<< HEAD
 	public int generateGearId() {
 		int id = 0;
 		Statement s = null;
@@ -617,7 +616,6 @@ public class StorageDB implements Storage {
 	      return id;
 	}
 
-=======
 	public int generateGuideId() {
 		int id = 0;
 		SafariDatabase sd = new SafariDatabase();
@@ -634,6 +632,6 @@ public class StorageDB implements Storage {
 		id++;
 		return id;
 	}
->>>>>>> branch 'master' of https://github.com/maxrgus/rastsafari-fx.git
+
 
 }

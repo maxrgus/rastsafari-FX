@@ -56,11 +56,8 @@ public class MainApp extends Application {
 	private Stage categoryStage;
 	private Stage safariStage;
 	private Stage customerRegisterStage;
-<<<<<<< HEAD
 	private Stage gearStage;
-=======
 	private Stage guideStage;
->>>>>>> branch 'master' of https://github.com/maxrgus/rastsafari-fx.git
 	private BorderPane rootLayout;
 	
 	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
@@ -428,7 +425,6 @@ public class MainApp extends Application {
 		}
 		
 	}
-<<<<<<< HEAD
 	public boolean showEditGearDialog(Gear gear, String editOrNew){
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -447,7 +443,6 @@ public class MainApp extends Application {
 			controller.setGearStage(editStage);
 			controller.setGear(gear);
 			controller.setHeaderLabel(editOrNew);
-=======
 	public boolean showEditGuideDialog(Guide guide, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -467,7 +462,6 @@ public class MainApp extends Application {
 			controller.setStage(editStage);
 			controller.setGuide(guide);
 			controller.setHeaderLabel(label);
->>>>>>> branch 'master' of https://github.com/maxrgus/rastsafari-fx.git
 			editStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
 			editStage.showAndWait();
 			
