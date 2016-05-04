@@ -103,7 +103,7 @@ public class GuideViewController {
 	}
 	@FXML
 	private void handleDispose() {
-		mainApp.getSafariViewStage().close();
+		mainApp.getGuideStage().close();
 	}
 
 }

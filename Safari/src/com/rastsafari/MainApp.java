@@ -440,6 +440,15 @@ public class MainApp extends Application {
 			controller.setGearStage(editStage);
 			controller.setGear(gear);
 			controller.setHeaderLabel(editOrNew);
+			editStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			editStage.showAndWait();
+			
+			return controller.isOkClicked();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	public boolean showEditGuideDialog(Guide guide, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -554,6 +563,9 @@ public class MainApp extends Application {
 	}
 	public Stage getGearStage(){
 		return gearStage;
+	}
+	public Stage getGuideStage() {
+		return guideStage;
 	}
 	public ObservableList<Customer> getCustomerList() {
 		return customerList;
