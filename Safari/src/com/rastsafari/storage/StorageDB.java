@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.rastsafari.model.Booking;
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
@@ -23,6 +19,7 @@ import javafx.collections.ObservableList;
 public class StorageDB implements Storage {
 
 	
+	@Override
 	public void addSafariLocation(SafariLocation location) {
         SafariDatabase sd = new SafariDatabase();
         Connection c = sd.createConnection();
@@ -39,6 +36,7 @@ public class StorageDB implements Storage {
 
     }
 
+	@Override
 	public void addCustomer(Customer customer) {
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -59,6 +57,7 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public void addCustomerCategory(CustomerCategory category) {
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -73,6 +72,7 @@ public class StorageDB implements Storage {
 		
 	}
 
+	@Override
 	public void addSafari(Safari s) {
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -86,6 +86,7 @@ public class StorageDB implements Storage {
 			e.printStackTrace();
 		}
 	}
+	@Override
 	public void addGuide(Guide g) {
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -100,12 +101,14 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public void addBooking(Booking b) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	
+	@Override
 	public void addGear(Gear g) {
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -121,6 +124,7 @@ public class StorageDB implements Storage {
 		}
 		
 	}
+	@Override
 	public void updateSafariLocation(SafariLocation location) {
         SafariDatabase sd = new SafariDatabase();
         Connection c = sd.createConnection();
@@ -143,6 +147,7 @@ public class StorageDB implements Storage {
 		
 	}
 
+	@Override
 	public void updateCustomer(Customer customer) {
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -164,6 +169,7 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public void updateCustomerCategory(CustomerCategory category) {
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -179,6 +185,7 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public void updateSafari(Safari s) {
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -193,6 +200,7 @@ public class StorageDB implements Storage {
 			se.printStackTrace();
 		}
 	}
+	@Override
 	public void updateGuide(Guide g) {
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -207,12 +215,14 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public void updateBooking(Booking b) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	
+	@Override
 	public void updateGear(Gear g) {
 		SafariDatabase sd = new SafariDatabase();
 		Connection c = sd.createConnection();
@@ -231,6 +241,7 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public void removeSafariLocation(SafariLocation location) {
 		String idNr = Integer.toString(location.getId());
         SafariDatabase sd = new SafariDatabase();
@@ -248,6 +259,7 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public void removeCustomer(Customer customer) {
 		int id = customer.getid();
 		SafariDatabase sd = new SafariDatabase();
@@ -262,6 +274,7 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public void removeCustomerCategory(CustomerCategory category) {
 		String idNr = Integer.toString(category.getId());
 		SafariDatabase sd = new SafariDatabase();
@@ -276,6 +289,7 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public void removeSafari(Safari s) {
 		int id = s.getId();
 		SafariDatabase sd = new SafariDatabase();
@@ -289,6 +303,7 @@ public class StorageDB implements Storage {
 		}
 		
 	}
+	@Override
 	public void removeGuide(Guide g) {
 		int id = g.getId();
 		SafariDatabase sd = new SafariDatabase();
@@ -303,12 +318,14 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public void removeBooking(Booking b) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	
+	@Override
 	public void removeGear(Gear g) {
 		int id = g.getId();
 		SafariDatabase sd = new SafariDatabase();
@@ -324,6 +341,7 @@ public class StorageDB implements Storage {
 		
 	}
 
+	@Override
 	public ObservableList<SafariLocation> getLocationsFromStorage() {
 		ObservableList<SafariLocation> locations = FXCollections.observableArrayList();
 		SafariDatabase sd = new SafariDatabase();
@@ -351,6 +369,7 @@ public class StorageDB implements Storage {
 	      }
 	      return locations;
 	}
+	@Override
 	public ObservableList<Customer> getCustomersFromStorage() {
 		ObservableList<Customer> customers = FXCollections.observableArrayList();
 		SafariDatabase sd = new SafariDatabase();
@@ -379,6 +398,7 @@ public class StorageDB implements Storage {
 		}
 		return customers;
 	}
+	@Override
 	public ObservableList<Gear> getGearFromStorage() {
 		ObservableList<Gear> gearList = FXCollections.observableArrayList();
 		SafariDatabase sd = new SafariDatabase();
@@ -403,6 +423,7 @@ public class StorageDB implements Storage {
 		return gearList;
 	}
 
+	@Override
 	public ObservableList<Safari> getSafarisFromStorage() {
 		ObservableList<Safari> safaris = FXCollections.observableArrayList();
 		SafariDatabase sd = new SafariDatabase();
@@ -437,6 +458,7 @@ public class StorageDB implements Storage {
 	}
 
 	
+	@Override
 	public ObservableList<Booking> getBookingsFromStorage() {
 		ObservableList<Booking> bookings = FXCollections.observableArrayList();
 		SafariDatabase sd = new SafariDatabase();
@@ -508,6 +530,7 @@ public class StorageDB implements Storage {
 		}
 		return categories;
 	}
+	@Override
 	public ObservableList<Guide> getGuidesFromStorage() {
 		ObservableList<Guide> guides = FXCollections.observableArrayList();
 		SafariDatabase sd = new SafariDatabase();
@@ -530,6 +553,7 @@ public class StorageDB implements Storage {
 		}
 		return guides;
 	}
+	@Override
 	public int generateCategoryId(){
 		int id = 0;
 		Statement s = null;
@@ -547,6 +571,7 @@ public class StorageDB implements Storage {
 		id++;
 		return id;
 	}
+	@Override
 	public int generateCustomerId(){
 		int id = 0;
 		Statement s = null;
@@ -564,6 +589,7 @@ public class StorageDB implements Storage {
 		id++;
 		return id;
 	}
+	@Override
 	public int generateLocationId() {
 	      int id = 0;
 	      Statement s = null;
@@ -581,6 +607,7 @@ public class StorageDB implements Storage {
 	      id++;
 	      return id;
     }
+	@Override
 	public int generateSafariId() {
 		int id = 0;
 		Statement s = null;
@@ -598,6 +625,7 @@ public class StorageDB implements Storage {
 	      id++;
 	      return id;
 	}
+	@Override
 	public int generateGearId() {
 		int id = 0;
 		Statement s = null;
@@ -616,6 +644,7 @@ public class StorageDB implements Storage {
 	      return id;
 	}
 
+	@Override
 	public int generateGuideId() {
 		int id = 0;
 		SafariDatabase sd = new SafariDatabase();

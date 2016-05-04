@@ -16,11 +16,8 @@ import com.rastsafari.view.CustomerCategoryController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
 import com.rastsafari.view.EditCustomerDialogController;
-<<<<<<< HEAD
 import com.rastsafari.view.EditGearDialogController;
-=======
 import com.rastsafari.view.EditGuideDialogController;
->>>>>>> branch 'master' of https://github.com/maxrgus/rastsafari-fx.git
 import com.rastsafari.view.EditSafariDialogController;
 import com.rastsafari.view.GearViewController;
 import com.rastsafari.view.GenerateReportViewController;

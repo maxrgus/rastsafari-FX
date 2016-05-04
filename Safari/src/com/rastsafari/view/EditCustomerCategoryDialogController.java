@@ -5,8 +5,6 @@ import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.storage.Storage;
 import com.rastsafari.storage.StorageFactory;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

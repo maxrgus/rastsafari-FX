@@ -1,11 +1,18 @@
 package com.rastsafari.view;
 
+import java.util.Optional;
+
 import com.rastsafari.MainApp;
 import com.rastsafari.model.Guide;
+import com.rastsafari.storage.Storage;
+import com.rastsafari.storage.StorageFactory;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class GuideViewController {
@@ -26,6 +33,8 @@ public class GuideViewController {
 	// Reference stage.
 	private Stage guideStage;
 	
+	private Storage storage = StorageFactory.getStorageDB();
+	
 	public GuideViewController() {
 		
 	}
@@ -39,6 +48,62 @@ public class GuideViewController {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		guideTable.setItems(mainApp.getGuideList());
+	}
+	@FXML
+	private void handleEditGuide() {
+		Guide selectedGuide = guideTable.getSelectionModel().getSelectedItem();
+		if (selectedGuide != null) {
+			boolean okClicked = mainApp.showEditGuideDialog(selectedGuide, "Redigera guide");
+			if (okClicked) {
+				storage.updateGuide(selectedGuide);
+			}
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setHeaderText("Inget markerat");
+			alert.setContentText("Vänligen väl en guide som ska redigeras");
+			
+			alert.showAndWait();
+		}
+	}
+	@FXML
+	private void handleNewGuide() {
+		Guide tempGuide = new Guide();
+		boolean okClicked = mainApp.showEditGuideDialog(tempGuide, "Ny guide");
+		if (okClicked) {
+			tempGuide.setId(storage.generateGuideId());
+			mainApp.getGuideList().add(tempGuide);
+			storage.addGuide(tempGuide);
+		}
+	}
+	@FXML
+	private void handleDeleteGuide() {
+		int selectedIndex = guideTable.getSelectionModel().getSelectedIndex();
+		Guide guide = guideTable.getSelectionModel().getSelectedItem();
+		if (selectedIndex >= 0) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Bekräfta");
+			alert.setHeaderText("Bekräfta borttagning");
+			alert.setContentText("Vill du verkligen ta bort "+guide.getGivenName()+" "+guide.getFamilyName());
+			
+			Optional<ButtonType> result = alert.showAndWait();
+			if(result.get() == ButtonType.OK) {
+				guideTable.getItems().remove(selectedIndex);
+				storage.removeGuide(guide);
+			}
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("Inget markerat");
+			alert.setHeaderText("Ingen guide markerad");
+			alert.setContentText("Vänligen markera en guide som du vill radera");
+			
+			alert.showAndWait();
+		}
+	}
+	@FXML
+	private void handleDispose() {
+		mainApp.getSafariViewStage().close();
 	}
 
 }

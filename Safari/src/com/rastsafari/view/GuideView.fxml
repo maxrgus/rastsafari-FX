@@ -25,10 +25,10 @@
             <ButtonBar prefHeight="57.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <buttons>
                 <Button mnemonicParsing="false" text="Rapport" />
-                  <Button defaultButton="true" mnemonicParsing="false" text="Ny.." />
-                  <Button mnemonicParsing="false" text="Redigera" />
-                  <Button mnemonicParsing="false" text="Radera" />
-                  <Button mnemonicParsing="false" text="Tillbaka" />
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#handleNewGuide" text="Ny.." />
+                  <Button mnemonicParsing="false" onAction="#handleEditGuide" text="Redigera" />
+                  <Button mnemonicParsing="false" onAction="#handleDeleteGuide" text="Radera" />
+                  <Button mnemonicParsing="false" onAction="#handleDispose" text="Tillbaka" />
               </buttons>
                <padding>
                   <Insets right="25.0" />
