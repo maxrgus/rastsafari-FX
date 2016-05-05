@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 /**
  * Dialog to edit details or add a new object of SafariLocation
+ * 
  * @author maxrg
  *
  */
@@ -31,41 +32,45 @@ public class LocationEditDialogController {
 	private ComboBox<Integer> maxParticipantBox;
 	@FXML
 	private ComboBox<String> isActiveBox;
-	
+
 	private Stage dialogStage;
 	private SafariLocation location;
 	private Storage storage = StorageFactory.getStorageDB();
 	private boolean okClicked = false;
 	private ObservableList<Integer> participantOptions = FXCollections.observableArrayList();
 	private ObservableList<String> isActiveOptions = FXCollections.observableArrayList();
-	
+
 	/**
 	 * Initializes the controller class. This method is automatically called
 	 * after the FXML file has been loaded.
 	 */
 	@FXML
 	private void initialize() {
-		for (int i=0; i < 16; i++) {
+		for (int i = 0; i < 16; i++) {
 			participantOptions.add(i);
 		}
 		minParticipantBox.getItems().addAll(participantOptions);
 		maxParticipantBox.getItems().addAll(participantOptions);
 		isActiveBox.getItems().addAll("Aktiv", "Inaktiv");
 	}
+
 	/**
 	 * Sets the stage of this dialog.
+	 * 
 	 * @param dialogStage
 	 */
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
+
 	/**
 	 * Sets the SafariLocation to be edited.
+	 * 
 	 * @param location
 	 */
 	public void setSafariLocation(SafariLocation location) {
 		this.location = location;
-		
+
 		locationNameField.setText(location.getLocationName());
 		descriptionField.setText(location.getDescription());
 		locationField.setText(location.getLocation());
@@ -77,13 +82,16 @@ public class LocationEditDialogController {
 			isActiveBox.setValue("Inaktiv");
 		}
 	}
+
 	/**
 	 * Returns true if user clicked ok, false otherwise
+	 * 
 	 * @return
 	 */
 	public boolean isOkClicked() {
 		return okClicked;
 	}
+
 	/**
 	 * Called when the user clicks ok.
 	 */
@@ -105,6 +113,7 @@ public class LocationEditDialogController {
 			dialogStage.close();
 		}
 	}
+
 	/**
 	 * Called when the user clicks cancel
 	 */
@@ -112,38 +121,40 @@ public class LocationEditDialogController {
 	private void handleCancel() {
 		dialogStage.close();
 	}
+
 	/**
 	 * Validates the user input in the text fields.
+	 * 
 	 * @return true if the input is valid.
 	 */
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (locationNameField.getText() == null || locationNameField.getText().length() == 0) {
-			errorMessage += "Sjö är inte ifyllt!\n";
+			errorMessage += "Sjï¿½ ï¿½r inte ifyllt!\n";
 		}
 		if (descriptionField.getText() == null || descriptionField.getText().length() == 0) {
-			errorMessage += "Beskrivning är inte ifyllt \n";
+			errorMessage += "Beskrivning ï¿½r inte ifyllt \n";
 		}
 		if (locationField.getText() == null || locationField.getText().length() == 0) {
-			errorMessage += "Plats är inte ifyllt \n";
+			errorMessage += "Plats ï¿½r inte ifyllt \n";
 		}
-		if (minParticipantBox.getValue() > maxParticipantBox.getValue()){
-			errorMessage += "Minimum antal deltagare är fler än max antal \n";
+		if (minParticipantBox.getValue() > maxParticipantBox.getValue()) {
+			errorMessage += "Minimum antal deltagare ï¿½r fler ï¿½n max antal \n";
 		}
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
-			//Show error message
+			// Show error message
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(dialogStage);
 			alert.setTitle("Felaktig inmatning");
-			alert.setHeaderText("Vänligen fyll i fälten");
+			alert.setHeaderText("Vï¿½nligen fyll i fï¿½lten");
 			alert.setContentText(errorMessage);
-			
+
 			alert.showAndWait();
-			
+
 			return false;
 		}
-		
+
 	}
 }

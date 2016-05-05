@@ -1,9 +1,11 @@
 package com.rastsafari.view;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import com.rastsafari.MainApp;
 import com.rastsafari.model.Booking;
+import com.rastsafari.model.Safari;
 import com.rastsafari.storage.Storage;
 import com.rastsafari.storage.StorageFactory;
 
@@ -28,88 +30,105 @@ public class BookingViewController {
 	private TableColumn<Booking, String> safariColumn;
 	@FXML
 	private TableColumn<Booking, String> dateColumn;
-	
+
 	private Storage storage = StorageFactory.getStorageDB();
-	  //Reference the main app
-    private MainApp mainApp;
-    private Stage bookingStage;
-    
-    public BookingViewController(){
-    	
-    }
-    @FXML
-    private void initialize(){
-    	idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
-    	customerColumn.setCellValueFactory(cellData -> cellData.getValue().getCustomer().fullNameProperty());
-    	safariColumn.setCellValueFactory(cellData -> cellData.getValue().getSafari().getLocation().locationNameProperty());
-    	dateColumn.setCellValueFactory(cellData -> cellData.getValue().getSafari().getDateProperty());
-    	
-    }
-    
-    public void setBookingStage(Stage bookingStage, MainApp mainApp) {
-    	this.bookingStage = bookingStage;
-    	this.mainApp = mainApp;
-    	bookingTable.setItems(mainApp.getBookingList());
-    	
-    }
-    @FXML
-    private void handleEditBooking() {
-    	Booking selectedBooking = bookingTable.getSelectionModel().getSelectedItem();
-    	int selectedIndex = bookingTable.getSelectionModel().getSelectedIndex();
-    	if (selectedBooking != null) {
-    		boolean okClicked = mainApp.showEditBookingDialog(selectedBooking, "Redigera bokning");
-    		if (okClicked) {
-    			storage.updateBooking(selectedBooking);
-    			bookingTable.getColumns().get(0).setVisible(false);
-    			bookingTable.getColumns().get(0).setVisible(true);
-    		}
-    	} else {
-    		Alert alert = new Alert(AlertType.WARNING);
+	// Reference the main app
+	private MainApp mainApp;
+	private Stage bookingStage;
+
+	public BookingViewController() {
+
+	}
+
+	@FXML
+	private void initialize() {
+		idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+		customerColumn.setCellValueFactory(cellData -> cellData.getValue().getCustomer().fullNameProperty());
+		safariColumn
+				.setCellValueFactory(cellData -> cellData.getValue().getSafari().getLocation().locationNameProperty());
+		dateColumn.setCellValueFactory(cellData -> cellData.getValue().getSafari().getDateProperty());
+
+	}
+
+	public void setBookingStage(Stage bookingStage, MainApp mainApp) {
+		this.bookingStage = bookingStage;
+		this.mainApp = mainApp;
+		bookingTable.setItems(mainApp.getBookingList());
+
+	}
+
+	@FXML
+	private void handleEditBooking() {
+		Booking selectedBooking = bookingTable.getSelectionModel().getSelectedItem();
+		int selectedIndex = bookingTable.getSelectionModel().getSelectedIndex();
+		if (selectedBooking != null) {
+			boolean okClicked = mainApp.showEditBookingDialog(selectedBooking, "Redigera bokning");
+			if (okClicked) {
+				storage.updateBooking(selectedBooking);
+				bookingTable.getColumns().get(0).setVisible(false);
+				bookingTable.getColumns().get(0).setVisible(true);
+			}
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setHeaderText("Inget markerat");
-			alert.setContentText("V‰nligen v‰lj en bokning som ska redigeras");
-			
+			alert.setContentText("V√§nligen v√§lj en bokning som ska redigeras");
+
 			alert.showAndWait();
-    	}
-    }
-    @FXML
-    private void handleNewBooking() {
-    	Booking tempBooking = new Booking();
-    	boolean okClicked = mainApp.showEditBookingDialog(tempBooking, "Ny bokning");
-    	if (okClicked) {
-    		tempBooking.setId(storage.generateBookingId());
-    		mainApp.getBookingList().add(tempBooking);
-    		storage.addBooking(tempBooking);
-    	}
-    }
-    @FXML
-    private void handleDeleteBooking() {
-    	int selectedIndex = bookingTable.getSelectionModel().getSelectedIndex();
-    	Booking booking = bookingTable.getSelectionModel().getSelectedItem();
-    	if (selectedIndex >= 0) {
-    		Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekr‰fta");
-			alert.setHeaderText("Bekr‰fta borttagning");
+		}
+	}
+
+	@FXML
+	private void handleNewBooking() {
+		Booking tempBooking = new Booking();
+		boolean okClicked = mainApp.showEditBookingDialog(tempBooking, "Ny bokning");
+		if (okClicked) {
+			tempBooking.setId(storage.generateBookingId());
+			mainApp.getBookingList().add(tempBooking);
+			storage.addBooking(tempBooking);
+			for (Safari s : mainApp.getUpNextSafariList()) {
+				if (s.getId() == tempBooking.getSafari().getId()) {
+					s.addBookingToList(tempBooking);
+					s.setAvalibleSlots(s.getBookedCustomers());
+					s.setTakenSlots(s.getBookedCustomers());
+				}
+			}
+		}
+	}
+
+	@FXML
+	private void handleDeleteBooking() {
+		int selectedIndex = bookingTable.getSelectionModel().getSelectedIndex();
+		Booking booking = bookingTable.getSelectionModel().getSelectedItem();
+		if (selectedIndex >= 0) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Bekr√§fta");
+			alert.setHeaderText("Bekr√§fta borttagning");
 			alert.setContentText("Vill du verkligen ta bort bokningen");
-			
-			
+
 			Optional<ButtonType> result = alert.showAndWait();
-			if(result.get() == ButtonType.OK) {
+			if (result.get() == ButtonType.OK) {
 				bookingTable.getItems().remove(selectedIndex);
 				storage.removeBooking(booking);
+				for (Safari s : mainApp.getUpNextSafariList()) {
+					if (s.getId() == booking.getSafari().getId()) {
+						s.removeBookingFromList(booking);
+					}
+				}
 			}
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Inget safari markerad");
-			alert.setContentText("V‰nligen markera ett safari som du vill radera");
-			
+			alert.setContentText("V√§nligen markera ett safari som du vill radera");
+
 			alert.showAndWait();
 		}
-    }
-    @FXML
-    private void handleDispose() {
-    	bookingStage.close();
-    }
+	}
+
+	@FXML
+	private void handleDispose() {
+		bookingStage.close();
+	}
 }

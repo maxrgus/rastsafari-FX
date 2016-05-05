@@ -36,18 +36,19 @@ public class CustomerRegisterViewController {
 	private TableColumn<Customer, String> phoneColumn;
 	@FXML
 	private TextField filterField;
-	
-	//Reference the main app
+
+	// Reference the main app
 	private MainApp mainApp;
 
 	private Storage storage = StorageFactory.getStorageDB();
 	private SortedList<Customer> customersSorted;
 	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
-	
+
 	private boolean isFiltered;
-	
+
 	public CustomerRegisterViewController() {
 	}
+
 	@FXML
 	private void initialize() {
 		idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
@@ -56,29 +57,31 @@ public class CustomerRegisterViewController {
 		familyNameColumn.setCellValueFactory(cellData -> cellData.getValue().lNameProperty());
 		emailColumn.setCellValueFactory(cellData -> cellData.getValue().eMailProperty());
 		phoneColumn.setCellValueFactory(cellData -> cellData.getValue().allNumberProperty());
-		
+
 	}
+
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		customerList.addAll(mainApp.getCustomerList());
 		customerTable.setItems(customerList);
 	}
+
 	@FXML
 	private void handleSearch() {
-		//Wrap in a filtered list for filtering.
+		// Wrap in a filtered list for filtering.
 		FilteredList<Customer> customersFiltered = new FilteredList<>(customerList, p -> true);
-				
-		//add listener to filterField
+
+		// add listener to filterField
 		filterField.textProperty().addListener((observable, oldValue, newValue) -> {
 			customersFiltered.setPredicate(customer -> {
-				//If filter text is empty, display all customers.
+				// If filter text is empty, display all customers.
 				if (newValue == null || newValue.isEmpty()) {
 					isFiltered = true;
 					return true;
 				}
-				
+
 				String lowerCaseFilter = newValue.toLowerCase();
-				
+
 				if (customer.getFName().toLowerCase().contains(lowerCaseFilter)) {
 					isFiltered = true;
 					return true;
@@ -98,14 +101,15 @@ public class CustomerRegisterViewController {
 		});
 		customersSorted = new SortedList<>(customersFiltered);
 		customersSorted.comparatorProperty().bind(customerTable.comparatorProperty());
-		
+
 		customerTable.setItems(customersSorted);
 	}
+
 	@FXML
 	private void handleEditCustomer() {
 		Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
 		if (selectedCustomer != null) {
-			boolean okClicked = mainApp.showEditCustomerDialog(selectedCustomer,"Redigera Kund");
+			boolean okClicked = mainApp.showEditCustomerDialog(selectedCustomer, "Redigera Kund");
 			if (okClicked) {
 				selectedCustomer.setAllNumber();
 				storage.updateCustomer(selectedCustomer);
@@ -115,11 +119,12 @@ public class CustomerRegisterViewController {
 			alert.initOwner(mainApp.getCustomerRegisterStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen kund markerad");
-			alert.setContentText("Vänligen välj en kund som ska redigeras");
-			
+			alert.setContentText("Vï¿½nligen vï¿½lj en kund som ska redigeras");
+
 			alert.showAndWait();
 		}
 	}
+
 	@FXML
 	private void handleNewCustomer() {
 		Customer tempCustomer = new Customer();
@@ -131,19 +136,19 @@ public class CustomerRegisterViewController {
 			storage.addCustomer(tempCustomer);
 		}
 	}
+
 	@FXML
 	private void handleDeleteCustomer() {
 		int selectedIndex = customerTable.getSelectionModel().getSelectedIndex();
 		Customer customer = customerTable.getSelectionModel().getSelectedItem();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekräfta");
-			alert.setHeaderText("Bekräfta borttagning");
-			alert.setContentText("Vill du verkligen ta bort " + customer.getFName() +
-					" " + customer.getLName() + "?");
+			alert.setTitle("Bekrï¿½fta");
+			alert.setHeaderText("Bekrï¿½fta borttagning");
+			alert.setContentText("Vill du verkligen ta bort " + customer.getFName() + " " + customer.getLName() + "?");
 			Optional<ButtonType> result = alert.showAndWait();
-			if(result.get() == ButtonType.OK) {
-				//customerTable.getItems().remove(selectedIndex);
+			if (result.get() == ButtonType.OK) {
+				// customerTable.getItems().remove(selectedIndex);
 				if (isFiltered) {
 					int sourceIndex = customersSorted.getSourceIndexFor(customerList, selectedIndex);
 					customerList.remove(sourceIndex);
@@ -157,14 +162,15 @@ public class CustomerRegisterViewController {
 			alert.initOwner(mainApp.getCustomerRegisterStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen kund markerad");
-			alert.setContentText("Vänligen markera en kund som du vill radera");
-			
+			alert.setContentText("Vï¿½nligen markera en kund som du vill radera");
+
 			alert.showAndWait();
 		}
 	}
+
 	@FXML
 	private void handleBackButton() {
 		mainApp.getCustomerRegisterStage().close();
 	}
-	
+
 }

@@ -30,17 +30,18 @@ public class GearViewController {
 	private TableColumn<Gear, String> descriptionColumn;
 	@FXML
 	private TableColumn<Gear, Integer> inStockColumn;
-	
+
 	// Reference main app
 	private MainApp mainApp;
-	
+
 	private Storage storage = StorageFactory.getStorageDB();
 	private boolean isFiltered;
 	private SortedList<Gear> gearSorted;
 	private ObservableList<Gear> gearList = FXCollections.observableArrayList();
-	
-	public GearViewController() {}
-	
+
+	public GearViewController() {
+	}
+
 	@FXML
 	private void initialize() {
 		idColumn.setCellValueFactory(cellData -> cellData.getValue().getIdProperty().asObject());
@@ -48,53 +49,56 @@ public class GearViewController {
 		descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().getDescriptionProperty());
 		inStockColumn.setCellValueFactory(cellData -> cellData.getValue().getInStockProperty().asObject());
 	}
+
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		gearTable.setItems(mainApp.getGearList());
 
 	}
+
 	@FXML
-	private void handleNewGear(){
+	private void handleNewGear() {
 		Gear tempGear = new Gear();
 		boolean okClicked = mainApp.showEditGearDialog(tempGear, "Ny utrustning");
-		if(okClicked) {
+		if (okClicked) {
 			tempGear.setId(storage.generateGearId());
-			mainApp.getGearList().add(tempGear); 
+			mainApp.getGearList().add(tempGear);
 			storage.addGear(tempGear);
-			
+
 		}
 	}
+
 	@FXML
-	private void handleEditGear(){
+	private void handleEditGear() {
 		Gear selectedGear = gearTable.getSelectionModel().getSelectedItem();
-		if(selectedGear != null){
+		if (selectedGear != null) {
 			boolean okClicked = mainApp.showEditGearDialog(selectedGear, "Redigera utrustning");
-			if(okClicked){
+			if (okClicked) {
 				storage.updateGear(selectedGear);
 			}
-		}else{
+		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getGearStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen utrustning markerad");
-			alert.setContentText("Vänligen välj en utrustning som ska redigeras");
-			
+			alert.setContentText("Vï¿½nligen vï¿½lj en utrustning som ska redigeras");
+
 			alert.showAndWait();
 		}
 	}
+
 	@FXML
-	private void handleDeleteGear(){
+	private void handleDeleteGear() {
 		int selectedIndex = gearTable.getSelectionModel().getSelectedIndex();
 		Gear gear = gearTable.getSelectionModel().getSelectedItem();
-		if(selectedIndex >= 0){
+		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekräfta");
-			alert.setHeaderText("Bekräfta borttagning");
-			alert.setContentText("Vill du verkligen ta bort " + gear.getGearName() +
-					" " + gear.getDescription() + "?");
+			alert.setTitle("Bekrï¿½fta");
+			alert.setHeaderText("Bekrï¿½fta borttagning");
+			alert.setContentText("Vill du verkligen ta bort " + gear.getGearName() + " " + gear.getDescription() + "?");
 			Optional<ButtonType> result = alert.showAndWait();
-			if(result.get() == ButtonType.OK) {
-				
+			if (result.get() == ButtonType.OK) {
+
 				if (isFiltered) {
 					int sourceIndex = gearSorted.getSourceIndexFor(gearList, selectedIndex);
 					gearList.remove(sourceIndex);
@@ -108,32 +112,15 @@ public class GearViewController {
 			alert.initOwner(mainApp.getCustomerRegisterStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen utrustning markerad");
-			alert.setContentText("Vänligen markera en utrustning som du vill radera");
-			
+			alert.setContentText("Vï¿½nligen markera en utrustning som du vill radera");
+
 			alert.showAndWait();
 		}
 	}
+
 	@FXML
-	private void handleBackButton(){
+	private void handleBackButton() {
 		mainApp.getGearStage().close();
-	}	
-	
+	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -17,12 +17,12 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <LineChart layoutX="14.0" layoutY="-1.0" prefHeight="398.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <LineChart fx:id="chart" layoutX="14.0" layoutY="-1.0" prefHeight="398.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <xAxis>
-                      <CategoryAxis side="BOTTOM" />
+                      <CategoryAxis fx:id="chartCategories" side="BOTTOM" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis side="LEFT" />
+                      <NumberAxis fx:id="chartNumbers" side="LEFT" />
                     </yAxis>
                   </LineChart>
                </children>
@@ -33,14 +33,17 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
                            <children>
-                              <TableView layoutX="28.0" layoutY="84.0" prefHeight="201.0" prefWidth="392.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="84.0">
+                              <TableView fx:id="safariTable" layoutX="28.0" layoutY="84.0" prefHeight="201.0" prefWidth="392.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="84.0">
                                 <columns>
-                                  <TableColumn prefWidth="118.0" text="Safari" />
-                                  <TableColumn prefWidth="133.0" text="Namn" />
-                                    <TableColumn prefWidth="140.0" text="Datum" />
+                                  <TableColumn fx:id="dateColumn" prefWidth="94.0" text="Datum" />
+                                  <TableColumn fx:id="locationColumn" prefWidth="85.0" text="Sjö" />
+                                    <TableColumn fx:id="descriptionColumn" prefWidth="104.0" text="Safari" />
+                                    <TableColumn fx:id="startTimeColumn" prefWidth="110.0" text="Starttid" />
+                                    <TableColumn fx:id="endTimeColumn" prefWidth="98.0" text="Sluttid" />
+                                    <TableColumn fx:id="takenSlotsColumn" prefWidth="104.0" text="Bokade" />
                                 </columns>
                               </TableView>
-                              <Label layoutX="14.0" layoutY="14.0" styleClass="label-header" text="Senaste bokningar" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                              <Label layoutX="14.0" layoutY="14.0" styleClass="label-header" text="Kommande Safarier" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">

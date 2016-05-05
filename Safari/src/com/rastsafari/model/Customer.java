@@ -7,167 +7,170 @@ import javafx.beans.property.StringProperty;
 
 public class Customer {
 
-private IntegerProperty id;
-private StringProperty  fName;
-private StringProperty  lName;
-private StringProperty 	fullName;
-private StringProperty pNumber;
-private StringProperty  eMail;
-private StringProperty dNumber;
-private StringProperty nNumber;
-private StringProperty allNumber;
-private IntegerProperty  category;
+	private IntegerProperty id;
+	private StringProperty fName;
+	private StringProperty lName;
+	private StringProperty fullName;
+	private StringProperty pNumber;
+	private StringProperty eMail;
+	private StringProperty dNumber;
+	private StringProperty nNumber;
+	private StringProperty allNumber;
+	private IntegerProperty category;
 
-public Customer(){
-	this(0,null,null,null,null,null,null,0);
-}
+	public Customer() {
+		this(0, null, null, null, null, null, null, 0);
+	}
 
-public Customer(int id, String fName, String lName,String pNumber, String eMail, String dNumber, String nNumber, int category){
-	this.id=       new SimpleIntegerProperty(id);
-	this.fName=    new SimpleStringProperty(fName);
-	this.lName=    new SimpleStringProperty(lName);
-	this.pNumber=  new SimpleStringProperty(pNumber);
-	this.eMail=    new SimpleStringProperty(eMail);
-	this.dNumber=  new SimpleStringProperty(dNumber);
-	this.nNumber=  new SimpleStringProperty(nNumber);
-	this.category= new SimpleIntegerProperty(category);
-	this.allNumber = new SimpleStringProperty(dNumber + "/" + nNumber);
-	this.fullName = new SimpleStringProperty(fName + " " + lName);
-}
+	public Customer(int id, String fName, String lName, String pNumber, String eMail, String dNumber, String nNumber,
+			int category) {
+		this.id = new SimpleIntegerProperty(id);
+		this.fName = new SimpleStringProperty(fName);
+		this.lName = new SimpleStringProperty(lName);
+		this.pNumber = new SimpleStringProperty(pNumber);
+		this.eMail = new SimpleStringProperty(eMail);
+		this.dNumber = new SimpleStringProperty(dNumber);
+		this.nNumber = new SimpleStringProperty(nNumber);
+		this.category = new SimpleIntegerProperty(category);
+		this.allNumber = new SimpleStringProperty(dNumber + "/" + nNumber);
+		this.fullName = new SimpleStringProperty(fName + " " + lName);
+	}
 
-public int getid(){
-	
-	return id.get();
-}
+	public int getid() {
 
-public void setId(int id){
-	this.id.set(id);
-	
-}
+		return id.get();
+	}
 
-public IntegerProperty idProperty(){
-	return id;
-	
-}
+	public void setId(int id) {
+		this.id.set(id);
 
-public String getFName(){
-	
-	return fName.get();
-}
+	}
 
-public void setFName(String fName){
-	this.fName.set(fName);
-	
-}
+	public IntegerProperty idProperty() {
+		return id;
 
-public StringProperty fNameProperty(){
-	
-	return fName;
-}
+	}
 
-public String getLName(){
-	
-	return lName.get();
-}
+	public String getFName() {
 
-public void setLName(String lName){
-	this.lName.set(lName);
-	
-}
+		return fName.get();
+	}
 
-public StringProperty lNameProperty(){
-	
-	return lName;
-	
-}
-public StringProperty fullNameProperty() {
-	return fullName;
-}
-public void setFullName() {
-	fullName.set(fName.get() + " " + lName.get());
-}
-public String getPNumber(){
-	
-	return pNumber.get();
-}
+	public void setFName(String fName) {
+		this.fName.set(fName);
 
-public void setPNumber(String pNumber){
-	this.pNumber.set(pNumber);
-	
-}
+	}
 
-public StringProperty pNumberProperty(){
-	return pNumber;
-}
+	public StringProperty fNameProperty() {
 
+		return fName;
+	}
 
-public String getEMail(){
-	
-	return eMail.get();
+	public String getLName() {
 
-}
+		return lName.get();
+	}
 
-public void setEMail(String eMail){
-	
-	this.eMail.set(eMail);
-}
+	public void setLName(String lName) {
+		this.lName.set(lName);
 
-public StringProperty eMailProperty(){
-	return eMail;
-	
-}
-public StringProperty allNumberProperty() {
-	return allNumber;
-}
-public String getAllNumber() {
-	return allNumber.get();
-}
-public void setAllNumber() {
-	this.allNumber.set(this.dNumber.get() + "/" + this.nNumber.get());
-}
+	}
 
-public String getDNumber(){
-	
-	return dNumber.get();
-}
+	public StringProperty lNameProperty() {
 
-public void setDNumber(String dNumber){
-	this.dNumber.set(dNumber);
-	
-}
+		return lName;
 
-public StringProperty dNumberProperty(){
-	
-	return dNumber;
-}
+	}
 
+	public StringProperty fullNameProperty() {
+		return fullName;
+	}
 
-public String getNNumber(){
-	
-	return nNumber.get();
-}
+	public void setFullName() {
+		fullName.set(fName.get() + " " + lName.get());
+	}
 
-public void setNNumber(String nNumber){
-	this.nNumber.set(nNumber);
-}
+	public String getPNumber() {
 
-public StringProperty nNumberProperty(){
-	return nNumber;
-}
+		return pNumber.get();
+	}
 
+	public void setPNumber(String pNumber) {
+		this.pNumber.set(pNumber);
 
-public int getCategory(){
-	
-	return category.get();
-}
+	}
 
-public void setCategory(int category){
-	this.category.set(category);
-}
+	public StringProperty pNumberProperty() {
+		return pNumber;
+	}
 
-public IntegerProperty categoryProperty(){
-	return category;
-}
+	public String getEMail() {
 
-	
+		return eMail.get();
+
+	}
+
+	public void setEMail(String eMail) {
+
+		this.eMail.set(eMail);
+	}
+
+	public StringProperty eMailProperty() {
+		return eMail;
+
+	}
+
+	public StringProperty allNumberProperty() {
+		return allNumber;
+	}
+
+	public String getAllNumber() {
+		return allNumber.get();
+	}
+
+	public void setAllNumber() {
+		this.allNumber.set(this.dNumber.get() + "/" + this.nNumber.get());
+	}
+
+	public String getDNumber() {
+
+		return dNumber.get();
+	}
+
+	public void setDNumber(String dNumber) {
+		this.dNumber.set(dNumber);
+
+	}
+
+	public StringProperty dNumberProperty() {
+
+		return dNumber;
+	}
+
+	public String getNNumber() {
+
+		return nNumber.get();
+	}
+
+	public void setNNumber(String nNumber) {
+		this.nNumber.set(nNumber);
+	}
+
+	public StringProperty nNumberProperty() {
+		return nNumber;
+	}
+
+	public int getCategory() {
+
+		return category.get();
+	}
+
+	public void setCategory(int category) {
+		this.category.set(category);
+	}
+
+	public IntegerProperty categoryProperty() {
+		return category;
+	}
+
 }

@@ -21,7 +21,7 @@ public class SafariViewController {
 	private TableView<Safari> safariTable;
 	@FXML
 	private TableView<Booking> bookingsTable;
-	
+
 	@FXML
 	private TableColumn<Safari, String> dateColumn;
 	@FXML
@@ -34,12 +34,12 @@ public class SafariViewController {
 	private TableColumn<Safari, Integer> takenSlotsColumn;
 	@FXML
 	private TableColumn<Safari, Integer> avalibleSlotsColumn;
-	
+
 	@FXML
 	private TableColumn<Booking, Integer> idColumn;
 	@FXML
 	private TableColumn<Booking, String> customerColumn;
-	
+
 	@FXML
 	private Label idLabel;
 	@FXML
@@ -56,16 +56,16 @@ public class SafariViewController {
 	private Label priceLabel;
 	@FXML
 	private Label guideLabel;
-	
-	
-	//Reference MainApp
+
+	// Reference MainApp
 	private MainApp mainApp;
-	
+
 	private Storage storage = StorageFactory.getStorageDB();
-	
+
 	public SafariViewController() {
-		
+
 	}
+
 	@FXML
 	private void initialize() {
 		dateColumn.setCellValueFactory(cellData -> cellData.getValue().getDateProperty());
@@ -74,19 +74,18 @@ public class SafariViewController {
 		endTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getEndTimeProperty());
 		takenSlotsColumn.setCellValueFactory(cellData -> cellData.getValue().getTakenSlotsProperty().asObject());
 		avalibleSlotsColumn.setCellValueFactory(cellData -> cellData.getValue().getAvalibleSlotsProperty().asObject());
-		
+
 		idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
 		customerColumn.setCellValueFactory(cellData -> cellData.getValue().getCustomer().fullNameProperty());
-		
-		
-		//Clear
+
+		// Clear
 		showSafariDetails(null);
-		
-		safariTable.getSelectionModel().selectedItemProperty().addListener(
-					(observable, oldValue, newValue) -> showSafariDetails(newValue));
-		
-		
+
+		safariTable.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> showSafariDetails(newValue));
+
 	}
+
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		safariTable.setItems(mainApp.getSafariList());
@@ -99,7 +98,7 @@ public class SafariViewController {
 		safariTable.getSortOrder().add(dateColumn);
 
 	}
-	
+
 	private void showSafariDetails(Safari safari) {
 		if (safari != null) {
 			idLabel.setText(Integer.toString(safari.getId()));
@@ -110,9 +109,9 @@ public class SafariViewController {
 			avalibleSlotsLabel.setText(Integer.toString(safari.getAvalibleSlots()));
 			priceLabel.setText(Double.toString(safari.getPrice()));
 			guideLabel.setText(safari.getGuide().getGivenName() + " " + safari.getGuide().getFamilyName());
-			
+
 			bookingsTable.setItems(safari.getBookedCustomers());
-			
+
 		} else {
 			idLabel.setText("");
 			dateLabel.setText("");
@@ -122,10 +121,11 @@ public class SafariViewController {
 			avalibleSlotsLabel.setText("");
 			priceLabel.setText("");
 			guideLabel.setText("");
-			
+
 			bookingsTable.setItems(null);
 		}
 	}
+
 	@FXML
 	private void handleEditSafari() {
 		Safari selectedSafari = safariTable.getSelectionModel().getSelectedItem();
@@ -138,11 +138,12 @@ public class SafariViewController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setHeaderText("Inget markerat");
-			alert.setContentText("Vänligen välj ett safari som ska redigeras");
-			
+			alert.setContentText("Vï¿½nligen vï¿½lj ett safari som ska redigeras");
+
 			alert.showAndWait();
 		}
 	}
+
 	@FXML
 	private void handleNewSafari() {
 		Safari tempSafari = new Safari();
@@ -153,19 +154,20 @@ public class SafariViewController {
 			storage.addSafari(tempSafari);
 		}
 	}
+
 	@FXML
 	private void handleDeleteSafari() {
 		int selectedIndex = safariTable.getSelectionModel().getSelectedIndex();
 		Safari safari = safariTable.getSelectionModel().getSelectedItem();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekräfta");
-			alert.setHeaderText("Bekräfta borttagning");
-			alert.setContentText("Vill du verkligen ta bort " + safari.getLocation().getLocationName() +
-								" den " + safari.getDate());
-			
+			alert.setTitle("Bekrï¿½fta");
+			alert.setHeaderText("Bekrï¿½fta borttagning");
+			alert.setContentText(
+					"Vill du verkligen ta bort " + safari.getLocation().getLocationName() + " den " + safari.getDate());
+
 			Optional<ButtonType> result = alert.showAndWait();
-			if(result.get() == ButtonType.OK) {
+			if (result.get() == ButtonType.OK) {
 				safariTable.getItems().remove(selectedIndex);
 				storage.removeSafari(safari);
 			}
@@ -174,38 +176,14 @@ public class SafariViewController {
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Inget safari markerad");
-			alert.setContentText("Vänligen markera ett safari som du vill radera");
-			
+			alert.setContentText("Vï¿½nligen markera ett safari som du vill radera");
+
 			alert.showAndWait();
 		}
 	}
+
 	@FXML
 	private void handleDispose() {
 		mainApp.getSafariViewStage().close();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,7 +7,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 
 public class RootLayoutController {
-	
+
 	@FXML
 	private MenuBar topMenu;
 	@FXML
@@ -16,48 +16,52 @@ public class RootLayoutController {
 	private Menu customer;
 	@FXML
 	private Menu help;
-	
-	//Reference the main app
+
+	// Reference the main app
 	private MainApp mainApp;
-	
-	public RootLayoutController(){
-		
-		
+
+	public RootLayoutController() {
+
 	}
+
 	@FXML
-	private void initialize(){
-		
+	private void initialize() {
+
 	}
-	
-	public void setMainApp(MainApp mainApp){
+
+	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-		
+
 	}
+
 	@FXML
-	private void handleFileExit(){
+	private void handleFileExit() {
 		System.exit(1);
 	}
+
 	@FXML
-	private void handleCustomerRegister(){
+	private void handleCustomerRegister() {
 		mainApp.showCustomerRegisterView();
 	}
+
 	@FXML
-	private void handleCustomerCategory(){
+	private void handleCustomerCategory() {
 		mainApp.showCustomerCategoryView();
 	}
+
 	@FXML
 	private void handleGenerateReport() {
 		mainApp.showGenereateReportView();
 	}
+
 	@FXML
 	private void handleGearView() {
 		mainApp.showGearListView();
 	}
+
 	@FXML
 	private void handleGuideView() {
 		mainApp.showGuideView();
 	}
-	
-	
 
 }

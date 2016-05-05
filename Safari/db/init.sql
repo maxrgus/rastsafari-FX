@@ -12,17 +12,21 @@ CREATE TABLE safariLocation (
        isActive             integer);
 
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('Storsjön', 'Laxfiske', '59.1234459,12.1212122', 4, 8, 1);
+VALUES ('StorsjÃ¶n', 'Laxfiske', '57.7144739,14.4881351,16.5z', 5, 15, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('Storsjön', 'Äringsfiske', '59.1234459,12.1212122', 6, 12, 1);
+VALUES ('StorsjÃ¶n', 'Ã–ringsfiske', '@57.7144739,14.4881351,16.5z', 5, 15, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('Svartetjörn', 'Gäddfiske', '59.1234459,12.1212122', 8, 16, 1);
+VALUES ('ByasjÃ¶n', 'GÃ¤ddfiske med bÃ¥t', '57.0695043,12.5311132,15.25z', 5, 7, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('Svartetjörn', 'Metning för barn', '59.1234459,12.1212122', 8, 16, 1);
+VALUES ('ByasjÃ¶n', 'GÃ¤ddfiske frÃ¥n strand', '57.0695043,12.5311132,15.25z', 5, 7, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('Gunnliseå', 'Flugfiske', '59.1234459,12.1212122', 5, 10, 1);
+VALUES ('LokasjÃ¶n', 'Flugfiske', '56.4558454,13.5644112,15z', 5, 12, 1);
 INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
-VALUES ('Långån', 'Kanotsafari', '59.1234459,12.1212122', 3, 6, 1);
+VALUES ('LokasjÃ¶n', 'Kanotsafari', '56.4558454,13.5644112,15z', 5, 12, 1);
+INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
+VALUES ('Helge Ã¥', 'Aborrfiske', '56.4714675,13.8861878,15.25z', 5, 14, 1);
+INSERT INTO safariLocation (locationName,description,location,minParticipants,maxParticipants, isActive)
+VALUES ('Helge Ã¥', 'Jakt pÃ¥ gammelgÃ¤ddan', '56.4714675,13.8861878,15.25z', 5, 14, 1);
 
 CREATE TABLE gearReq (
        sid		integer,

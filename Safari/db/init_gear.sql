@@ -8,15 +8,15 @@ CREATE TABLE gear (
   description   varchar(50));
 
 INSERT INTO gear (gearName,description)
-VALUES ('Flugfiskespö', 'Modell TMC');
+VALUES ('FlugfiskespÃ¶', 'Modell TMC');
 INSERT INTO gear (gearName,description)
-VALUES ('Sovsäck', '175cm');
+VALUES ('SovsÃ¤ck', '175cm');
 INSERT INTO gear (gearName,description)
-VALUES ('Sovsäck', '185cm');
+VALUES ('SovsÃ¤ck', '185cm');
 INSERT INTO gear (gearName,description)
-VALUES ('Tält', '3man');
+VALUES ('TÃ¤lt', '3man');
 INSERT INTO gear (gearName,description)
-VALUES ('Havsspö', 'Modell THC');
+VALUES ('HavsspÃ¶', 'Modell THC');
 
 CREATE TABLE gearStock (
   gid           integer PRIMARY KEY,

@@ -1,6 +1,5 @@
 package com.rastsafari.view;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -24,7 +23,7 @@ import javafx.util.Callback;
 import javafx.util.StringConverter;
 
 public class EditSafariDialogController {
-	
+
 	@FXML
 	private Label headerLabel;
 	@FXML
@@ -39,39 +38,34 @@ public class EditSafariDialogController {
 	private TextField priceField;
 	@FXML
 	private ComboBox<Guide> guideBox;
-	
-	//reference owner stage and mainApp
+
+	// reference owner stage and mainApp
 	private Stage safariStage;
 	private MainApp mainApp;
-	
+
 	private Safari safari;
 	private boolean okClicked;
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	
-	private String[] timeOptions = {"00:00","01:00","02:00",
-									"03:00","04:00","05:00",
-									"06:00","07:00","08:00",
-									"09:00","10:00","11:00",
-									"12:00","13:00","14:00",
-									"15:00","16:00","17:00",
-									"18:00","19:00","20:00",
-									"21:00","22:00","23:00",
-									"24:00"};
-	
+	private String[] timeOptions = { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00",
+			"09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00",
+			"21:00", "22:00", "23:00", "24:00" };
+
 	public EditSafariDialogController() {
-		
+
 	}
+
 	@FXML
 	private void initialize() {
-		
+
 	}
+
 	public void setSafari(Safari safari) {
 		this.safari = safari;
-		
+
 		locationBox.getItems().addAll(mainApp.getLocationList());
 		locationBox.setValue(safari.getLocation());
-		locationBox.setCellFactory(new Callback<ListView<SafariLocation >, ListCell<SafariLocation>>() {
+		locationBox.setCellFactory(new Callback<ListView<SafariLocation>, ListCell<SafariLocation>>() {
 			@Override
 			public ListCell<SafariLocation> call(ListView<SafariLocation> s) {
 				ListCell<SafariLocation> cell = new ListCell<SafariLocation>() {
@@ -103,7 +97,7 @@ public class EditSafariDialogController {
 				// TODO Auto-generated method stub
 				return null;
 			}
-	
+
 		});
 		if (safari.getDate() != null) {
 			LocalDate date = LocalDate.parse(safari.getDate(), formatter);
@@ -112,7 +106,7 @@ public class EditSafariDialogController {
 			LocalDate todaysDate = LocalDate.now();
 			datePicker.setValue(todaysDate);
 		}
-		
+
 		startTimeBox.getItems().addAll(timeOptions);
 		startTimeBox.setValue(safari.getStartTime());
 		endTimeBox.getItems().addAll(timeOptions);
@@ -129,25 +123,30 @@ public class EditSafariDialogController {
 					return g.getGivenName() + " " + g.getFamilyName();
 				}
 			}
+
 			@Override
 			public Guide fromString(String string) {
 				return null;
 			}
 		});
 	}
+
 	public void setStage(Stage safariStage) {
 		this.safariStage = safariStage;
 	}
+
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
+
 	public void setHeaderLabel(String label) {
 		headerLabel.setText(label);
 	}
+
 	public boolean isOkClicked() {
 		return okClicked;
 	}
-	
+
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
@@ -164,25 +163,25 @@ public class EditSafariDialogController {
 			safari.setMaxParticipants(safari.getLocation().getMaxParticipant());
 			safari.setTakenSlots(safari.getBookedCustomers());
 			safari.setAvalibleSlots(safari.getBookedCustomers());
-			
+
 			okClicked = true;
 			safariStage.close();
 		}
 	}
-	
+
 	@FXML
 	private void handleCancel() {
 		safariStage.close();
 	}
-	
+
 	private boolean isInputValid() {
 		String errorMessage = "";
-		if(priceField.getText() == null || priceField.getText().length() == 0) {
-			errorMessage += "Pris är inte ifyllt\n";
+		if (priceField.getText() == null || priceField.getText().length() == 0) {
+			errorMessage += "Pris ï¿½r inte ifyllt\n";
 		}
 		LocalDate today = LocalDate.now();
 		if (today.isAfter(datePicker.getValue()) && !today.equals(datePicker.getValue())) {
-			errorMessage += "Datum måste vara idag eller i framtiden, Marty\n";
+			errorMessage += "Datum mï¿½ste vara idag eller i framtiden, Marty\n";
 		}
 		if (errorMessage.length() == 0) {
 			return true;
@@ -190,34 +189,13 @@ public class EditSafariDialogController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(safariStage);
 			alert.setTitle("Felaktig inmatning");
-			alert.setHeaderText("Vänligen kontrollera nedan:");
+			alert.setHeaderText("Vï¿½nligen kontrollera nedan:");
 			alert.setContentText(errorMessage);
-			
+
 			alert.showAndWait();
-			
+
 			return false;
 		}
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

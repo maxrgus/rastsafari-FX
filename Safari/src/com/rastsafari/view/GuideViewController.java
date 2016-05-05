@@ -26,18 +26,19 @@ public class GuideViewController {
 	private TableColumn<Guide, String> familyNameColumn;
 	@FXML
 	private TableColumn<Guide, String> emailColumn;
-	
+
 	// Reference MainApp.
 	private MainApp mainApp;
-	
+
 	// Reference stage.
 	private Stage guideStage;
-	
+
 	private Storage storage = StorageFactory.getStorageDB();
-	
+
 	public GuideViewController() {
-		
+
 	}
+
 	@FXML
 	private void initialize() {
 		idColumn.setCellValueFactory(cellData -> cellData.getValue().getIdProperty().asObject());
@@ -45,10 +46,12 @@ public class GuideViewController {
 		familyNameColumn.setCellValueFactory(cellData -> cellData.getValue().getFamilyNameProperty());
 		emailColumn.setCellValueFactory(cellData -> cellData.getValue().getEmailProperty());
 	}
+
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		guideTable.setItems(mainApp.getGuideList());
 	}
+
 	@FXML
 	private void handleEditGuide() {
 		Guide selectedGuide = guideTable.getSelectionModel().getSelectedItem();
@@ -61,11 +64,12 @@ public class GuideViewController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setHeaderText("Inget markerat");
-			alert.setContentText("Vänligen väl en guide som ska redigeras");
-			
+			alert.setContentText("Vï¿½nligen vï¿½l en guide som ska redigeras");
+
 			alert.showAndWait();
 		}
 	}
+
 	@FXML
 	private void handleNewGuide() {
 		Guide tempGuide = new Guide();
@@ -76,18 +80,19 @@ public class GuideViewController {
 			storage.addGuide(tempGuide);
 		}
 	}
+
 	@FXML
 	private void handleDeleteGuide() {
 		int selectedIndex = guideTable.getSelectionModel().getSelectedIndex();
 		Guide guide = guideTable.getSelectionModel().getSelectedItem();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekräfta");
-			alert.setHeaderText("Bekräfta borttagning");
-			alert.setContentText("Vill du verkligen ta bort "+guide.getGivenName()+" "+guide.getFamilyName());
-			
+			alert.setTitle("Bekrï¿½fta");
+			alert.setHeaderText("Bekrï¿½fta borttagning");
+			alert.setContentText("Vill du verkligen ta bort " + guide.getGivenName() + " " + guide.getFamilyName());
+
 			Optional<ButtonType> result = alert.showAndWait();
-			if(result.get() == ButtonType.OK) {
+			if (result.get() == ButtonType.OK) {
 				guideTable.getItems().remove(selectedIndex);
 				storage.removeGuide(guide);
 			}
@@ -96,11 +101,12 @@ public class GuideViewController {
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen guide markerad");
-			alert.setContentText("Vänligen markera en guide som du vill radera");
-			
+			alert.setContentText("Vï¿½nligen markera en guide som du vill radera");
+
 			alert.showAndWait();
 		}
 	}
+
 	@FXML
 	private void handleDispose() {
 		mainApp.getGuideStage().close();

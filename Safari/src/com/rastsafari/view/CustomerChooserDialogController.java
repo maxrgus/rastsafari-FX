@@ -33,20 +33,21 @@ public class CustomerChooserDialogController {
 	private TableColumn<Customer, String> phoneColumn;
 	@FXML
 	private TextField filterField;
-	
-	//Reference the main app
+
+	// Reference the main app
 	private MainApp mainApp;
 
 	private SortedList<Customer> customersSorted;
 	private ObservableList<Customer> customerList = FXCollections.observableArrayList();
 	private Customer customer;
-		
+
 	private boolean isFiltered;
 	private boolean okClicked;
-	
+
 	public CustomerChooserDialogController() {
-		
+
 	}
+
 	@FXML
 	private void initialize() {
 		idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
@@ -56,17 +57,21 @@ public class CustomerChooserDialogController {
 		emailColumn.setCellValueFactory(cellData -> cellData.getValue().eMailProperty());
 		phoneColumn.setCellValueFactory(cellData -> cellData.getValue().allNumberProperty());
 	}
+
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		customerList.addAll(mainApp.getCustomerList());
 		customerTable.setItems(customerList);
 	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
+
 	public boolean isOkClicked() {
 		return okClicked;
 	}
+
 	@FXML
 	private void handleOk() {
 		int selectedIndex = customerTable.getSelectionModel().getSelectedIndex();
@@ -79,27 +84,28 @@ public class CustomerChooserDialogController {
 			alert.initOwner(mainApp.getCustomerRegisterStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen kund markerad");
-			alert.setContentText("Vänligen markera en kund som du vill boka");
-			
+			alert.setContentText("Vï¿½nligen markera en kund som du vill boka");
+
 			alert.showAndWait();
 		}
 	}
+
 	@FXML
 	private void handleSearch() {
-		//Wrap in a filtered list for filtering.
+		// Wrap in a filtered list for filtering.
 		FilteredList<Customer> customersFiltered = new FilteredList<>(customerList, p -> true);
-				
-		//add listener to filterField
+
+		// add listener to filterField
 		filterField.textProperty().addListener((observable, oldValue, newValue) -> {
 			customersFiltered.setPredicate(customer -> {
-				//If filter text is empty, display all customers.
+				// If filter text is empty, display all customers.
 				if (newValue == null || newValue.isEmpty()) {
 					isFiltered = true;
 					return true;
 				}
-				
+
 				String lowerCaseFilter = newValue.toLowerCase();
-				
+
 				if (customer.getFName().toLowerCase().contains(lowerCaseFilter)) {
 					isFiltered = true;
 					return true;
@@ -119,26 +125,13 @@ public class CustomerChooserDialogController {
 		});
 		customersSorted = new SortedList<>(customersFiltered);
 		customersSorted.comparatorProperty().bind(customerTable.comparatorProperty());
-		
+
 		customerTable.setItems(customersSorted);
 	}
+
 	@FXML
 	private void handleBackButton() {
 		mainApp.getCustomerRegisterStage().close();
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

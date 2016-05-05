@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class EditCustomerDialogController {
-	
+
 	@FXML
 	private Label headerLabel;
 	@FXML
@@ -27,42 +27,48 @@ public class EditCustomerDialogController {
 	private TextField phoneNightField;
 	@FXML
 	private ComboBox<Integer> categoryBox;
-	
-	//Reference owner stage
+
+	// Reference owner stage
 	private Stage customerRegisterStage;
-	
+
 	private Customer customer;
 	private boolean okClicked;
-	
+
 	public EditCustomerDialogController() {
-		
+
 	}
+
 	@FXML
 	private void initialize() {
-		
+
 	}
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
-		
+
 		givenNameField.setText(customer.getFName());
 		familyNameField.setText(customer.getLName());
 		pNumberField.setText(customer.getPNumber());
 		emailField.setText(customer.getEMail());
 		phoneDayField.setText(customer.getDNumber());
 		phoneNightField.setText(customer.getNNumber());
-		categoryBox.getItems().addAll(1,2,3,4);
+		categoryBox.getItems().addAll(1, 2, 3, 4);
 		categoryBox.setValue(customer.getCategory());
-		
+
 	}
+
 	public void setStage(Stage customerRegisterStage) {
 		this.customerRegisterStage = customerRegisterStage;
 	}
+
 	public void setHeaderLabel(String label) {
 		headerLabel.setText(label);
 	}
+
 	public boolean isOkClicked() {
 		return okClicked;
 	}
+
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
@@ -73,34 +79,36 @@ public class EditCustomerDialogController {
 			customer.setDNumber(phoneDayField.getText());
 			customer.setNNumber(phoneNightField.getText());
 			customer.setCategory(categoryBox.getValue());
-			
+
 			okClicked = true;
 			customerRegisterStage.close();
 		}
 	}
+
 	@FXML
 	private void handleCancel() {
 		customerRegisterStage.close();
 	}
+
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (givenNameField.getText() == null || givenNameField.getText().length() == 0) {
-			errorMessage += "Förnamn är inte ifyllt!\n";
+			errorMessage += "Fï¿½rnamn ï¿½r inte ifyllt!\n";
 		}
 		if (familyNameField.getText() == null || familyNameField.getText().length() == 0) {
-			errorMessage += "Efternamn är inte ifyllt!\n";
+			errorMessage += "Efternamn ï¿½r inte ifyllt!\n";
 		}
 		if (pNumberField.getText() == null || pNumberField.getText().length() == 0) {
-			errorMessage += "Personnummer är inte ifyllt!\n";
+			errorMessage += "Personnummer ï¿½r inte ifyllt!\n";
 		}
 		if (emailField.getText() == null || emailField.getText().length() == 0) {
-			errorMessage += "Email är inte ifyllt!\n";
+			errorMessage += "Email ï¿½r inte ifyllt!\n";
 		}
 		if (phoneDayField.getText() == null || phoneDayField.getText().length() == 0) {
-			errorMessage += "Telefonnummer dagtid är inte ifyllt!\n";
+			errorMessage += "Telefonnummer dagtid ï¿½r inte ifyllt!\n";
 		}
 		if (phoneNightField.getText() == null || phoneNightField.getText().length() == 0) {
-			errorMessage += "Telefonnummer kvällstid är inte ifyllt!\n";
+			errorMessage += "Telefonnummer kvï¿½llstid ï¿½r inte ifyllt!\n";
 		}
 		if (errorMessage.length() == 0) {
 			return true;
@@ -108,11 +116,11 @@ public class EditCustomerDialogController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(customerRegisterStage);
 			alert.setTitle("Felaktig inmatning");
-			alert.setHeaderText("Vänligen fyll i fälten");
+			alert.setHeaderText("Vï¿½nligen fyll i fï¿½lten");
 			alert.setContentText(errorMessage);
-			
+
 			alert.showAndWait();
-			
+
 			return false;
 		}
 	}

@@ -1,6 +1,5 @@
 package com.rastsafari.view;
 
-
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.storage.Storage;
 import com.rastsafari.storage.StorageFactory;
@@ -16,72 +15,70 @@ public class EditCustomerCategoryDialogController {
 	private TextField categoryNameField;
 	@FXML
 	private TextField priceIndexField;
-	
+
 	private Stage categoryStage;
 	private CustomerCategory category;
 	private Storage storage = StorageFactory.getStorageDB();
 	private boolean okClicked = false;
-	
+
 	@FXML
-	private void initialize(){} 
-	
-	public void setCategoryStage(Stage categoryStage){
+	private void initialize() {
+	}
+
+	public void setCategoryStage(Stage categoryStage) {
 		this.categoryStage = categoryStage;
 	}
-	
-	public void setCategory(CustomerCategory category){
-		this.category = category; 
-		
+
+	public void setCategory(CustomerCategory category) {
+		this.category = category;
+
 		categoryNameField.setText(category.getCategoryName());
 		priceIndexField.setText(String.valueOf(category.getPriceIndex()));
-			
-	} 
-	
-	public boolean isOkClicked(){
+
+	}
+
+	public boolean isOkClicked() {
 		return okClicked;
 	}
 
 	@FXML
-	private void handleOK(){
-		if(isInputValid()){
+	private void handleOK() {
+		if (isInputValid()) {
 			category.setCategoryName(categoryNameField.getText());
-			category.setPriceIndex(Double.parseDouble(priceIndexField.getText()));	
-			
+			category.setPriceIndex(Double.parseDouble(priceIndexField.getText()));
+
 			okClicked = true;
 			storage.updateCustomerCategory(category);
 			categoryStage.close();
-			}
+		}
 	}
-	
+
 	@FXML
-	private void handleCancel(){
+	private void handleCancel() {
 		categoryStage.close();
 	}
-	
-	private boolean isInputValid(){
+
+	private boolean isInputValid() {
 		String errorMessage = "";
-		if(categoryNameField.getText() == null || categoryNameField.getText().length() == 0) {
-			errorMessage += "Kategori är inte ifyllt!\n"; 
+		if (categoryNameField.getText() == null || categoryNameField.getText().length() == 0) {
+			errorMessage += "Kategori är inte ifyllt!\n";
 		} // Validering för siffra måste tilläggas
-		if(priceIndexField.getText() == null || priceIndexField.getText().length() == 0 ) {
+		if (priceIndexField.getText() == null || priceIndexField.getText().length() == 0) {
 			errorMessage += "PrisIndex är inte ifyllt!\n";
 		}
-		
-		if(errorMessage.length() == 0){
+
+		if (errorMessage.length() == 0) {
 			return true;
-		}
-		else {
+		} else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(categoryStage);
 			alert.setTitle("Felaktig inmatning");
 			alert.setHeaderText("Vänligen fyll i fälten");
 			alert.setContentText(errorMessage);
-			
+
 			alert.showAndWait();
 			return false;
 		}
 	}
-	
-	
 
 }
