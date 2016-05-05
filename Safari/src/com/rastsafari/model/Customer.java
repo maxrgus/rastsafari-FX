@@ -83,6 +83,9 @@ public StringProperty lNameProperty(){
 public StringProperty fullNameProperty() {
 	return fullName;
 }
+public void setFullName() {
+	fullName.set(fName.get() + " " + lName.get());
+}
 public String getPNumber(){
 	
 	return pNumber.get();

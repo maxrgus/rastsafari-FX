@@ -91,13 +91,10 @@ public class SafariViewController {
 		this.mainApp = mainApp;
 		safariTable.setItems(mainApp.getSafariList());
 		for (Safari s : mainApp.getSafariList()) {
-			for (Booking b : mainApp.getBookingList()) {
-				if (b.getSafari().getId() == s.getId()) {
-					s.addBookingToList(b);
-					s.setAvalibleSlots(s.getBookedCustomers());
-					s.setTakenSlots(s.getBookedCustomers());
-				}
-			}
+			s.initBookedCustomers();
+			s.setBookedCustomers(storage.getSafariBookingsFromStorage(s.getId()));
+			s.setAvalibleSlots(s.getBookedCustomers());
+			s.setTakenSlots(s.getBookedCustomers());
 		}
 		safariTable.getSortOrder().add(dateColumn);
 

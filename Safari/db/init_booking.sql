@@ -13,7 +13,7 @@ CREATE TABLE Safari (
 		maxParticipants		integer,
 		price				integer,
 		guideId				integer);
-		
+
 INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price, guideId)
 VALUES (1, '2016-04-28', '13:00', '15:30',2 ,5, 1000, 1);
 INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxParticipants, price, guideId)
@@ -26,31 +26,31 @@ INSERT INTO Safari (safariLocationId, date, hour, endHour, minParticipants, maxP
 VALUES (8, '2020-05-06', '24:00', '03:00', 23, 60, 10000, 4);
 
 CREATE TABLE Booking (
-		bookingNr	integer PRIMARY KEY,
+		bookingNr	integer PRIMARY KEY AUTOINCREMENT,
 		customerId	integer,
 		safariId	integer,
 		priceIndex	integer);
-		
+
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
 VALUES (1, 5, 1, 1);
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
-VALUES (12, 75, 2, 0.7);
+VALUES (2, 75, 2, 0.7);
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
-VALUES (555, 123, 3, 0.7);
+VALUES (3, 123, 3, 0.7);
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
-VALUES (56564, 411, 2, 1);
+VALUES (4, 411, 2, 1);
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
-VALUES (24565, 24, 4, 1.2);
+VALUES (5, 24, 4, 1.2);
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
-VALUES (661123, 1, 1, 0.8);
+VALUES (6, 1, 1, 0.8);
 INSERT INTO Booking (bookingNr, customerId, safariId, priceIndex)
-VALUES (33344, 67, 2, 1.5);
+VALUES (7, 67, 2, 1.5);
 
 CREATE TABLE Invoice (
 		invoiceNr	integer PRIMARY KEY,
 		bookingNr	integer,
 		customerId	integer);
-		
+
 INSERT INTO Invoice (invoiceNr, bookingNr, customerId)
 VALUES (001, 55622, 23343);
 INSERT INTO Invoice (invoiceNr, bookingNr, customerId)

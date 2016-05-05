@@ -4,6 +4,8 @@ import com.rastsafari.MainApp;
 import com.rastsafari.model.Booking;
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.Safari;
+import com.rastsafari.storage.Storage;
+import com.rastsafari.storage.StorageFactory;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -23,6 +25,7 @@ public class BookingDialogController {
 	// Reference main app and stage
 	private MainApp mainApp;
 	private Stage bookingStage;
+	private Storage storage = StorageFactory.getStorageDB();
 	
 	private Booking booking;
 	private boolean okClicked;
@@ -75,11 +78,16 @@ public class BookingDialogController {
 	}
 	@FXML
 	private void handleOk() {
-		booking.setSafari(safariBox.getValue());
-		booking.setCustomer(customer);
+		if (safariBox.getValue() != null && customer != null) {
+			booking.setSafari(safariBox.getValue());
+			booking.setCustomer(customer);
+			storage.addCustomer(customer);
+			okClicked = true;
+			bookingStage.close();
+		} else {
+			System.out.println("logg");
+		}
 		
-		okClicked = true;
-		bookingStage.close();
 	}
 	@FXML
 	private void handleCancel() {
@@ -87,9 +95,20 @@ public class BookingDialogController {
 	}
 	@FXML
 	private void handleSearchCustomer() {
+		this.customer = mainApp.showCustomerChooserDialog();
+		if (customer != null) {
+			customerField.setText(Integer.toString(customer.getid()) + " " + customer.getFName() + 
+				  " " + customer.getLName());
+		}
 	}
 	@FXML
 	private void handleNewCustomer() {
+		this.customer = mainApp.showBookingNewCustomerDialog("Ny kund");
+		if (customer != null) {
+			customer.setId(storage.generateCustomerId());
+			customerField.setText(Integer.toString(customer.getid()) + " " + customer.getFName() + 
+					  " " + customer.getLName());
+		}
 		
 	}
 

@@ -103,8 +103,16 @@ public class StorageDB implements Storage {
 	
 	@Override
 	public void addBooking(Booking b) {
-		// TODO Auto-generated method stub
-		
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "INSERT INTO Booking (customerId,safariId,priceIndex) " +
+						 "VALUES ("+b.getCustomer().getid()+","+b.getSafari().getId()+",0);";
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -217,7 +225,16 @@ public class StorageDB implements Storage {
 	
 	@Override
 	public void updateBooking(Booking b) {
-		// TODO Auto-generated method stub
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "UPDATE Booking SET customerId = "+b.getCustomer().getid()+", safariId = "+b.getSafari().getId()+" " +
+						 "WHERE bookingNr == "+b.getId()+";";
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -320,8 +337,16 @@ public class StorageDB implements Storage {
 	
 	@Override
 	public void removeBooking(Booking b) {
-		// TODO Auto-generated method stub
-		
+		int id = b.getId();
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "DELETE FROM Booking WHERE bookingNr=="+id+";";
+			st.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -566,6 +591,58 @@ public class StorageDB implements Storage {
 		}
 		return guides;
 	}
+	public ObservableList<Booking> getSafariBookingsFromStorage(int safariId) {
+		ObservableList<Booking> safariBookings = FXCollections.observableArrayList();
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "SELECT Booking.bookingNr,customer.id, customer.customerCatID, customer.SSID, "
+					+ "customer.givenName, customer.familyName,"
+					+ "customer.email, customer.phoneDay, customer.phoneNight,safari.id,safariLocation.*,"
+					+ "safari.date,safari.hour,safari.endHour,safari.price,guide.* "
+					+ "FROM Booking,customer,safari,safariLocation,guide " +
+						 "WHERE Booking.customerId == customer.id "
+						 + "AND Booking.safariId == safari.id "
+						 + "AND safari.safariLocationId == safariLocation.id "
+						 + "AND safari.guideId == guide.id "
+						 + "AND Booking.safariId == "+safariId+";";
+			ResultSet rs = st.executeQuery(sql);
+			
+			while (rs.next()) {
+				safariBookings.add(new Booking(
+						rs.getInt(1),
+						new Customer(rs.getInt(2),
+									 rs.getString(5),
+									 rs.getString(6),
+									 rs.getString(4),
+									 rs.getString(7),
+									 rs.getString(8),
+									 rs.getString(9),
+									 rs.getInt(3)),
+						new Safari(rs.getInt(10),
+								   new SafariLocation(rs.getInt(11),
+										   			  rs.getString(12),
+										   			  rs.getString(13),
+										   			  rs.getString(14),
+										   			  rs.getInt(15),
+										   			  rs.getInt(16),
+										   			  rs.getInt(17)),
+								   rs.getString(18),
+								   rs.getString(19),
+								   rs.getString(20),
+								   rs.getInt(21),
+								   new Guide(rs.getInt(22),
+										   rs.getString(23),
+										   rs.getString(24),
+										   rs.getString(25)))));
+			}
+			rs.close();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return safariBookings;
+	}
 	public int generateBookingId(){
 		int id = 0;
 		Statement s = null;
@@ -573,7 +650,7 @@ public class StorageDB implements Storage {
 		Connection c = sd.createConnection();
 		try {
 			s = c.createStatement();
-			String sql = "SELECT MAX(bookingNr) FROM Booking;";
+			String sql = "SELECT MAX(seq) FROM sqlite_sequence WHERE name == 'Booking';";
 			ResultSet rs = s.executeQuery(sql);
 			id = rs.getInt(1);
 			rs.close();
@@ -591,7 +668,7 @@ public class StorageDB implements Storage {
 		Connection c = sd.createConnection();
 		try {
 			s = c.createStatement();
-			String sql = "SELECT MAX(id) FROM customerCategory;";
+			String sql = "SELECT MAX(seq) FROM sqlite_sequence WHERE name == 'customerCategory';";
 			ResultSet rs = s.executeQuery(sql);
 			id = rs.getInt(1);
 			rs.close();
@@ -609,7 +686,7 @@ public class StorageDB implements Storage {
 		Connection c = sd.createConnection();
 		try {
 			s = c.createStatement();
-			String sql = "SELECT MAX(id) FROM customer;";
+			String sql = "SELECT MAX(seq) FROM sqlite_sequence WHERE name == 'customer';";
 			ResultSet rs = s.executeQuery(sql);
 			id = rs.getInt(1);
 			rs.close();
@@ -627,7 +704,7 @@ public class StorageDB implements Storage {
 	      Connection c = sd.createConnection();
 	      try {
 	        s = c.createStatement();
-	        String sql = "SELECT MAX(id) FROM safariLocation;";
+	        String sql = "SELECT MAX(seq) FROM sqlite_sequence WHERE name == 'safariLocation';";
 	        ResultSet rs = s.executeQuery(sql);
 	        id = rs.getInt(1);
 	        rs.close();
@@ -645,7 +722,7 @@ public class StorageDB implements Storage {
 		Connection c = sd.createConnection();
 		try {
 	        s = c.createStatement();
-	        String sql = "SELECT MAX(id) FROM safari;";
+	        String sql = "SELECT MAX(seq) FROM sqlite_sequence WHERE name == 'safari';";
 	        ResultSet rs = s.executeQuery(sql);
 	        id = rs.getInt(1);
 	        rs.close();
@@ -663,7 +740,7 @@ public class StorageDB implements Storage {
 		Connection c = sd.createConnection();
 		try {
 	        s = c.createStatement();
-	        String sql = "SELECT MAX(id) FROM gear;";
+	        String sql = "SELECT MAX(seq) FROM sqlite_sequence WHERE name == 'gear';";
 	        ResultSet rs = s.executeQuery(sql);
 	        id = rs.getInt(1);
 	        rs.close();
@@ -681,7 +758,7 @@ public class StorageDB implements Storage {
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
-			String sql = "SELECT MAX(id) FROM guide;";
+			String sql = "SELECT MAX(seq) FROM sqlite_sequence WHERE name == 'guide';";
 			ResultSet rs = st.executeQuery(sql);
 			id = rs.getInt(1);
 			rs.close();
@@ -691,6 +768,5 @@ public class StorageDB implements Storage {
 		id++;
 		return id;
 	}
-
 
 }

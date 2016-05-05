@@ -12,8 +12,10 @@ import com.rastsafari.model.SafariLocation;
 import com.rastsafari.storage.Storage;
 import com.rastsafari.storage.StorageFactory;
 import com.rastsafari.view.BookingDialogController;
+import com.rastsafari.view.BookingNewCustomerDialogController;
 import com.rastsafari.view.BookingViewController;
 import com.rastsafari.view.CustomerCategoryController;
+import com.rastsafari.view.CustomerChooserDialogController;
 import com.rastsafari.view.CustomerRegisterViewController;
 import com.rastsafari.view.EditCustomerCategoryDialogController;
 import com.rastsafari.view.EditCustomerDialogController;
@@ -397,6 +399,34 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	public Customer showCustomerChooserDialog() {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/CustomerChooserDialog.fxml"));
+			BorderPane customerChooserDialog = (BorderPane) uiLoader.load();
+			
+			customerRegisterStage = new Stage();
+			customerRegisterStage.setTitle("Välj kund");
+			customerRegisterStage.initModality(Modality.WINDOW_MODAL);
+			customerRegisterStage.initOwner(bookingStage);
+			Scene scene = new Scene(customerChooserDialog);
+			customerRegisterStage.setScene(scene);
+			
+			CustomerChooserDialogController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			customerRegisterStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			customerRegisterStage.showAndWait();
+			if (controller.isOkClicked()) {
+				return controller.getCustomer();
+			} else {
+				return null;
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public boolean showEditCustomerDialog(Customer customer, String editOrNew) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -421,6 +451,36 @@ public class MainApp extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	public Customer showBookingNewCustomerDialog(String label) {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("view/BookingNewCustomerDialog.fxml"));
+			AnchorPane editDialog = (AnchorPane) uiLoader.load();
+			
+			Stage editStage = new Stage();
+			editStage.setTitle(label);
+			editStage.initModality(Modality.WINDOW_MODAL);
+			editStage.initOwner(bookingStage);
+			Scene scene = new Scene(editDialog);
+			editStage.setScene(scene);
+			
+			BookingNewCustomerDialogController controller = uiLoader.getController();
+			controller.setStage(editStage);
+			controller.setHeaderLabel(label);
+			
+			editStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			editStage.showAndWait();
+			
+			if (controller.isOkClicked()) {
+				return controller.getCustomer();
+			} else {
+				return controller.getCustomer();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	public boolean showEditSafariDialog(Safari safari, String label) {

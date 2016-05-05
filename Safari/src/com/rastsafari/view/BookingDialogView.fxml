@@ -36,12 +36,12 @@
             <Label styleClass="label-bright" text="Safari" />
             <ComboBox fx:id="safariBox" prefWidth="150.0" GridPane.columnIndex="1" />
             <Label styleClass="label-bright" text="Kund" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="Sök" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" onAction="#handleSearchCustomer" text="Sök" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="25.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Ny kund" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#handleNewCustomer" text="Ny kund" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <TextField fx:id="customerField" editable="false" prefHeight="14.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>

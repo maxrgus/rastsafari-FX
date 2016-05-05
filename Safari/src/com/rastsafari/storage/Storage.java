@@ -52,5 +52,6 @@ public interface Storage {
 	public ObservableList<Booking> getBookingsFromStorage();
 	public ObservableList<CustomerCategory> getCategoriesFromStorage();
 	public ObservableList<Guide> getGuidesFromStorage();
+	public ObservableList<Booking> getSafariBookingsFromStorage(int id);
 		
 }

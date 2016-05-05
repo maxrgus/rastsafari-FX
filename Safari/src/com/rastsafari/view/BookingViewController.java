@@ -30,8 +30,6 @@ public class BookingViewController {
 	private TableColumn<Booking, String> dateColumn;
 	
 	private Storage storage = StorageFactory.getStorageDB();
-	private ObservableList<Booking> bookingList = FXCollections.observableArrayList();
-
 	  //Reference the main app
     private MainApp mainApp;
     private Stage bookingStage;
@@ -57,10 +55,13 @@ public class BookingViewController {
     @FXML
     private void handleEditBooking() {
     	Booking selectedBooking = bookingTable.getSelectionModel().getSelectedItem();
+    	int selectedIndex = bookingTable.getSelectionModel().getSelectedIndex();
     	if (selectedBooking != null) {
     		boolean okClicked = mainApp.showEditBookingDialog(selectedBooking, "Redigera bokning");
     		if (okClicked) {
     			storage.updateBooking(selectedBooking);
+    			bookingTable.getColumns().get(0).setVisible(false);
+    			bookingTable.getColumns().get(0).setVisible(true);
     		}
     	} else {
     		Alert alert = new Alert(AlertType.WARNING);
@@ -109,6 +110,6 @@ public class BookingViewController {
     }
     @FXML
     private void handleDispose() {
-    	mainApp.getBookingStage().close();
+    	bookingStage.close();
     }
 }
