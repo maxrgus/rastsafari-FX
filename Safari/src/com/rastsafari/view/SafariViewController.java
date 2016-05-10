@@ -3,6 +3,7 @@ package com.rastsafari.view;
 import java.util.Optional;
 
 import com.rastsafari.MainApp;
+import com.rastsafari.mail.RastsafariMail;
 import com.rastsafari.model.Booking;
 import com.rastsafari.model.Safari;
 import com.rastsafari.storage.Storage;
@@ -61,6 +62,7 @@ public class SafariViewController {
 	private MainApp mainApp;
 
 	private Storage storage = StorageFactory.getStorageDB();
+	private RastsafariMail mail = new RastsafariMail();
 
 	public SafariViewController() {
 
@@ -177,6 +179,22 @@ public class SafariViewController {
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Inget safari markerad");
 			alert.setContentText("Vï¿½nligen markera ett safari som du vill radera");
+
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML
+	private void handleSendGuideBriefing() {
+		Safari selectedSafari = safariTable.getSelectionModel().getSelectedItem();
+		if (selectedSafari != null) {
+			mail.sendGuideBriefing(selectedSafari);
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(mainApp.getPrimaryStage());
+			alert.setTitle("Inget markerat");
+			alert.setHeaderText("Inget safari markerad");
+			alert.setContentText("Vänligen markera ett safari som du vill skicka");
 
 			alert.showAndWait();
 		}

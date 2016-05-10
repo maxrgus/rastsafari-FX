@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -75,7 +77,7 @@
    <bottom>
       <AnchorPane prefHeight="55.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
-            <ButtonBar prefHeight="55.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ButtonBar layoutX="336.0" prefHeight="55.0" prefWidth="664.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="336.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <buttons>
                 <Button defaultButton="true" mnemonicParsing="false" onAction="#handleNewSafari" text="Ny.." />
                   <Button mnemonicParsing="false" onAction="#handleEditSafari" text="Redigera" />
@@ -86,6 +88,12 @@
                   <Insets right="25.0" />
                </padding>
             </ButtonBar>
+            <MenuButton layoutX="14.0" layoutY="5.0" mnemonicParsing="false" styleClass="button" text="Skicka">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleSendGuideBriefing" text="Uppdragsbeskrivning" />
+                <MenuItem mnemonicParsing="false" text="Kundbekräftelse" />
+              </items>
+            </MenuButton>
          </children>
       </AnchorPane>
    </bottom>
