@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import com.rastsafari.MainApp;
+import com.rastsafari.mail.RastsafariMail;
 import com.rastsafari.model.Booking;
 import com.rastsafari.model.Safari;
 import com.rastsafari.storage.Storage;
@@ -32,6 +33,7 @@ public class BookingViewController {
 	private TableColumn<Booking, String> dateColumn;
 
 	private Storage storage = StorageFactory.getStorageDB();
+	private RastsafariMail mail = new RastsafariMail();
 	// Reference the main app
 	private MainApp mainApp;
 	private Stage bookingStage;
@@ -86,6 +88,7 @@ public class BookingViewController {
 			tempBooking.setId(storage.generateBookingId());
 			mainApp.getBookingList().add(tempBooking);
 			storage.addBooking(tempBooking);
+			mail.sendBookingConfirmation(tempBooking);
 			for (Safari s : mainApp.getUpNextSafariList()) {
 				if (s.getId() == tempBooking.getSafari().getId()) {
 					s.addBookingToList(tempBooking);

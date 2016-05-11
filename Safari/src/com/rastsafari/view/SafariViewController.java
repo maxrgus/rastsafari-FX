@@ -9,8 +9,13 @@ import com.rastsafari.model.Safari;
 import com.rastsafari.storage.Storage;
 import com.rastsafari.storage.StorageFactory;
 
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert;
@@ -57,6 +62,11 @@ public class SafariViewController {
 	private Label priceLabel;
 	@FXML
 	private Label guideLabel;
+	
+	@FXML
+	private Label mailStatusLabel;
+	@FXML
+	private ProgressIndicator progress;
 
 	// Reference MainApp
 	private MainApp mainApp;
@@ -85,7 +95,8 @@ public class SafariViewController {
 
 		safariTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> showSafariDetails(newValue));
-
+		progress.setVisible(false);
+		mailStatusLabel.setVisible(false);
 	}
 
 	public void setMainApp(MainApp mainApp) {
@@ -188,7 +199,25 @@ public class SafariViewController {
 	private void handleSendGuideBriefing() {
 		Safari selectedSafari = safariTable.getSelectionModel().getSelectedItem();
 		if (selectedSafari != null) {
-			mail.sendGuideBriefing(selectedSafari);
+			progress.setVisible(true);
+			mailStatusLabel.setVisible(true);
+			mailStatusLabel.setText("Skickar");
+			Task<Void> sendEmail = new Task<Void>() {
+				@Override
+				protected Void call() throws Exception {
+						mail.sendGuideBriefing(selectedSafari);
+						return null;
+				}
+			};
+			sendEmail.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+				@Override
+				public void handle(WorkerStateEvent event) {
+					progress.setVisible(false);
+					mailStatusLabel.setVisible(false);
+				}
+			});
+			new Thread(sendEmail).start();
+			
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());

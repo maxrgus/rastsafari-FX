@@ -10,7 +10,7 @@
       <WebView fx:id="map" layoutX="117.0" layoutY="26.0" prefHeight="525.0" prefWidth="550.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ButtonBar layoutX="336.0" layoutY="546.0" prefHeight="40.0" prefWidth="240.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
         <buttons>
-            <Button defaultButton="true" mnemonicParsing="false" text="OK" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOk" text="OK" />
         </buttons>
       </ButtonBar>
    </children>

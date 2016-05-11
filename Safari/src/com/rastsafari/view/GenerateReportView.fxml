@@ -12,18 +12,18 @@
    <top>
       <AnchorPane prefHeight="66.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="14.0" layoutY="7.0" styleClass="label-header" text="Rapportgenerering" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="7.0" />
+            <Label layoutX="14.0" layoutY="7.0" styleClass="label-header" text="Lönerapport Guide" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="7.0" />
          </children>
       </AnchorPane>
    </top>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ComboBox layoutX="225.0" layoutY="43.0" prefWidth="150.0" />
-            <Label layoutX="265.0" layoutY="14.0" styleClass="label-bright" text="Rapportyp" />
+            <ComboBox fx:id="guideBox" layoutX="225.0" layoutY="43.0" prefWidth="150.0" />
+            <Label layoutX="280.0" layoutY="14.0" styleClass="label-bright" text="Guide" />
             <Label layoutX="292.0" layoutY="135.0" styleClass="label-header" text="-" />
-            <DatePicker layoutX="34.0" layoutY="148.0" />
-            <DatePicker layoutX="336.0" layoutY="148.0" />
+            <DatePicker fx:id="startDate" layoutX="34.0" layoutY="148.0" />
+            <DatePicker fx:id="endDate" layoutX="336.0" layoutY="148.0" />
             <Label layoutX="277.0" layoutY="96.0" styleClass="label-bright" text="Datum" />
          </children>
       </AnchorPane>
@@ -34,7 +34,7 @@
             <ButtonBar layoutX="309.0" layoutY="89.0" prefHeight="40.0" prefWidth="277.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
               <buttons>
                 <Button defaultButton="true" mnemonicParsing="false" onAction="#handleGenerate" text="Generera" />
-                  <Button mnemonicParsing="false" text="Avbryt" />
+                  <Button mnemonicParsing="false" onAction="#handleDispose" text="Avbryt" />
               </buttons>
             </ButtonBar>
          </children>

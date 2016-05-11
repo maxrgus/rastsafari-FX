@@ -1,12 +1,14 @@
 package com.rastsafari.storage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import com.rastsafari.model.Booking;
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.Gear;
 import com.rastsafari.model.Guide;
+import com.rastsafari.model.GuideSalary;
 import com.rastsafari.model.Safari;
 import com.rastsafari.model.SafariLocation;
 
@@ -87,5 +89,7 @@ public interface Storage {
 	public ObservableList<Guide> getGuidesFromStorage();
 
 	public ObservableList<Booking> getSafariBookingsFromStorage(int id);
+	
+	public ArrayList<GuideSalary> getGuideSalaryFromStorage(int id,String startDate,String endDate);
 
 }

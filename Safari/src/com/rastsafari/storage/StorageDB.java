@@ -5,12 +5,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import com.rastsafari.model.Booking;
 import com.rastsafari.model.Customer;
 import com.rastsafari.model.CustomerCategory;
 import com.rastsafari.model.Gear;
 import com.rastsafari.model.Guide;
+import com.rastsafari.model.GuideSalary;
 import com.rastsafari.model.Safari;
 import com.rastsafari.model.SafariDatabase;
 import com.rastsafari.model.SafariLocation;
@@ -576,6 +578,29 @@ public class StorageDB implements Storage {
 			e.printStackTrace();
 		}
 		return safariBookings;
+	}
+	public ArrayList<GuideSalary> getGuideSalaryFromStorage(int id,String startDate,String endDate) {
+		ArrayList<GuideSalary> salaryObjects = new ArrayList<GuideSalary>();
+		SafariDatabase sd = new SafariDatabase();
+		Connection c = sd.createConnection();
+		try {
+			Statement st = c.createStatement();
+			String sql = "SELECT safari.date,safariLocation.locationName,safariLocation.description,safari.price FROM safari,safariLocation "
+					+ "WHERE safari.safariLocationId == safariLocation.id "
+					+ "AND safari.guideId == "+id+" "
+					+ "AND safari.date >= '"+startDate+"' "
+					+ "AND safari.date <= '"+endDate+"';";
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				salaryObjects.add(new GuideSalary(rs.getString(1),
+												  rs.getString(2) + " " + rs.getString(3),
+												  rs.getInt(4)));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return salaryObjects;
 	}
 
 	public int generateBookingId() {

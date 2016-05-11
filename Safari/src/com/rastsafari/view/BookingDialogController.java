@@ -29,6 +29,7 @@ public class BookingDialogController {
 
 	private Booking booking;
 	private boolean okClicked;
+	private boolean customerExists;
 	private Customer customer;
 
 	public BookingDialogController() {
@@ -90,7 +91,9 @@ public class BookingDialogController {
 		if (safariBox.getValue() != null && customer != null) {
 			booking.setSafari(safariBox.getValue());
 			booking.setCustomer(customer);
-			storage.addCustomer(customer);
+			if (!customerExists) {
+				storage.addCustomer(customer);
+			}
 			okClicked = true;
 			bookingStage.close();
 		} else {
@@ -110,6 +113,7 @@ public class BookingDialogController {
 		if (customer != null) {
 			customerField.setText(
 					Integer.toString(customer.getid()) + " " + customer.getFName() + " " + customer.getLName());
+			customerExists = true;
 		}
 	}
 
@@ -120,6 +124,7 @@ public class BookingDialogController {
 			customer.setId(storage.generateCustomerId());
 			customerField.setText(
 					Integer.toString(customer.getid()) + " " + customer.getFName() + " " + customer.getLName());
+			customerExists = false;
 		}
 
 	}

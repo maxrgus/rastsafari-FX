@@ -607,6 +607,8 @@ public class MainApp extends Application {
 			reportStage.setScene(scene);
 
 			GenerateReportViewController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			controller.setGuideBox();
 			controller.setStage(reportStage);
 
 			reportStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
