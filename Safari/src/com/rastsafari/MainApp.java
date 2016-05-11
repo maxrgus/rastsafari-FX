@@ -3,35 +3,36 @@ package com.rastsafari;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import com.rastsafari.model.Booking;
-import com.rastsafari.model.Customer;
-import com.rastsafari.model.CustomerCategory;
-import com.rastsafari.model.Gear;
-import com.rastsafari.model.Guide;
-import com.rastsafari.model.Safari;
-import com.rastsafari.model.SafariLocation;
-import com.rastsafari.storage.Storage;
-import com.rastsafari.storage.StorageFactory;
-import com.rastsafari.view.BookingDialogController;
-import com.rastsafari.view.BookingNewCustomerDialogController;
-import com.rastsafari.view.BookingViewController;
-import com.rastsafari.view.CustomerCategoryController;
-import com.rastsafari.view.CustomerChooserDialogController;
-import com.rastsafari.view.CustomerRegisterViewController;
-import com.rastsafari.view.EditCustomerCategoryDialogController;
-import com.rastsafari.view.EditCustomerDialogController;
-import com.rastsafari.view.EditGearDialogController;
-import com.rastsafari.view.EditGuideDialogController;
-import com.rastsafari.view.EditSafariDialogController;
-import com.rastsafari.view.GearViewController;
-import com.rastsafari.view.GenerateReportViewController;
-import com.rastsafari.view.GuideViewController;
-import com.rastsafari.view.LocationEditDialogController;
-import com.rastsafari.view.LocationMapController;
-import com.rastsafari.view.MainFrameController;
-import com.rastsafari.view.RootLayoutController;
-import com.rastsafari.view.SafariLocationViewController;
-import com.rastsafari.view.SafariViewController;
+import com.rastsafari.client.controller.BookingDialogController;
+import com.rastsafari.client.controller.BookingNewCustomerDialogController;
+import com.rastsafari.client.controller.BookingViewController;
+import com.rastsafari.client.controller.CustomerCategoryController;
+import com.rastsafari.client.controller.CustomerChooserDialogController;
+import com.rastsafari.client.controller.CustomerRegisterViewController;
+import com.rastsafari.client.controller.EditCustomerCategoryDialogController;
+import com.rastsafari.client.controller.EditCustomerDialogController;
+import com.rastsafari.client.controller.EditGearDialogController;
+import com.rastsafari.client.controller.EditGuideDialogController;
+import com.rastsafari.client.controller.EditSafariDialogController;
+import com.rastsafari.client.controller.GearChooserDialogController;
+import com.rastsafari.client.controller.GearViewController;
+import com.rastsafari.client.controller.GenerateReportViewController;
+import com.rastsafari.client.controller.GuideViewController;
+import com.rastsafari.client.controller.LocationEditDialogController;
+import com.rastsafari.client.controller.LocationMapController;
+import com.rastsafari.client.controller.MainFrameController;
+import com.rastsafari.client.controller.RootLayoutController;
+import com.rastsafari.client.controller.SafariLocationViewController;
+import com.rastsafari.client.controller.SafariViewController;
+import com.rastsafari.server.model.Booking;
+import com.rastsafari.server.model.Customer;
+import com.rastsafari.server.model.CustomerCategory;
+import com.rastsafari.server.model.Gear;
+import com.rastsafari.server.model.Guide;
+import com.rastsafari.server.model.Safari;
+import com.rastsafari.server.model.SafariLocation;
+import com.rastsafari.server.storage.Storage;
+import com.rastsafari.server.storage.StorageFactory;
 
 import javafx.application.Application;
 import javafx.beans.Observable;
@@ -61,6 +62,7 @@ public class MainApp extends Application {
 	private Stage gearStage;
 	private Stage guideStage;
 	private Stage editBookingStage;
+	private Stage editStage;
 	private BorderPane rootLayout;
 	
 	private MainFrameController mainController;
@@ -91,7 +93,7 @@ public class MainApp extends Application {
 	private void initSystem() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/BootView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/BootView.fxml"));
 			AnchorPane bootLayout = (AnchorPane) uiLoader.load();
 			Scene scene = new Scene(bootLayout);
 			bootStage = new Stage();
@@ -141,7 +143,7 @@ public class MainApp extends Application {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/RootLayout.fxml"));
 			rootLayout = (BorderPane) uiLoader.load();
 
 			// Show the scene
@@ -165,7 +167,7 @@ public class MainApp extends Application {
 		try {
 			// Load main frame
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/MainFrame.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/MainFrame.fxml"));
 			AnchorPane mainFrame = (AnchorPane) uiLoader.load();
 
 			// Acess to controller
@@ -183,7 +185,7 @@ public class MainApp extends Application {
 		try {
 			// Load SafariLocationView.fxml
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/SafariLocationView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/SafariLocationView.fxml"));
 			AnchorPane safariLocationView = (AnchorPane) uiLoader.load();
 
 			// Create dialog stage
@@ -210,7 +212,7 @@ public class MainApp extends Application {
 		try {
 			// Load BookingView.fxml
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/BookingView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/BookingView.fxml"));
 			AnchorPane bookingView = (AnchorPane) uiLoader.load();
 
 			// Create dialog stage
@@ -236,7 +238,7 @@ public class MainApp extends Application {
 	public void showLocationMapDialog(String location) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/LocationMapDialog.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/LocationMapDialog.fxml"));
 			AnchorPane mapDialog = (AnchorPane) uiLoader.load();
 
 			Stage mapStage = new Stage();
@@ -261,11 +263,11 @@ public class MainApp extends Application {
 		try {
 			// Load LocationEditDialogController.fxml
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/LocationEditDialog.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/LocationEditDialog.fxml"));
 			AnchorPane editDialog = (AnchorPane) uiLoader.load();
 
 			// Create dialog stage
-			Stage editStage = new Stage();
+			editStage = new Stage();
 			editStage.setTitle("Redigera Safarimï¿½l");
 			editStage.initModality(Modality.WINDOW_MODAL);
 			editStage.initOwner(dialogStage);
@@ -274,6 +276,7 @@ public class MainApp extends Application {
 
 			// Load the controller
 			LocationEditDialogController controller = uiLoader.getController();
+			controller.setMainApp(this);
 			controller.setDialogStage(editStage);
 			controller.setSafariLocation(location);
 
@@ -291,7 +294,7 @@ public class MainApp extends Application {
 	public boolean showEditBookingDialog(Booking booking, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/BookingDialogView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/BookingDialogView.fxml"));
 			AnchorPane editDialog = (AnchorPane) uiLoader.load();
 
 			editBookingStage = new Stage();
@@ -321,7 +324,7 @@ public class MainApp extends Application {
 	public void showCustomerCategoryView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/CustomerCategoryView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/CustomerCategoryView.fxml"));
 			AnchorPane categoryView = (AnchorPane) uiLoader.load();
 
 			categoryStage = new Stage();
@@ -345,7 +348,7 @@ public class MainApp extends Application {
 	public void showGuideView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/GuideView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/GuideView.fxml"));
 			BorderPane guideView = (BorderPane) uiLoader.load();
 
 			guideStage = new Stage();
@@ -369,7 +372,7 @@ public class MainApp extends Application {
 	public boolean showCategoryEditDialog(CustomerCategory category) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/EditCustomerCategoryDialog.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/EditCustomerCategoryDialog.fxml"));
 			AnchorPane editCategory = (AnchorPane) uiLoader.load();
 
 			Stage editStage = new Stage();
@@ -398,7 +401,7 @@ public class MainApp extends Application {
 	public void showCustomerRegisterView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/CustomerRegisterView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/CustomerRegisterView.fxml"));
 			BorderPane customerRegisterView = (BorderPane) uiLoader.load();
 
 			customerRegisterStage = new Stage();
@@ -420,7 +423,7 @@ public class MainApp extends Application {
 	public Customer showCustomerChooserDialog() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/CustomerChooserDialog.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/CustomerChooserDialog.fxml"));
 			BorderPane customerChooserDialog = (BorderPane) uiLoader.load();
 
 			customerRegisterStage = new Stage();
@@ -445,11 +448,41 @@ public class MainApp extends Application {
 			return null;
 		}
 	}
+	public Gear showGearChooserDialog() {
+		try {
+			FXMLLoader uiLoader = new FXMLLoader();
+			uiLoader.setLocation(MainApp.class.getResource("client/view/GearChooserDialog.fxml"));
+			BorderPane gearChooserDialog = (BorderPane) uiLoader.load();
+			
+			Stage gearChooserStage = new Stage();
+			gearChooserStage.setTitle("Välj utrustning");
+			gearChooserStage.initModality(Modality.WINDOW_MODAL);
+			gearChooserStage.initOwner(editStage);
+			Scene scene = new Scene(gearChooserDialog);
+			gearChooserStage.setScene(scene);
+			
+			GearChooserDialogController controller = uiLoader.getController();
+			controller.setMainApp(this);
+			controller.setStage(gearChooserStage);
+			
+			gearChooserStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
+			gearChooserStage.showAndWait();
+			if (controller.isOkClicked()) {
+				return controller.getGear();
+			} else {
+				return null;
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public boolean showEditCustomerDialog(Customer customer, String editOrNew) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/EditCustomerDialog.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/EditCustomerDialog.fxml"));
 			AnchorPane editDialog = (AnchorPane) uiLoader.load();
 
 			Stage editStage = new Stage();
@@ -460,6 +493,7 @@ public class MainApp extends Application {
 			editStage.setScene(scene);
 
 			EditCustomerDialogController controller = uiLoader.getController();
+			controller.setMainApp(this);
 			controller.setStage(editStage);
 			controller.setCustomer(customer);
 			controller.setHeaderLabel(editOrNew);
@@ -476,7 +510,7 @@ public class MainApp extends Application {
 	public Customer showBookingNewCustomerDialog(String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/BookingNewCustomerDialog.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/BookingNewCustomerDialog.fxml"));
 			AnchorPane editDialog = (AnchorPane) uiLoader.load();
 
 			Stage editStage = new Stage();
@@ -487,6 +521,7 @@ public class MainApp extends Application {
 			editStage.setScene(scene);
 
 			BookingNewCustomerDialogController controller = uiLoader.getController();
+			controller.setMainApp(this);
 			controller.setHeaderLabel(label);
 			controller.setStage(editStage);
 			
@@ -508,7 +543,7 @@ public class MainApp extends Application {
 	public boolean showEditSafariDialog(Safari safari, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/EditSafariDialog.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/EditSafariDialog.fxml"));
 			AnchorPane editDialog = (AnchorPane) uiLoader.load();
 
 			Stage editStage = new Stage();
@@ -539,7 +574,7 @@ public class MainApp extends Application {
 	public boolean showEditGearDialog(Gear gear, String editOrNew) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/GearDialogView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/GearDialogView.fxml"));
 			AnchorPane editGear = (AnchorPane) uiLoader.load();
 
 			Stage editStage = new Stage();
@@ -567,7 +602,7 @@ public class MainApp extends Application {
 	public boolean showEditGuideDialog(Guide guide, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/EditGuideDialog.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/EditGuideDialog.fxml"));
 			AnchorPane editDialog = (AnchorPane) uiLoader.load();
 
 			Stage editStage = new Stage();
@@ -596,7 +631,7 @@ public class MainApp extends Application {
 	public void showGenereateReportView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/GenerateReportView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/GenerateReportView.fxml"));
 			BorderPane reportView = (BorderPane) uiLoader.load();
 
 			Stage reportStage = new Stage();
@@ -622,7 +657,7 @@ public class MainApp extends Application {
 	public void showGearListView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/GearView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/GearView.fxml"));
 			BorderPane gearView = (BorderPane) uiLoader.load();
 
 			gearStage = new Stage();
@@ -646,7 +681,7 @@ public class MainApp extends Application {
 	public void showSafariView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
-			uiLoader.setLocation(MainApp.class.getResource("view/SafariView.fxml"));
+			uiLoader.setLocation(MainApp.class.getResource("client/view/SafariView.fxml"));
 			BorderPane safariView = (BorderPane) uiLoader.load();
 
 			safariStage = new Stage();

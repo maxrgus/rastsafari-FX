@@ -1,0 +1,283 @@
+.root {
+  /*-fx-focus-color: #204705;*/
+  -fx-focus-color: CHART_COLOR_3;
+  /*-fx-accent: #204705;*/
+  -fx-accent: derive(CHART_COLOR_3, -10%);
+}
+
+.background {
+   -fx-background-color: #2b2b2b;
+}
+.header-toolbar {
+  /*-fx-background-color: #204705;*/
+  -fx-background-color: CHART_COLOR_3;
+}
+
+.chart {
+  -fx-background-color: #2b2b2b;
+}
+.chart-plot-background {
+  -fx-background-color: #2b2b2b;
+}
+.combo-box-base,
+.combo-box-base:editable > .arrow-button {
+    -fx-background-color: #2b2b2b;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
+
+.date-picker-popup > .month-year-pane {
+	-fx-background-color: derive(#2b2b2b, 10%);
+	
+}
+.date-picker-popup > .month-year-pane > label { 
+	-fx-text-fill: white;
+}
+.date-picker > .arrow-button {
+	-fx-text-fill: white;
+    -fx-border-color: -fx-focus-color;
+    -fx-border-width: 2;
+}
+.date-picker {
+	-fx-padding: 0;
+}
+.date-picker > .arrow-button > .arrow {
+    -fx-text-fill: white;
+}
+.combo-box,
+.combo-box-popup .list-view {
+	-fx-background-color: #2b2b2b;
+	-fx-border-color: white;
+	-fx-border-width: 2;
+	-fx-text-fill: white; 
+}
+.combo-box .list-cell {
+	-fx-background-color: #2b2b2b;
+	-fx-text-fill: white; 
+}
+.combo-box .list-cell:hover {
+	-fx-background-color: -fx-focus-color;
+	-fx-text-fill: black;
+}
+.text-field {
+	-fx-background-color: #2b2b2b;
+	-fx-border-color: white;
+	-fx-border-width: 2;
+	-fx-text-fill: white; 
+}
+.combo-box .arrow, .combo-box .arrow-button{
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+.combo-box .arrow,
+.date-picker .arrow {
+    -fx-background-color: white;
+}
+.date-picker-popup > * > .spinner > .button > .left-arrow,
+.date-picker-popup > * > .spinner > .button > .right-arrow {
+	-fx-background-color: white;
+}
+.date-picker-popup > * > .spinner > .label,
+.date-picker-popup > .month-year-pane > .secondary-label {
+	-fx-background-color: transparent;
+	-fx-text-fill: white;
+}
+
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 0.6;
+}
+
+.label-bright {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-header {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.table-view {
+    -fx-base: #2b2b2b;
+    -fx-control-inner-background: #2b2b2b;
+    -fx-background-color: #2b2b2b;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+        transparent
+        transparent
+        derive(-fx-base, 80%)
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+.table-cell-alert {
+	-fx-background-color: derive(red, 50%);
+}
+.chart {
+    -fx-padding: 10px;
+}
+.chart-content {
+    -fx-padding: 30px;
+}
+.chart-legend {
+   -fx-background-color:  transparent;
+   -fx-padding: 20px;
+}
+ 
+.chart-legend-item-symbol{
+   -fx-background-radius: 0;
+}
+ 
+.chart-legend-item{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+    -fx-font-family: "Segoe UI Semibold";
+}
+.chart-title {
+	-fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+ 
+.axis-label {
+  -fx-font-size: 11pt;
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-text-fill: white;
+  -fx-opacity: 1;
+}
+.chart-legend-item-symbol{
+   -fx-background-radius: 0;
+   -fx-background-color: CHART_COLOR_1;
+}
+.default-color1.chart-legend-item-symbol{
+   -fx-background-radius: 0;
+   -fx-background-color: CHART_COLOR_2;
+}
+.default-color2.chart-legend-item-symbol{
+   -fx-background-radius: 0;
+   -fx-background-color: CHART_COLOR_3;
+}
+.default-color3.chart-legend-item-symbol{
+   -fx-background-radius: 0;
+   -fx-background-color: CHART_COLOR_4;
+}
+.split-pane:horizontal > .split-pane-divider {
+    -fx-border-color: transparent #2b2b2b transparent #2b2b2b;
+    -fx-background-color: transparent, derive(#2b2b2b,20%);
+}
+
+.split-pane {
+    -fx-padding: 1 0 0 0;
+}
+
+.menu-bar {
+    /*-fx-background-color: derive(#2b2b2b,20%);*/
+    -fx-background-color: derive(CHART_COLOR_3,-20%);
+}
+
+.context-menu {
+    /*-fx-background-color: derive(#2b2b2b,50%);*/
+    -fx-background-color: derive(CHART_COLOR_3, 20%);
+}
+
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+}
+
+.menu .left-container {
+    -fx-background-color: black;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+/*
+ * Metro style Push Button
+ * Author: Pedro Duque Vieira
+ * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
+ */
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #2b2b2b;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.button:pressed, .button:default:hover:pressed {
+  -fx-background-color: white;
+  -fx-text-fill: #204705;
+}
+
+.button:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: white;
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}
