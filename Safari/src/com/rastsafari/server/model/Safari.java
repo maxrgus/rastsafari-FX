@@ -184,6 +184,12 @@ public class Safari {
 	public void setAvalibleSlots(ObservableList<Booking> bookings) {
 		this.avalibleSlots.set(this.getMaxParticipants() - bookings.size());
 	}
+	public void setAvalibleSlotsWithInt(int i) {
+		this.avalibleSlots.set(i);
+	}
+	public void setTakenSlotsWithInt(int i) {
+		this.takenSlots.set(i);
+	}
 
 	public void initBookedCustomers() {
 		this.bookedCustomers = FXCollections.observableArrayList();

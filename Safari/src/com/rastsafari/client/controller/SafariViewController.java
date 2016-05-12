@@ -1,5 +1,6 @@
 package com.rastsafari.client.controller;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import com.rastsafari.MainApp;
@@ -162,7 +163,7 @@ public class SafariViewController {
 		boolean okClicked = mainApp.showEditSafariDialog(tempSafari, "Nytt safari");
 		if (okClicked) {
 			tempSafari.setId(storage.generateSafariId());
-			mainApp.getSafariList().add(tempSafari);
+			mainApp.getSafariList().add(tempSafari);			
 			storage.addSafari(tempSafari);
 		}
 	}
