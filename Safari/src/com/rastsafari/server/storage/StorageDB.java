@@ -81,10 +81,10 @@ public class StorageDB implements Storage {
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
-			String sql = "INSERT INTO safari (safariLocationId,date,hour,endHour,minParticipants,maxParticipants,price) "
+			String sql = "INSERT INTO safari (safariLocationId,date,hour,endHour,minParticipants,maxParticipants,price,guideId) "
 					+ "VALUES (" + s.getLocation().getId() + ",'" + s.getDate() + "','" + s.getStartTime() + "','"
 					+ s.getEndTime() + "'," + s.getMinParticipants() + "," + s.getMaxParticipants() + "," + s.getPrice()
-					+ ");";
+					+ ","+s.getGuide().getId()+");";
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -473,7 +473,7 @@ public class StorageDB implements Storage {
 			Statement statement = c.createStatement();
 			String sql = "SELECT safari.id,safariLocation.*,safari.date,safari.hour,safari.endhour,safari.price,guide.* "
 					+ "FROM safari,safariLocation,guide " + "WHERE safariLocation.id == safari.safariLocationId "
-					+ "AND safari.id == guide.id;";
+					+ "AND safari.guideId == guide.id;";
 			ResultSet rs = statement.executeQuery(sql);
 
 			while (rs.next()) {
@@ -737,7 +737,7 @@ public class StorageDB implements Storage {
 		Connection c = sd.createConnection();
 		try {
 			s = c.createStatement();
-			String sql = "SELECT MAX(seq) FROM sqlite_sequence WHERE name == 'safari';";
+			String sql = "SELECT MAX(seq) FROM sqlite_sequence WHERE name == 'Safari';";
 			ResultSet rs = s.executeQuery(sql);
 			id = rs.getInt(1);
 			rs.close();
