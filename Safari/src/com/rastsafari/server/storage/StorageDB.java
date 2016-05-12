@@ -50,9 +50,9 @@ public class StorageDB implements Storage {
 		Connection c = sd.createConnection();
 		try {
 			Statement s = c.createStatement();
-			String sql = "INSERT INTO customer (customerCatID,SSID,givenName,familyName,email" + ",phoneDay,phoneNight)"
-					+ "VALUES (" + customer.getid() + ",'" + customer.getPNumber() + "','" + customer.getFName() + "','"
-					+ customer.getLName() + "','" + customer.getEMail() + "','" + customer.getDNumber() + "','"
+			String sql = "INSERT INTO customer (customerCatID,SSID,givenName,familyName,email,adress" + ",phoneDay,phoneNight)"
+					+ "VALUES (" + customer.getCategory() + ",'" + customer.getPNumber() + "','" + customer.getFName() + "','"
+					+ customer.getLName() + "','" + customer.getEMail() + "','" +customer.getAdress()+"','"+ customer.getDNumber() + "','"
 					+ customer.getNNumber() + "')";
 			s.executeUpdate(sql);
 		} catch (SQLException se) {

@@ -4,6 +4,8 @@ import com.rastsafari.MainApp;
 import com.rastsafari.server.model.Customer;
 import com.rastsafari.server.model.CustomerCategory;
 import com.rastsafari.server.model.Safari;
+import com.rastsafari.server.storage.Storage;
+import com.rastsafari.server.storage.StorageFactory;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -38,6 +40,7 @@ public class EditCustomerDialogController {
 	// Reference owner stage
 	private MainApp mainApp;
 	private Stage customerRegisterStage;
+	private Storage storage = StorageFactory.getStorageDB();
 
 	private Customer customer;
 	private boolean okClicked;
@@ -105,13 +108,16 @@ public class EditCustomerDialogController {
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
+			customer.setId(storage.generateCustomerId());
 			customer.setFName(givenNameField.getText());
 			customer.setLName(familyNameField.getText());
+			customer.setFullName();
 			customer.setPNumber(pNumberField.getText());
 			customer.setEMail(emailField.getText());
 			customer.setAdress(adressField.getText());
 			customer.setDNumber(phoneDayField.getText());
 			customer.setNNumber(phoneNightField.getText());
+			customer.setAllNumber();
 			customer.setCategory(categoryBox.getValue().getId());
 
 			okClicked = true;

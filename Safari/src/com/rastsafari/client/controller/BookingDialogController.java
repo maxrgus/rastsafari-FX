@@ -93,6 +93,7 @@ public class BookingDialogController {
 			booking.setCustomer(customer);
 			if (!customerExists) {
 				storage.addCustomer(customer);
+				mainApp.getCustomerList().add(customer);
 			}
 			okClicked = true;
 			bookingStage.close();
@@ -121,7 +122,6 @@ public class BookingDialogController {
 	private void handleNewCustomer() {
 		this.customer = mainApp.showBookingNewCustomerDialog("Ny kund");
 		if (customer != null) {
-			customer.setId(storage.generateCustomerId());
 			customerField.setText(
 					Integer.toString(customer.getid()) + " " + customer.getFName() + " " + customer.getLName());
 			customerExists = false;

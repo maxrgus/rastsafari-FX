@@ -93,7 +93,7 @@ public class BookingNewCustomerDialogController {
 	private void handleOk() {
 		if (isInputValid()) {
 			customer = new Customer();
-			customer.setId(0);
+			customer.setId(storage.generateCustomerId());
 			customer.setFName(givenNameField.getText());
 			customer.setLName(familyNameField.getText());
 			customer.setPNumber(pNumberField.getText());
