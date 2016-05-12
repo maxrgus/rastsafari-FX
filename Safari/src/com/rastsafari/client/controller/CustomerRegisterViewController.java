@@ -133,10 +133,10 @@ public class CustomerRegisterViewController {
 		Customer tempCustomer = new Customer();
 		boolean okClicked = mainApp.showEditCustomerDialog(tempCustomer, "Ny kund");
 		if (okClicked) {
-//			tempCustomer.setId(storage.generateCustomerId());
+//			
 //			tempCustomer.setAllNumber();
 //			tempCustomer.setFullName();
-			
+			tempCustomer.setId(storage.generateCustomerId());
 			mainApp.getCustomerList().add(tempCustomer);
 			storage.addCustomer(tempCustomer);
 			customerTable.setItems(mainApp.getCustomerList());

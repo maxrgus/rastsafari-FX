@@ -108,7 +108,6 @@ public class EditCustomerDialogController {
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
-			customer.setId(storage.generateCustomerId());
 			customer.setFName(givenNameField.getText());
 			customer.setLName(familyNameField.getText());
 			customer.setFullName();
