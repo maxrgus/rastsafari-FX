@@ -37,6 +37,7 @@ import com.rastsafari.server.storage.Storage;
 import com.rastsafari.server.storage.StorageFactory;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,6 +52,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 public class MainApp extends Application {
 
@@ -82,6 +84,12 @@ public class MainApp extends Application {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Rastsafari");
+		this.primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent event) {
+		        Platform.exit();
+		    }
+		}));
 
 		// Set app icon
 		this.primaryStage.getIcons().add(new Image("file:resources/images/1460788635_fishing.png"));
