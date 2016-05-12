@@ -24,6 +24,8 @@ import com.rastsafari.client.controller.MainFrameController;
 import com.rastsafari.client.controller.RootLayoutController;
 import com.rastsafari.client.controller.SafariLocationViewController;
 import com.rastsafari.client.controller.SafariViewController;
+import com.rastsafari.client.listener.RastsafariListener;
+import com.rastsafari.server.listener.Distributor;
 import com.rastsafari.server.model.Booking;
 import com.rastsafari.server.model.Customer;
 import com.rastsafari.server.model.CustomerCategory;
@@ -115,6 +117,11 @@ public class MainApp extends Application {
 					bookingList.addAll(s.getBookingsFromStorage());
 					LocalDate date = LocalDate.now();
 					upNextSafariList.addAll(s.getUpNextSafariFromStorage(date));
+					// Init a listener and subscribe to the distributor.
+					RastsafariListener listener = new RastsafariListener(MainApp.this);
+					Distributor dist = new Distributor();
+					dist.subscribeToList(listener);
+					
 					Thread.sleep(2500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -520,8 +527,10 @@ public class MainApp extends Application {
 			Scene scene = new Scene(editDialog);
 			editStage.setScene(scene);
 
+			
 			BookingNewCustomerDialogController controller = uiLoader.getController();
 			controller.setMainApp(this);
+			controller.setCategoryBox();
 			controller.setHeaderLabel(label);
 			controller.setStage(editStage);
 			

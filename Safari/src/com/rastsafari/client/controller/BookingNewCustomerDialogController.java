@@ -45,11 +45,13 @@ public class BookingNewCustomerDialogController {
 	private Storage storage = StorageFactory.getStorageDB();
 
 	public BookingNewCustomerDialogController() {
-
 	}
 
 	@FXML
 	private void initialize() {
+
+	}
+	public void setCategoryBox() {
 		categoryBox.getItems().addAll(mainApp.getCategoryList());
 		categoryBox.setConverter(new StringConverter<CustomerCategory>() {
 			@Override
@@ -66,12 +68,6 @@ public class BookingNewCustomerDialogController {
 				return null;
 			}
 		});
-		for (CustomerCategory cc : mainApp.getCategoryList()) {
-			if (customer.getCategory() == cc.getId()) {
-				categoryBox.setValue(cc);
-			}
-		}
-
 	}
 
 	public void setHeaderLabel(String label) {
