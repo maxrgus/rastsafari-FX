@@ -1,7 +1,10 @@
 package com.rastsafari.server.storage;
 
-import com.rastsafari.MainApp;
-
+/**
+ * Storage factory for Rastsafari
+ * @author maxrg
+ *
+ */
 public class StorageFactory {
 	public static Storage getStorageDB() {
 		return new StorageDB();

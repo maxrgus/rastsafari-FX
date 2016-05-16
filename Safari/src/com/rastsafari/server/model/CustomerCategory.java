@@ -6,16 +6,27 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
+/**
+ * CustomerCategory model
+ * @author maxrg
+ *
+ */
 public class CustomerCategory {
 	private IntegerProperty id;
 	private StringProperty categoryName;
 	private DoubleProperty priceIndex;
-
+	/**
+	 * Null constructor
+	 */
 	public CustomerCategory() {
 		this(0, null, 0);
 	}
-
+	/**
+	 * Default contructor
+	 * @param id
+	 * @param categoryName
+	 * @param priceIndex
+	 */
 	public CustomerCategory(int id, String categoryName, double priceIndex) {
 		this.id = new SimpleIntegerProperty(id);
 		this.categoryName = new SimpleStringProperty(categoryName);

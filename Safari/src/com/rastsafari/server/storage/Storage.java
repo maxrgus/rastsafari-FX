@@ -14,6 +14,12 @@ import com.rastsafari.server.model.SafariLocation;
 
 import javafx.collections.ObservableList;
 
+/**
+ * Interface for storage
+ * @author maxrg
+ *
+ */
+
 public interface Storage {
 
 	public void addSafariLocation(SafariLocation location);

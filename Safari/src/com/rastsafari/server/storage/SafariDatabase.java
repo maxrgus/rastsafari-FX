@@ -1,4 +1,4 @@
-package com.rastsafari.server.model;
+package com.rastsafari.server.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,8 +18,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class SafariDatabase {
+/**
+ * Class for connecting to a SQLite database
+ * @author maxrg
+ *
+ */
 
+public class SafariDatabase {
+	/**
+	 * Returns a connection object
+	 * @return
+	 */
 	public Connection createConnection() {
 		Connection localConn = null;
 		try {

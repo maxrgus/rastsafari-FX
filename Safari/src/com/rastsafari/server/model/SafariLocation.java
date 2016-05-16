@@ -24,14 +24,14 @@ public class SafariLocation {
 	private ObservableList<Gear> gearReq;
 
 	/**
-	 * Default constructor
+	 * Null constructor
 	 */
 	public SafariLocation() {
 		this(0, null, null, null, 0, 0, 0,null);
 	}
 
 	/**
-	 * Constructor
+	 * Constructor with gear requirements
 	 * 
 	 * @param id
 	 * @param locationName
@@ -52,6 +52,16 @@ public class SafariLocation {
 		this.isActive = new SimpleIntegerProperty(isActive);
 		this.gearReq = gearReq;
 	}
+	/**
+	 * Default constructor
+	 * @param id
+	 * @param locationName
+	 * @param description
+	 * @param location
+	 * @param minParticipant
+	 * @param maxParticipant
+	 * @param isActive
+	 */
 	public SafariLocation(int id, String locationName, String description, String location, int minParticipant,
 			int maxParticipant, int isActive) {
 		this.id = new SimpleIntegerProperty(id);

@@ -5,6 +5,14 @@ import java.util.ArrayList;
 import com.rastsafari.client.listener.RastsafariListener;
 import com.rastsafari.server.model.SafariLocation;
 
+/**
+ * Server side distributor, should distribute objects to all 
+ * subscribed clients
+ * Not finished.
+ * @author maxrg
+ *
+ */
+
 public class Distributor {
 	// List of client listeners
 	private ArrayList<RastsafariListener> listeners;

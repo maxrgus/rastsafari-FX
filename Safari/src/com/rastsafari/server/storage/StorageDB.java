@@ -15,12 +15,19 @@ import com.rastsafari.server.model.Gear;
 import com.rastsafari.server.model.Guide;
 import com.rastsafari.server.model.GuideSalary;
 import com.rastsafari.server.model.Safari;
-import com.rastsafari.server.model.SafariDatabase;
 import com.rastsafari.server.model.SafariLocation;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Class that implements storage interface
+ * <p>
+ * contains methods for working with a SQLite DB.
+ * 
+ * @author maxrg
+ *
+ */
 public class StorageDB implements Storage {
 	private SafariDatabase sd = new SafariDatabase();
 	

@@ -1,10 +1,22 @@
 package com.rastsafari.server.model;
 
+
+/**
+ * Support model class for generating salary reports
+ * @author maxrg
+ *
+ */
 public class GuideSalary {
 	private String date;
 	private String safari;
 	private int pay;
 	
+	/**
+	 * Default constructor
+	 * @param date
+	 * @param safari
+	 * @param pay
+	 */
 	public GuideSalary(String date,String safari,int pay) {
 		this.date = date;
 		this.safari = safari;

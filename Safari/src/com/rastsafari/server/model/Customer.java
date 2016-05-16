@@ -5,6 +5,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Customer model
+ * @author maxrg
+ *
+ */
+
 public class Customer {
 
 	private IntegerProperty id;
@@ -18,11 +24,25 @@ public class Customer {
 	private StringProperty nNumber;
 	private StringProperty allNumber;
 	private IntegerProperty category;
-
+	
+	/**
+	 * Null constructor
+	 */
 	public Customer() {
 		this(0, null, null, null, null, null, null, null, 0);
 	}
-
+	/**
+	 * Default constructor
+	 * @param id
+	 * @param fName
+	 * @param lName
+	 * @param pNumber
+	 * @param eMail
+	 * @param adress
+	 * @param dNumber
+	 * @param nNumber
+	 * @param category
+	 */
 	public Customer(int id, String fName, String lName, String pNumber, String eMail, String adress, String dNumber, String nNumber,
 			int category) {
 		this.id = new SimpleIntegerProperty(id);

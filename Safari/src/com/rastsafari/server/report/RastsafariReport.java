@@ -17,12 +17,23 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.rastsafari.server.model.Guide;
 import com.rastsafari.server.model.GuideSalary;
 
-
+/**
+ * Class for generating reports with the iText library
+ * @author maxrg
+ *
+ */
 public class RastsafariReport {
 	private static Font catFont = new Font(Font.FontFamily.HELVETICA, 18);
 	private static Font subFont = new Font(Font.FontFamily.HELVETICA, 16);
 	private static Font smallBold = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
 	
+	/**
+	 * Generates a salary report for a guide
+	 * @param path
+	 * @param guide
+	 * @param salaryObjects
+	 * @throws DocumentException
+	 */
 	public void generateSalaryReport(String path,Guide guide,ArrayList<GuideSalary> salaryObjects)
 			throws DocumentException {
 		try {

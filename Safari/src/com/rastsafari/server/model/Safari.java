@@ -9,6 +9,12 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Safari model
+ * @author maxrg
+ *
+ */
+
 public class Safari {
 	private IntegerProperty id;
 	private SafariLocation location;
@@ -23,7 +29,17 @@ public class Safari {
 	private IntegerProperty takenSlots;
 	private IntegerProperty avalibleSlots;
 	private ObservableList<Booking> bookedCustomers;
-
+	
+	/**
+	 * Default constructor
+	 * @param id
+	 * @param location
+	 * @param date
+	 * @param startTime
+	 * @param endTime
+	 * @param price
+	 * @param guide
+	 */
 	public Safari(int id, SafariLocation location, String date, String startTime, String endTime, int price,
 			Guide guide) {
 		this.id = new SimpleIntegerProperty(id);
@@ -47,7 +63,9 @@ public class Safari {
 		}
 
 	}
-
+	/**
+	 * Null constructor
+	 */
 	public Safari() {
 		this(0, null, null, null, null, 0, null);
 	}
@@ -190,7 +208,9 @@ public class Safari {
 	public void setTakenSlotsWithInt(int i) {
 		this.takenSlots.set(i);
 	}
-
+	/**
+	 * Inits the bookedcustomers list for a new safari or a safari without bookings.
+	 */
 	public void initBookedCustomers() {
 		this.bookedCustomers = FXCollections.observableArrayList();
 	}

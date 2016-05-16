@@ -16,6 +16,12 @@ import com.rastsafari.server.model.Safari;
 
 import javax.mail.PasswordAuthentication;
 
+/**
+ * Class for sending emails with the application
+ * @author maxrg
+ *
+ */
+
 public class RastsafariMail {
 	private String fromEmail = "rastsafari.gu@gmail.com";
 	
@@ -26,7 +32,10 @@ public class RastsafariMail {
 	private Session session;
 
 	
-	
+	/**
+	 * Constructor for rastsafari.
+	 * Puts settings for mailserver
+	 */
 	public RastsafariMail() {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -40,6 +49,10 @@ public class RastsafariMail {
 					}
 				  });
 	}
+	/**
+	 * Sends a briefing to the guide for the chosen safari.
+	 * @param safari
+	 */
 	public void sendGuideBriefing(Safari safari) {
 		String locationName = safari.getLocation().getLocationName();
 		String description = safari.getLocation().getDescription();
@@ -90,6 +103,10 @@ public class RastsafariMail {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Sends a booking confirmation to the customer
+	 * @param booking
+	 */
 	public void sendBookingConfirmation(Booking booking) {
 		String locationName = booking.getSafari().getLocation().getLocationName();
 		String description = booking.getSafari().getLocation().getDescription();

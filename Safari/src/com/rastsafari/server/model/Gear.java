@@ -5,17 +5,31 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Gear model
+ * @author maxrg
+ *
+ */
+
 public class Gear {
 
 	private IntegerProperty id;
 	private StringProperty gearName;
 	private StringProperty description;
 	private IntegerProperty inStock;
-
+	/**
+	 * Null constructor
+	 */
 	public Gear() {
 		this(0, null, null, 0);
 	}
-
+	/**
+	 * Default constructor
+	 * @param id
+	 * @param gearName
+	 * @param description
+	 * @param inStock
+	 */
 	public Gear(int id, String gearName, String description, int inStock) {
 		this.id = new SimpleIntegerProperty(id);
 		this.gearName = new SimpleStringProperty(gearName);
