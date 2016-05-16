@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import com.rastsafari.MainApp;
 import com.rastsafari.server.model.Booking;
 import com.rastsafari.server.model.Customer;
 import com.rastsafari.server.model.CustomerCategory;
@@ -21,10 +22,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class StorageDB implements Storage {
+	private SafariDatabase sd = new SafariDatabase();
+	
 
 	@Override
 	public void addSafariLocation(SafariLocation location) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement s = c.createStatement();
@@ -46,7 +49,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void addCustomer(Customer customer) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement s = c.createStatement();
@@ -62,7 +65,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void addCustomerCategory(CustomerCategory category) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement s = c.createStatement();
@@ -77,7 +80,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void addSafari(Safari s) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -93,7 +96,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void addGuide(Guide g) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -107,7 +110,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void addBooking(Booking b) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -121,7 +124,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void addGear(Gear g) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -136,7 +139,7 @@ public class StorageDB implements Storage {
 	}
 	@Override
 	public void addGearReq(Gear g,SafariLocation sl) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -149,7 +152,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void updateSafariLocation(SafariLocation location) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement s = c.createStatement();
@@ -168,7 +171,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void updateCustomer(Customer customer) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement s = c.createStatement();
@@ -186,7 +189,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void updateCustomerCategory(CustomerCategory category) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement s = c.createStatement();
@@ -200,7 +203,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void updateSafari(Safari s) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -216,7 +219,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void updateGuide(Guide g) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -230,7 +233,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void updateBooking(Booking b) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -245,7 +248,7 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void updateGear(Gear g) {
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -262,7 +265,7 @@ public class StorageDB implements Storage {
 	@Override
 	public void removeSafariLocation(SafariLocation location) {
 		String idNr = Integer.toString(location.getId());
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement s = c.createStatement();
@@ -280,7 +283,7 @@ public class StorageDB implements Storage {
 	@Override
 	public void removeCustomer(Customer customer) {
 		int id = customer.getid();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement s = c.createStatement();
@@ -294,7 +297,7 @@ public class StorageDB implements Storage {
 	@Override
 	public void removeCustomerCategory(CustomerCategory category) {
 		String idNr = Integer.toString(category.getId());
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement s = c.createStatement();
@@ -308,7 +311,7 @@ public class StorageDB implements Storage {
 	@Override
 	public void removeSafari(Safari s) {
 		int id = s.getId();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -323,7 +326,7 @@ public class StorageDB implements Storage {
 	@Override
 	public void removeGuide(Guide g) {
 		int id = g.getId();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -337,7 +340,7 @@ public class StorageDB implements Storage {
 	@Override
 	public void removeBooking(Booking b) {
 		int id = b.getId();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -351,7 +354,7 @@ public class StorageDB implements Storage {
 	@Override
 	public void removeGear(Gear g) {
 		int id = g.getId();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -367,7 +370,7 @@ public class StorageDB implements Storage {
 	public void removeGearReq(Gear g, SafariLocation sl) {
 		int gid = g.getId();
 		int sid = sl.getId();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -383,7 +386,7 @@ public class StorageDB implements Storage {
 		ObservableList<SafariLocation> locations = FXCollections.observableArrayList();
 		ObservableList<Gear> gearReq;
 		String sqlGear;
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement statement = c.createStatement();
@@ -422,7 +425,7 @@ public class StorageDB implements Storage {
 	@Override
 	public ObservableList<Customer> getCustomersFromStorage() {
 		ObservableList<Customer> customers = FXCollections.observableArrayList();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 
 		try {
@@ -446,7 +449,7 @@ public class StorageDB implements Storage {
 	@Override
 	public ObservableList<Gear> getGearFromStorage() {
 		ObservableList<Gear> gearList = FXCollections.observableArrayList();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 
 		try {
@@ -467,7 +470,7 @@ public class StorageDB implements Storage {
 	@Override
 	public ObservableList<Safari> getSafarisFromStorage() {
 		ObservableList<Safari> safaris = FXCollections.observableArrayList();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement statement = c.createStatement();
@@ -494,7 +497,7 @@ public class StorageDB implements Storage {
 	@Override
 	public ObservableList<Safari> getUpNextSafariFromStorage(LocalDate date) {
 		ObservableList<Safari> upNextSafariList = FXCollections.observableArrayList();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		LocalDate twoWeeks = date.plusDays(14);
 		try {
@@ -521,7 +524,7 @@ public class StorageDB implements Storage {
 	@Override
 	public ObservableList<Booking> getBookingsFromStorage() {
 		ObservableList<Booking> bookings = FXCollections.observableArrayList();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 
 		try {
@@ -555,7 +558,7 @@ public class StorageDB implements Storage {
 	@Override
 	public ObservableList<CustomerCategory> getCategoriesFromStorage() {
 		ObservableList<CustomerCategory> categories = FXCollections.observableArrayList();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 
 		try {
@@ -578,7 +581,7 @@ public class StorageDB implements Storage {
 	@Override
 	public ObservableList<Guide> getGuidesFromStorage() {
 		ObservableList<Guide> guides = FXCollections.observableArrayList();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -599,7 +602,7 @@ public class StorageDB implements Storage {
 	@Override
 	public ObservableList<Booking> getSafariBookingsFromStorage(int safariId) {
 		ObservableList<Booking> safariBookings = FXCollections.observableArrayList();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -631,7 +634,7 @@ public class StorageDB implements Storage {
 	@Override
 	public ArrayList<GuideSalary> getGuideSalaryFromStorage(int id,String startDate,String endDate) {
 		ArrayList<GuideSalary> salaryObjects = new ArrayList<GuideSalary>();
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
@@ -657,7 +660,7 @@ public class StorageDB implements Storage {
 	public int generateBookingId() {
 		int id = 0;
 		Statement s = null;
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			s = c.createStatement();
@@ -676,7 +679,7 @@ public class StorageDB implements Storage {
 	public int generateCategoryId() {
 		int id = 0;
 		Statement s = null;
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			s = c.createStatement();
@@ -695,7 +698,7 @@ public class StorageDB implements Storage {
 	public int generateCustomerId() {
 		int id = 0;
 		Statement s = null;
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			s = c.createStatement();
@@ -714,7 +717,7 @@ public class StorageDB implements Storage {
 	public int generateLocationId() {
 		int id = 0;
 		Statement s = null;
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			s = c.createStatement();
@@ -733,7 +736,7 @@ public class StorageDB implements Storage {
 	public int generateSafariId() {
 		int id = 0;
 		Statement s = null;
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			s = c.createStatement();
@@ -752,7 +755,7 @@ public class StorageDB implements Storage {
 	public int generateGearId() {
 		int id = 0;
 		Statement s = null;
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			s = c.createStatement();
@@ -770,7 +773,7 @@ public class StorageDB implements Storage {
 	@Override
 	public int generateGuideId() {
 		int id = 0;
-		SafariDatabase sd = new SafariDatabase();
+		
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();

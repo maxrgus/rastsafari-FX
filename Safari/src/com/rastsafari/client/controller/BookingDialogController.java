@@ -14,6 +14,17 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+/**
+ * Controller for the Booking dialog. 
+ * <p>
+ * It is either for creating a new booking
+ * or editing an existing one
+ * <p>
+ * FXML : BookingDialogView.fxml
+ * @author Team14
+ *
+ */
+
 public class BookingDialogController {
 	@FXML
 	private Label headerLabel;
@@ -25,6 +36,7 @@ public class BookingDialogController {
 	// Reference main app and stage
 	private MainApp mainApp;
 	private Stage bookingStage;
+	
 	private Storage storage = StorageFactory.getStorageDB();
 
 	private Booking booking;
@@ -40,7 +52,11 @@ public class BookingDialogController {
 	private void initialize() {
 
 	}
-
+	/**
+	 * Sets the fields to the provided booking
+	 * if new, sets to null.
+	 * @param booking
+	 */
 	public void setBooking(Booking booking) {
 		this.booking = booking;
 		this.customer = booking.getCustomer();
@@ -69,23 +85,37 @@ public class BookingDialogController {
 		}
 
 	}
-
+	/**
+	 * Sets the stage for ownership
+	 * @param bookingStage
+	 */
 	public void setStage(Stage bookingStage) {
 		this.bookingStage = bookingStage;
 	}
-
+	/**
+	 * Sets the Main app for reference
+	 * @param mainApp
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-
+	/**
+	 * Sets the headerlabel, new or edit.
+	 * @param label
+	 */
 	public void setHeaderLabel(String label) {
 		headerLabel.setText(label);
 	}
-
+	/**
+	 * Returns true if user clicked "OK"
+	 * @return
+	 */
 	public boolean isOkClicked() {
 		return okClicked;
 	}
-
+	/**
+	 * Handle if users clicks ok. 
+	 */
 	@FXML
 	private void handleOk() {
 		if (safariBox.getValue() != null && customer != null) {
@@ -102,12 +132,16 @@ public class BookingDialogController {
 		}
 
 	}
-
+	/**
+	 * Handle if user clicks cancel
+	 */
 	@FXML
 	private void handleCancel() {
 		bookingStage.close();
 	}
-
+	/**
+	 * Handle the if the users wants to search for a customer.
+	 */
 	@FXML
 	private void handleSearchCustomer() {
 		this.customer = mainApp.showCustomerChooserDialog();
@@ -117,7 +151,9 @@ public class BookingDialogController {
 			customerExists = true;
 		}
 	}
-
+	/**
+	 * Handle if the users wants to add a new customer
+	 */
 	@FXML
 	private void handleNewCustomer() {
 		this.customer = mainApp.showBookingNewCustomerDialog("Ny kund");

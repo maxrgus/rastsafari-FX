@@ -1,6 +1,7 @@
 package com.rastsafari;
 
 import java.io.IOException;
+
 import java.time.LocalDate;
 
 import com.rastsafari.client.controller.BookingDialogController;
@@ -54,6 +55,16 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
+
+
+/**
+ * Main class in Rastsafari.
+ * Methods to start application and show the different
+ * stages are stored here.
+ * Lists of elements used in the application are stored here.
+ * @author Team14
+ *
+ */
 public class MainApp extends Application {
 
 	private Stage primaryStage;
@@ -79,7 +90,10 @@ public class MainApp extends Application {
 	private ObservableList<Safari> upNextSafariList = FXCollections.observableArrayList((Safari p) -> new Observable[]{p.getTakenSlotsProperty()});
 	private ObservableList<Booking> bookingList = FXCollections.observableArrayList();
 	private ObservableList<Guide> guideList = FXCollections.observableArrayList();
-
+	/**
+	 * Starts the application
+	 * @param primaryStage
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -87,7 +101,7 @@ public class MainApp extends Application {
 		this.primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
 		    @Override
 		    public void handle(WindowEvent event) {
-		        Platform.exit();
+		        Platform.exit(); // Closes the app if mainframe is closed.
 		    }
 		}));
 
@@ -99,7 +113,10 @@ public class MainApp extends Application {
 		showMainFrame();
 
 	}
-
+	/**
+	 * Runs the startup code, fills the lists from storage
+	 * 
+	 */
 	private void initSystem() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -111,6 +128,7 @@ public class MainApp extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// Fill the lists from storage on a separate thread.
 		Task<Void> sleeper = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
@@ -130,7 +148,7 @@ public class MainApp extends Application {
 					Distributor dist = new Distributor();
 					dist.subscribeToList(listener);
 					
-					Thread.sleep(2500);
+					Thread.sleep(2500); // For a visual effect. Not needed now, but with a larger database.
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -195,7 +213,9 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Show the frame for Safari locations.
+	 */
 	public void showSafariLocationView() {
 		try {
 			// Load SafariLocationView.fxml
@@ -222,7 +242,9 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	/*
+	 * Show the frame for Bookings.
+	 */
 	public void showBookingView() {
 		try {
 			// Load BookingView.fxml
@@ -249,7 +271,10 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Show the frame with map view of location
+	 * @param location
+	 */
 	public void showLocationMapDialog(String location) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -273,7 +298,11 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Show frame to edit a Safari Location.
+	 * @param location
+	 * @return boolean
+	 */
 	public boolean showLocationEditDialog(SafariLocation location) {
 		try {
 			// Load LocationEditDialogController.fxml
@@ -305,7 +334,12 @@ public class MainApp extends Application {
 			return false;
 		}
 	}
-
+	/**
+	 * Show the dialog to edit a Booking
+	 * @param booking
+	 * @param label
+	 * @return boolean
+	 */
 	public boolean showEditBookingDialog(Booking booking, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -335,7 +369,9 @@ public class MainApp extends Application {
 			return false;
 		}
 	}
-
+	/**
+	 * Show the frame for Customer Categories
+	 */
 	public void showCustomerCategoryView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -359,7 +395,9 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Show the frame for Guides
+	 */
 	public void showGuideView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -383,7 +421,11 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Show the dialog to edit a Customer Category
+	 * @param category
+	 * @return boolean
+	 */
 	public boolean showCategoryEditDialog(CustomerCategory category) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -412,7 +454,9 @@ public class MainApp extends Application {
 		}
 
 	}
-
+	/**
+	 * Show the frame for the Customer Register
+	 */
 	public void showCustomerRegisterView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -434,7 +478,10 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Show the dialog for choosing a customer for a booking.
+	 * @return Customer
+	 */
 	public Customer showCustomerChooserDialog() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -463,6 +510,10 @@ public class MainApp extends Application {
 			return null;
 		}
 	}
+	/**
+	 * Show the dialog to choose Gear in Safari Location
+	 * @return Gear
+	 */
 	public Gear showGearChooserDialog() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -493,7 +544,12 @@ public class MainApp extends Application {
 			return null;
 		}
 	}
-
+	/**
+	 * Show dialog to edit a Customer
+	 * @param customer
+	 * @param editOrNew
+	 * @return boolean
+	 */
 	public boolean showEditCustomerDialog(Customer customer, String editOrNew) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -521,7 +577,11 @@ public class MainApp extends Application {
 			return false;
 		}
 	}
-
+	/**
+	 * Show new Customer dialog within a new Booking
+	 * @param label
+	 * @return Customer
+	 */
 	public Customer showBookingNewCustomerDialog(String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -556,7 +616,12 @@ public class MainApp extends Application {
 			return null;
 		}
 	}
-
+	/**
+	 * Show dialog to edit a Safari
+	 * @param safari
+	 * @param label
+	 * @return boolean
+	 */
 	public boolean showEditSafariDialog(Safari safari, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -587,7 +652,12 @@ public class MainApp extends Application {
 		}
 
 	}
-
+	/**
+	 * Show dialog to edit Gear
+	 * @param gear
+	 * @param editOrNew
+	 * @return boolean
+	 */
 	public boolean showEditGearDialog(Gear gear, String editOrNew) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -615,7 +685,12 @@ public class MainApp extends Application {
 			return false;
 		}
 	}
-
+	/**
+	 * Show dialog to edit a Guide
+	 * @param guide
+	 * @param label
+	 * @return boolean
+	 */
 	public boolean showEditGuideDialog(Guide guide, String label) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -644,7 +719,9 @@ public class MainApp extends Application {
 			return false;
 		}
 	}
-
+	/**
+	 * Show frame to generate a report
+	 */
 	public void showGenereateReportView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -670,7 +747,9 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Show frame of Gear
+	 */
 	public void showGearListView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -694,7 +773,9 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Show frame with Safari
+	 */
 	public void showSafariView() {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
@@ -719,7 +800,7 @@ public class MainApp extends Application {
 		}
 	}
 
-	/*
+	/**
 	 * Returns the main stage.
 	 * 
 	 * @return
@@ -727,63 +808,109 @@ public class MainApp extends Application {
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
-
+	/**
+	 * Returns customerRegister stage
+	 * @return
+	 */
 	public Stage getCustomerRegisterStage() {
 		return customerRegisterStage;
 	}
-
+	/**
+	 * Returns safariViewStage
+	 * @return
+	 */
 	public Stage getSafariViewStage() {
 		return safariStage;
 	}
-
+	/**
+	 * Returns gearStage
+	 * @return
+	 */
 	public Stage getGearStage() {
 		return gearStage;
 	}
-
+	/**
+	 * Returns guideStage
+	 * @return
+	 */
 	public Stage getGuideStage() {
 		return guideStage;
 	}
-
+	/**
+	 * Returns bookingStage
+	 * @return
+	 */
 	public Stage getBookingStage() {
 		return editBookingStage;
 	}
-	
+	/**
+	 * Returns the mainFrame controller
+	 * @return
+	 */
 	public MainFrameController getMainFrameController() {
 		return mainController;
 	}
-
+	/**
+	 * Returns customerList
+	 * @return
+	 */
 	public ObservableList<Customer> getCustomerList() {
 		return customerList;
 	}
-
+	/**
+	 * Returns categoryList
+	 * @return
+	 */
 	public ObservableList<CustomerCategory> getCategoryList() {
 		return categoryList;
 	}
-
+	/**
+	 * Returns locationList
+	 * @return
+	 */
 	public ObservableList<SafariLocation> getLocationList() {
 		return locationList;
 	}
-
+	/**
+	 * Returns gearList
+	 * @return
+	 */
 	public ObservableList<Gear> getGearList() {
 		return gearList;
 	}
-
+	/**
+	 * Returns safariList
+	 * @return
+	 */
 	public ObservableList<Safari> getSafariList() {
 		return safariList;
 	}
-
+	/**
+	 * Returns the list of safaris in the coming 2 weeks.
+	 * @return
+	 */
 	public ObservableList<Safari> getUpNextSafariList() {
 		return upNextSafariList;
 	}
-
+	/**
+	 * Returns bookingList
+	 * @return
+	 */
 	public ObservableList<Booking> getBookingList() {
 		return bookingList;
 	}
-
+	/**
+	 * Returns guideList
+	 * @return
+	 */
 	public ObservableList<Guide> getGuideList() {
 		return guideList;
 	}
-
+	/**
+	 * Main method.
+	 * Runs method launch.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

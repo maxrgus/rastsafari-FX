@@ -15,6 +15,14 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+/**
+ * Controller for when user wants to add a new customer
+ * <p>
+ * from within the booking stage
+ * @author Team14
+ *
+ */
+
 public class BookingNewCustomerDialogController {
 
 	@FXML
@@ -39,7 +47,9 @@ public class BookingNewCustomerDialogController {
 	// Reference owner stage
 	private Stage customerRegisterStage;
 	
+	// Reference mainapp
 	private MainApp mainApp;
+	
 	private Customer customer;
 	private boolean okClicked;
 	private Storage storage = StorageFactory.getStorageDB();
@@ -51,6 +61,9 @@ public class BookingNewCustomerDialogController {
 	private void initialize() {
 
 	}
+	/**
+	 * Sets the combobox of categories.
+	 */
 	public void setCategoryBox() {
 		categoryBox.getItems().addAll(mainApp.getCategoryList());
 		categoryBox.setConverter(new StringConverter<CustomerCategory>() {
@@ -69,26 +82,44 @@ public class BookingNewCustomerDialogController {
 			}
 		});
 	}
-
+	/**
+	 * Sets header label.
+	 * @param label
+	 */
 	public void setHeaderLabel(String label) {
 		headerLabel.setText(label);
 	}
+	/**
+	 * Sets Main App for reference
+	 * @param mainApp
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-
+	/**
+	 * Returns if the user clicked "OK"
+	 * @return
+	 */
 	public boolean isOkClicked() {
 		return okClicked;
 	}
-
+	/**
+	 * Returns the customer
+	 * @return
+	 */
 	public Customer getCustomer() {
 		return customer;
 	}
-
+	/**
+	 * Sets the stage for ownership
+	 * @param customerRegisterStage
+	 */
 	public void setStage(Stage customerRegisterStage) {
 		this.customerRegisterStage = customerRegisterStage;
 	}
-
+	/**
+	 * Handles OK button
+	 */
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
@@ -109,12 +140,18 @@ public class BookingNewCustomerDialogController {
 
 		}
 	}
-
+	/**
+	 * Handles the cancel button
+	 */
 	@FXML
 	private void handleCancel() {
 		customerRegisterStage.close();
 	}
-
+	/**
+	 * Check if the input is valid, return true if it is.
+	 * Else show error message
+	 * @return
+	 */
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (givenNameField.getText() == null || givenNameField.getText().length() == 0) {

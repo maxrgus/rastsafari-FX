@@ -71,8 +71,18 @@ public class GenerateReportViewController {
 
 	@FXML
 	public void handleGenerate() {
-		ArrayList<GuideSalary> salaryObjects = storage.getGuideSalaryFromStorage(2, startDate.getValue().toString(), endDate.getValue().toString());
-		Guide tempGuide = guideBox.getValue();
+		ArrayList<GuideSalary> salaryObjects = null;
+		Guide tempGuide = null;
+		try {
+			salaryObjects = storage.getGuideSalaryFromStorage(guideBox.getValue().getId(), startDate.getValue().toString(), endDate.getValue().toString());
+			tempGuide = guideBox.getValue();
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(primaryStage);
+			alert.setHeaderText("Ogiltlig förfrågan");
+			alert.setContentText("Allt är inte ifyllt");
+			alert.showAndWait();
+		}
 		fileChooser = new FileChooser();
 		fileChooser.setTitle("Spara rapport");
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));

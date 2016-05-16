@@ -131,6 +131,8 @@ public class EditCustomerDialogController {
 
 	private boolean isInputValid() {
 		String errorMessage = "";
+		boolean emailFilled = true;
+		boolean emailMatch = true;
 		if (givenNameField.getText() == null || givenNameField.getText().length() == 0) {
 			errorMessage += "F�rnamn �r inte ifyllt!\n";
 		}
@@ -145,9 +147,12 @@ public class EditCustomerDialogController {
 		}
 		if (emailField.getText() == null || emailField.getText().length() == 0) {
 			errorMessage += "Email �r inte ifyllt!\n";
+			emailFilled = false;
 		}
 		String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\" + "@([\\w]+\\.)+[\\w]+[\\w]$";
-		boolean emailMatch = emailField.getText().matches(EMAIL_REGEX);
+		if (emailFilled) {
+			emailMatch = emailField.getText().matches(EMAIL_REGEX);
+		}
 		if (!emailMatch) {
 			errorMessage += "Email �r inte i r�tt format";
 		}

@@ -2,6 +2,7 @@ package com.rastsafari.client.controller;
 
 import java.util.Optional;
 
+
 import com.rastsafari.MainApp;
 import com.rastsafari.server.mail.RastsafariMail;
 import com.rastsafari.server.model.Booking;
@@ -16,6 +17,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+
+/**
+ * Controller for 
+ * @author Team14
+ *
+ */
 
 public class BookingViewController {
 	@FXML
