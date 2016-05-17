@@ -19,7 +19,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 /**
- * Controller for 
+ * Controller for Booking view.
+ * <p>
+ * Its either for creating a new bookig, editing or deleting
+ * <p>
  * @author Team14
  *
  */
@@ -55,7 +58,11 @@ public class BookingViewController {
 		dateColumn.setCellValueFactory(cellData -> cellData.getValue().getSafari().getDateProperty());
 
 	}
-
+/**
+ * Sets stage, mainapp and the table items
+ * @param bookingStage
+ * @param mainApp
+ */
 	public void setBookingStage(Stage bookingStage, MainApp mainApp) {
 		this.bookingStage = bookingStage;
 		this.mainApp = mainApp;
@@ -63,6 +70,9 @@ public class BookingViewController {
 
 	}
 
+/**
+ * Handles the editing of booking. If no booking is marked then ask user to choose
+ */
 	@FXML
 	private void handleEditBooking() {
 		Booking selectedBooking = bookingTable.getSelectionModel().getSelectedItem();
@@ -83,6 +93,10 @@ public class BookingViewController {
 			alert.showAndWait();
 		}
 	}
+	
+	/**
+	 * Handle new booking button
+	 */
 
 	@FXML
 	private void handleNewBooking() {
@@ -102,6 +116,10 @@ public class BookingViewController {
 			}
 		}
 	}
+	
+	/**
+	 * Handles delete button
+	 */
 
 	@FXML
 	private void handleDeleteBooking() {
@@ -134,6 +152,9 @@ public class BookingViewController {
 		}
 	}
 
+	/**
+	 *Closing booking stage
+	 */
 	@FXML
 	private void handleDispose() {
 		bookingStage.close();

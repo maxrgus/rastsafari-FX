@@ -19,6 +19,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
+/**
+ * 
+ * @author Team14
+ * <p>
+ * View for Customer registration
+ * <p>
+ * 
+ * 
+ */
 public class CustomerRegisterViewController {
 	@FXML
 	private TableView<Customer> customerTable;
@@ -68,6 +77,9 @@ public class CustomerRegisterViewController {
 		customerList.addAll(mainApp.getCustomerList());
 		customerTable.setItems(customerList);
 	}
+	/**
+	 * Handles searchbar
+	 */
 
 	@FXML
 	private void handleSearch() {
@@ -107,7 +119,9 @@ public class CustomerRegisterViewController {
 
 		customerTable.setItems(customersSorted);
 	}
-
+/**
+ * Handles edit customer. If no customer chosen. Alert
+ */
 	@FXML
 	private void handleEditCustomer() {
 		Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
@@ -127,7 +141,9 @@ public class CustomerRegisterViewController {
 			alert.showAndWait();
 		}
 	}
-
+/**
+ * Handles new customer 
+ */
 	@FXML
 	private void handleNewCustomer() {
 		Customer tempCustomer = new Customer();
@@ -143,6 +159,9 @@ public class CustomerRegisterViewController {
 		}
 	}
 
+	/**
+	 * Handles delete customer. If no customer chosen. Alert
+	 */
 	@FXML
 	private void handleDeleteCustomer() {
 		int selectedIndex = customerTable.getSelectionModel().getSelectedIndex();

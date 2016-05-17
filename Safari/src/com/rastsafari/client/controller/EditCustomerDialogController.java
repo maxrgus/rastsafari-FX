@@ -15,7 +15,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-
+/**
+ * Controller for editing customer
+ * <p>
+ *  
+ * @author Team14
+ * 
+ *
+ */
 public class EditCustomerDialogController {
 
 	@FXML
@@ -128,6 +135,12 @@ public class EditCustomerDialogController {
 	private void handleCancel() {
 		customerRegisterStage.close();
 	}
+	
+	/**
+	 * Method if the user has not filled in input. Errormessage appears. 
+	 * @return
+	 */
+	
 
 	private boolean isInputValid() {
 		String errorMessage = "";
@@ -143,7 +156,7 @@ public class EditCustomerDialogController {
 			errorMessage += "Personnummer ï¿½r inte ifyllt!\n";
 		}
 		if (adressField.getText() == null || adressField.getText().length() == 0) {
-			errorMessage += "Adress är inte ifyllt\n";
+			errorMessage += "Adress ï¿½r inte ifyllt\n";
 		}
 		if (emailField.getText() == null || emailField.getText().length() == 0) {
 			errorMessage += "Email ï¿½r inte ifyllt!\n";

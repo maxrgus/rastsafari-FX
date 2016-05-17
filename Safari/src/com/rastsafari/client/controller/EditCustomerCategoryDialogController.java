@@ -10,6 +10,16 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Controller for editing customer category
+ * <p>
+ * 
+ * @author Team14
+ *
+ *
+ *
+ */
+
 public class EditCustomerCategoryDialogController {
 	@FXML
 	private TextField categoryNameField;
@@ -57,7 +67,11 @@ public class EditCustomerCategoryDialogController {
 	private void handleCancel() {
 		categoryStage.close();
 	}
-
+/**
+ * 
+ * Method if the input is valid. If everyting is not filled, errormessage appears. 
+ * @return
+ */
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (categoryNameField.getText() == null || categoryNameField.getText().length() == 0) {

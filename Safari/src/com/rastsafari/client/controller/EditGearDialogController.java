@@ -13,6 +13,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+/**
+ * Controller for editing gear
+ * <p>
+ * 
+ * @author Team14
+ * 
+ * 
+ * 
+ *
+ */
 public class EditGearDialogController {
 	@FXML
 	private Label headerLabel;
@@ -84,6 +94,10 @@ public class EditGearDialogController {
 		gearStage.close();
 	}
 
+	/**
+	 * Method if the user has inputed correctly, if not errormessage appears.
+	 * @return
+	 */
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (nameField.getText() == null || nameField.getText().length() == 0) {

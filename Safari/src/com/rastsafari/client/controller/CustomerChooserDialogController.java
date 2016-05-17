@@ -13,6 +13,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+ * 
+ * @author Team14
+ * <p>
+ * Dialog for choosing customer controller
+ * <p>
+ */
 public class CustomerChooserDialogController {
 	@FXML
 	private TableView<Customer> customerTable;
@@ -68,6 +75,10 @@ public class CustomerChooserDialogController {
 	public boolean isOkClicked() {
 		return okClicked;
 	}
+	
+	/**
+	 * Handles ok button. If customer no choosen. Alert
+	 */
 
 	@FXML
 	private void handleOk() {
@@ -86,7 +97,9 @@ public class CustomerChooserDialogController {
 			alert.showAndWait();
 		}
 	}
-
+/**
+ * Handles searchbar
+ */
 	@FXML
 	private void handleSearch() {
 		// Wrap in a filtered list for filtering.

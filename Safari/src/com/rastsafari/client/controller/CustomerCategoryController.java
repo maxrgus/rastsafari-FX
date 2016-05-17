@@ -14,6 +14,16 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+/**
+ * Controller for Customer Category
+ * <p>
+ * 
+ * @author Team14
+ * 
+ * 
+ *<p>
+ */
+
 public class CustomerCategoryController {
 	@FXML
 	private TableView<CustomerCategory> categoryTable;
@@ -44,7 +54,9 @@ public class CustomerCategoryController {
 		this.mainApp = mainApp;
 		categoryTable.setItems(mainApp.getCategoryList());
 	}
-
+/**
+ * Handles editting customer category. If no customer selected, Alert
+ */
 	@FXML
 	private void handleEditCategory() {
 		CustomerCategory selectedCategory = categoryTable.getSelectionModel().getSelectedItem();
@@ -62,6 +74,10 @@ public class CustomerCategoryController {
 		}
 	}
 
+	/**
+	 * Handles new customer category
+	 */
+	
 	@FXML
 	private void handleNewCategory() {
 		CustomerCategory tempCategory = new CustomerCategory();
@@ -74,6 +90,9 @@ public class CustomerCategoryController {
 		}
 	}
 
+	/**
+	 * Handles deleting customer category. If customer not chosen, Alert
+	 */
 	@FXML
 	private void handleDeleteCategory() {
 		int selectedIndex = categoryTable.getSelectionModel().getSelectedIndex();
