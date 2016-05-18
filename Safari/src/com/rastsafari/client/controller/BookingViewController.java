@@ -88,7 +88,7 @@ public class BookingViewController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setHeaderText("Inget markerat");
-			alert.setContentText("V√§nligen v√§lj en bokning som ska redigeras");
+			alert.setContentText("V‰nligen v‰lj en bokning som ska redigeras");
 
 			alert.showAndWait();
 		}
@@ -127,8 +127,8 @@ public class BookingViewController {
 		Booking booking = bookingTable.getSelectionModel().getSelectedItem();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekr√§fta");
-			alert.setHeaderText("Bekr√§fta borttagning");
+			alert.setTitle("Bekr‰fta");
+			alert.setHeaderText("Bekr‰fta borttagning");
 			alert.setContentText("Vill du verkligen ta bort bokningen");
 
 			Optional<ButtonType> result = alert.showAndWait();
@@ -146,7 +146,7 @@ public class BookingViewController {
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Inget safari markerad");
-			alert.setContentText("V√§nligen markera ett safari som du vill radera");
+			alert.setContentText("V‰nligen markera ett safari som du vill radera");
 
 			alert.showAndWait();
 		}

@@ -75,10 +75,10 @@ public class EditCustomerCategoryDialogController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (categoryNameField.getText() == null || categoryNameField.getText().length() == 0) {
-			errorMessage += "Kategori √§r inte ifyllt!\n";
+			errorMessage += "Kategori ‰r inte ifyllt!\n";
 		} // Validering f√∂r siffra m√•ste till√§ggas
 		if (priceIndexField.getText() == null || priceIndexField.getText().length() == 0) {
-			errorMessage += "PrisIndex √§r inte ifyllt!\n";
+			errorMessage += "PrisIndex ‰r inte ifyllt!\n";
 		}
 
 		if (errorMessage.length() == 0) {
@@ -87,7 +87,7 @@ public class EditCustomerCategoryDialogController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(categoryStage);
 			alert.setTitle("Felaktig inmatning");
-			alert.setHeaderText("V√§nligen fyll i f√§lten");
+			alert.setHeaderText("V‰nligen fyll i f‰lten");
 			alert.setContentText(errorMessage);
 
 			alert.showAndWait();

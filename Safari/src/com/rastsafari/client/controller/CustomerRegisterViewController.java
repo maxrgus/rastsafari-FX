@@ -136,7 +136,7 @@ public class CustomerRegisterViewController {
 			alert.initOwner(mainApp.getCustomerRegisterStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen kund markerad");
-			alert.setContentText("Vï¿½nligen vï¿½lj en kund som ska redigeras");
+			alert.setContentText("Vänligen välj en kund som ska redigeras");
 
 			alert.showAndWait();
 		}
@@ -168,8 +168,8 @@ public class CustomerRegisterViewController {
 		Customer customer = customerTable.getSelectionModel().getSelectedItem();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekrï¿½fta");
-			alert.setHeaderText("Bekrï¿½fta borttagning");
+			alert.setTitle("Bekräfta");
+			alert.setHeaderText("Bekräfta borttagning");
 			alert.setContentText("Vill du verkligen ta bort " + customer.getFName() + " " + customer.getLName() + "?");
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
@@ -187,7 +187,7 @@ public class CustomerRegisterViewController {
 			alert.initOwner(mainApp.getCustomerRegisterStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen kund markerad");
-			alert.setContentText("Vï¿½nligen markera en kund som du vill radera");
+			alert.setContentText("Vä½nligen markera en kund som du vill radera");
 
 			alert.showAndWait();
 		}

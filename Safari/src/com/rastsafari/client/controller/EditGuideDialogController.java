@@ -93,18 +93,18 @@ public class EditGuideDialogController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (givenNameField.getText() == null || givenNameField.getText().length() == 0) {
-			errorMessage += "Fï¿½rnamn ï¿½r inte ifyllt\n";
+			errorMessage += "Förnamn är inte ifyllt\n";
 		}
 		if (familyNameField.getText() == null || familyNameField.getText().length() == 0) {
-			errorMessage += "Efternamn ï¿½r inte ifyllt\n";
+			errorMessage += "Efternamn är inte ifyllt\n";
 		}
 		if (emailField.getText() == null || emailField.getText().length() == 0) {
-			errorMessage += "Email ï¿½r inte ifyllt\n";
+			errorMessage += "Email är inte ifyllt\n";
 		}
 		String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\" + "@([\\w]+\\.)+[\\w]+[\\w]$";
 		boolean emailMatch = emailField.getText().matches(EMAIL_REGEX);
 		if (!emailMatch) {
-			errorMessage += "Email ï¿½r inte i rï¿½tt format";
+			errorMessage += "Email är inte i rätt format";
 		}
 		if (errorMessage.length() == 0) {
 			return true;
@@ -112,7 +112,7 @@ public class EditGuideDialogController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(guideStage);
 			alert.setTitle("Felaktig inmatning");
-			alert.setHeaderText("Vï¿½nligen kontrollera nedan");
+			alert.setHeaderText("Vänligen kontrollera nedan");
 			alert.setContentText(errorMessage);
 
 			alert.showAndWait();

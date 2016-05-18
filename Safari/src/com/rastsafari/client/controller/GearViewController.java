@@ -91,7 +91,7 @@ public class GearViewController {
 			alert.initOwner(mainApp.getGearStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen utrustning markerad");
-			alert.setContentText("Vï¿½nligen vï¿½lj en utrustning som ska redigeras");
+			alert.setContentText("Vänligen välj en utrustning som ska redigeras");
 
 			alert.showAndWait();
 		}
@@ -105,8 +105,8 @@ public class GearViewController {
 		Gear gear = gearTable.getSelectionModel().getSelectedItem();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekrï¿½fta");
-			alert.setHeaderText("Bekrï¿½fta borttagning");
+			alert.setTitle("Bekräfta");
+			alert.setHeaderText("Bekräfta borttagning");
 			alert.setContentText("Vill du verkligen ta bort " + gear.getGearName() + " " + gear.getDescription() + "?");
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
@@ -124,7 +124,7 @@ public class GearViewController {
 			alert.initOwner(mainApp.getCustomerRegisterStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen utrustning markerad");
-			alert.setContentText("Vï¿½nligen markera en utrustning som du vill radera");
+			alert.setContentText("Vänligen markera en utrustning som du vill radera");
 
 			alert.showAndWait();
 		}

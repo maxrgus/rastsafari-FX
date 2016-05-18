@@ -147,19 +147,19 @@ public class EditCustomerDialogController {
 		boolean emailFilled = true;
 		boolean emailMatch = true;
 		if (givenNameField.getText() == null || givenNameField.getText().length() == 0) {
-			errorMessage += "Fï¿½rnamn ï¿½r inte ifyllt!\n";
+			errorMessage += "Förnamn är inte ifyllt!\n";
 		}
 		if (familyNameField.getText() == null || familyNameField.getText().length() == 0) {
-			errorMessage += "Efternamn ï¿½r inte ifyllt!\n";
+			errorMessage += "Efternamn är inte ifyllt!\n";
 		}
 		if (pNumberField.getText() == null || pNumberField.getText().length() == 0) {
-			errorMessage += "Personnummer ï¿½r inte ifyllt!\n";
+			errorMessage += "Personnummer är inte ifyllt!\n";
 		}
 		if (adressField.getText() == null || adressField.getText().length() == 0) {
-			errorMessage += "Adress ï¿½r inte ifyllt\n";
+			errorMessage += "Adress är inte ifyllt\n";
 		}
 		if (emailField.getText() == null || emailField.getText().length() == 0) {
-			errorMessage += "Email ï¿½r inte ifyllt!\n";
+			errorMessage += "Email är inte ifyllt!\n";
 			emailFilled = false;
 		}
 		String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\" + "@([\\w]+\\.)+[\\w]+[\\w]$";
@@ -167,13 +167,13 @@ public class EditCustomerDialogController {
 			emailMatch = emailField.getText().matches(EMAIL_REGEX);
 		}
 		if (!emailMatch) {
-			errorMessage += "Email ï¿½r inte i rï¿½tt format";
+			errorMessage += "Email är inte i rätt format";
 		}
 		if (phoneDayField.getText() == null || phoneDayField.getText().length() == 0) {
-			errorMessage += "Telefonnummer dagtid ï¿½r inte ifyllt!\n";
+			errorMessage += "Telefonnummer dagtid är inte ifyllt!\n";
 		}
 		if (phoneNightField.getText() == null || phoneNightField.getText().length() == 0) {
-			errorMessage += "Telefonnummer kvï¿½llstid ï¿½r inte ifyllt!\n";
+			errorMessage += "Telefonnummer kvällstid är inte ifyllt!\n";
 		}
 		if (errorMessage.length() == 0) {
 			return true;
@@ -181,7 +181,7 @@ public class EditCustomerDialogController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(customerRegisterStage);
 			alert.setTitle("Felaktig inmatning");
-			alert.setHeaderText("Vï¿½nligen fyll i fï¿½lten");
+			alert.setHeaderText("Vänligen fyll i fälten");
 			alert.setContentText(errorMessage);
 
 			alert.showAndWait();

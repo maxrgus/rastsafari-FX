@@ -74,7 +74,7 @@ public class GuideViewController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setHeaderText("Inget markerat");
-			alert.setContentText("Vï¿½nligen vï¿½l en guide som ska redigeras");
+			alert.setContentText("Vänligen välj en guide som ska redigeras");
 
 			alert.showAndWait();
 		}
@@ -101,8 +101,8 @@ public class GuideViewController {
 		Guide guide = guideTable.getSelectionModel().getSelectedItem();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekrï¿½fta");
-			alert.setHeaderText("Bekrï¿½fta borttagning");
+			alert.setTitle("Bekräfta");
+			alert.setHeaderText("Bekräfta borttagning");
 			alert.setContentText("Vill du verkligen ta bort " + guide.getGivenName() + " " + guide.getFamilyName());
 
 			Optional<ButtonType> result = alert.showAndWait();
@@ -115,7 +115,7 @@ public class GuideViewController {
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen guide markerad");
-			alert.setContentText("Vï¿½nligen markera en guide som du vill radera");
+			alert.setContentText("Vänligen markera en guide som du vill radera");
 
 			alert.showAndWait();
 		}

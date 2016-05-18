@@ -75,7 +75,7 @@ public class GearChooserDialogController {
 			alert.initOwner(dialogStage);
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen utrustning markerad");
-			alert.setContentText("Vï¿½nligen markera utrustningen du vill lï¿½gga till");
+			alert.setContentText("Vänligen markera utrustningen du vill lägga till");
 
 			alert.showAndWait();
 		}

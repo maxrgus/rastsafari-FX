@@ -52,8 +52,6 @@ public class LocationEditDialogController {
 	private Storage storage = StorageFactory.getStorageDB();
 	private boolean okClicked = false;
 	private ObservableList<Integer> participantOptions = FXCollections.observableArrayList();
-	private ObservableList<String> isActiveOptions = FXCollections.observableArrayList();
-
 	/**
 	 * Initializes the controller class. This method is automatically called
 	 * after the FXML file has been loaded.
@@ -146,7 +144,7 @@ public class LocationEditDialogController {
 			alert.initOwner(dialogStage);
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen utrustning markerad");
-			alert.setContentText("Vï¿½nligen markera utrustningen som du vill radera");
+			alert.setContentText("Vänligen markera utrustningen som du vill radera");
 
 			alert.showAndWait();
 		}
@@ -192,16 +190,16 @@ public class LocationEditDialogController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (locationNameField.getText() == null || locationNameField.getText().length() == 0) {
-			errorMessage += "Sjï¿½ ï¿½r inte ifyllt!\n";
+			errorMessage += "Sjö är inte ifyllt!\n";
 		}
 		if (descriptionField.getText() == null || descriptionField.getText().length() == 0) {
-			errorMessage += "Beskrivning ï¿½r inte ifyllt \n";
+			errorMessage += "Beskrivning är inte ifyllt \n";
 		}
 		if (locationField.getText() == null || locationField.getText().length() == 0) {
-			errorMessage += "Plats ï¿½r inte ifyllt \n";
+			errorMessage += "Plats är inte ifyllt \n";
 		}
 		if (minParticipantBox.getValue() > maxParticipantBox.getValue()) {
-			errorMessage += "Minimum antal deltagare ï¿½r fler ï¿½n max antal \n";
+			errorMessage += "Minimum antal deltagare är fler än max antal \n";
 		}
 		if (errorMessage.length() == 0) {
 			return true;
@@ -210,7 +208,7 @@ public class LocationEditDialogController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(dialogStage);
 			alert.setTitle("Felaktig inmatning");
-			alert.setHeaderText("Vï¿½nligen fyll i fï¿½lten");
+			alert.setHeaderText("Vänligen fyll i fälten");
 			alert.setContentText(errorMessage);
 
 			alert.showAndWait();

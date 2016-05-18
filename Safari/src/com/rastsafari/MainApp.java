@@ -225,7 +225,7 @@ public class MainApp extends Application {
 
 			// Create dialog stage
 			dialogStage = new Stage();
-			dialogStage.setTitle("Safarimï¿½l");
+			dialogStage.setTitle("Safarimål");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(safariLocationView);
@@ -312,7 +312,7 @@ public class MainApp extends Application {
 
 			// Create dialog stage
 			editStage = new Stage();
-			editStage.setTitle("Redigera Safarimï¿½l");
+			editStage.setTitle("Redigera Safarimål");
 			editStage.initModality(Modality.WINDOW_MODAL);
 			editStage.initOwner(dialogStage);
 			Scene scene = new Scene(editDialog);
@@ -493,7 +493,7 @@ public class MainApp extends Application {
 			BorderPane customerChooserDialog = (BorderPane) uiLoader.load();
 
 			customerRegisterStage = new Stage();
-			customerRegisterStage.setTitle("Vï¿½lj kund");
+			customerRegisterStage.setTitle("Välj kund");
 			customerRegisterStage.initModality(Modality.WINDOW_MODAL);
 			customerRegisterStage.initOwner(bookingStage);
 			Scene scene = new Scene(customerChooserDialog);

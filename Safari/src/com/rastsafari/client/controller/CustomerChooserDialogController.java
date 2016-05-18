@@ -92,7 +92,7 @@ public class CustomerChooserDialogController {
 			alert.initOwner(mainApp.getCustomerRegisterStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen kund markerad");
-			alert.setContentText("Vï¿½nligen markera en kund som du vill boka");
+			alert.setContentText("Vänligen markera en kund som du vill boka");
 
 			alert.showAndWait();
 		}

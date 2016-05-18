@@ -101,10 +101,10 @@ public class EditGearDialogController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (nameField.getText() == null || nameField.getText().length() == 0) {
-			errorMessage += "Namn ï¿½r inte ifyllt!\n";
+			errorMessage += "Namn är inte ifyllt!\n";
 		} // Validering fÃ¶r siffra mÃ¥ste tillÃ¤ggas
 		if (descriptionField.getText() == null || descriptionField.getText().length() == 0) {
-			errorMessage += "Beskrivning ï¿½r inte ifyllt!\n";
+			errorMessage += "Beskrivning är inte ifyllt!\n";
 		}
 
 		if (errorMessage.length() == 0) {
@@ -113,7 +113,7 @@ public class EditGearDialogController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(gearStage);
 			alert.setTitle("Felaktig inmatning");
-			alert.setHeaderText("Vï¿½nligen fyll i fï¿½lten");
+			alert.setHeaderText("Vänligen fyll i fälten");
 			alert.setContentText(errorMessage);
 
 			alert.showAndWait();

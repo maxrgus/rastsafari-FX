@@ -56,8 +56,6 @@ public class SafariLocationViewController {
 
 	// Reference the main app
 	private MainApp mainApp;
-	private Stage dialogStage;
-
 	private Storage storage = StorageFactory.getStorageDB();
 
 	/**
@@ -96,7 +94,6 @@ public class SafariLocationViewController {
 	 * @param dialogStage
 	 */
 	public void setDialogStage(Stage dialogStage, MainApp mainApp) {
-		this.dialogStage = dialogStage;
 		this.mainApp = mainApp;
 
 		safariLocationTable.setItems(mainApp.getLocationList());
@@ -136,9 +133,9 @@ public class SafariLocationViewController {
 		SafariLocation location = safariLocationTable.getSelectionModel().getSelectedItem();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekrï¿½fta");
-			alert.setHeaderText("Bekrï¿½fta borttagning");
-			alert.setContentText("Vill du verkligen ta bort den hï¿½r medlemmen?");
+			alert.setTitle("Bekräfta");
+			alert.setHeaderText("Bekräfta borttagning");
+			alert.setContentText("Vill du verkligen ta bort det här safarimålet?");
 
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
@@ -151,8 +148,8 @@ public class SafariLocationViewController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
-			alert.setHeaderText("Inget safarimï¿½l markerat");
-			alert.setContentText("Vï¿½nligen markera safarimï¿½let du vill radera");
+			alert.setHeaderText("Inget safarimål markerat");
+			alert.setContentText("Vänligen markera safarimålet du vill radera");
 
 			alert.showAndWait();
 		}
@@ -193,8 +190,8 @@ public class SafariLocationViewController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
-			alert.setHeaderText("Inget safarimï¿½l valt");
-			alert.setContentText("Vï¿½nligen vï¿½lj ett safarimï¿½l som ska redigeras");
+			alert.setHeaderText("Inget safarimål valt");
+			alert.setContentText("Vänligen välj ett safarimål som ska redigeras");
 
 			alert.showAndWait();
 
@@ -211,8 +208,8 @@ public class SafariLocationViewController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
-			alert.setHeaderText("Inget safarimï¿½l valt");
-			alert.setContentText("Vï¿½nligen vï¿½lj ett safarimï¿½l som ska redigeras");
+			alert.setHeaderText("Inget safarimål valt");
+			alert.setContentText("Vänligen välj ett safarimål som ska redigeras");
 
 			alert.showAndWait();
 

@@ -193,11 +193,11 @@ public class EditSafariDialogController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (priceField.getText() == null || priceField.getText().length() == 0) {
-			errorMessage += "Pris ï¿½r inte ifyllt\n";
+			errorMessage += "Pris är inte ifyllt\n";
 		}
 		LocalDate today = LocalDate.now();
 		if (today.isAfter(datePicker.getValue()) && !today.equals(datePicker.getValue())) {
-			errorMessage += "Datum mï¿½ste vara idag eller i framtiden, Marty\n";
+			errorMessage += "Datum måste vara idag eller i framtiden, Marty\n";
 		}
 		if (errorMessage.length() == 0) {
 			return true;
@@ -205,7 +205,7 @@ public class EditSafariDialogController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(safariStage);
 			alert.setTitle("Felaktig inmatning");
-			alert.setHeaderText("Vï¿½nligen kontrollera nedan:");
+			alert.setHeaderText("Vänligen kontrollera nedan:");
 			alert.setContentText(errorMessage);
 
 			alert.showAndWait();

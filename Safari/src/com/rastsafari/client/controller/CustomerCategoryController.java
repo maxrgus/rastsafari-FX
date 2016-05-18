@@ -67,7 +67,7 @@ public class CustomerCategoryController {
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget Markerat");
 			alert.setHeaderText("Ingen kategori vald");
-			alert.setContentText("V√§nligen v√§lj en kategori som sak redigeras");
+			alert.setContentText("V‰nligen v‰lj en kategori som ska redigeras");
 
 			alert.showAndWait();
 
@@ -99,8 +99,8 @@ public class CustomerCategoryController {
 		CustomerCategory category = categoryTable.getSelectionModel().getSelectedItem();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekr√§fta");
-			alert.setHeaderText("Bekr√§fta borttagning");
+			alert.setTitle("Bekr‰fta");
+			alert.setHeaderText("Bekr‰fta borttagning");
 			alert.setContentText("Vill du verkligen ta bort denna kategori?");
 
 			Optional<ButtonType> result = alert.showAndWait();
@@ -113,7 +113,7 @@ public class CustomerCategoryController {
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen kategori markerad");
-			alert.setContentText("V√§nligen markera kategorin du vill raderad");
+			alert.setContentText("V‰nligen markera kategorin du vill raderad");
 			alert.showAndWait();
 		}
 	}

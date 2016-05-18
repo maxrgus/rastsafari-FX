@@ -1,6 +1,5 @@
 package com.rastsafari.client.controller;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 import com.rastsafari.MainApp;
@@ -204,7 +203,7 @@ public class SafariViewController {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setHeaderText("Inget markerat");
-			alert.setContentText("Vï¿½nligen vï¿½lj ett safari som ska redigeras");
+			alert.setContentText("Vänligen välj ett safari som ska redigeras");
 
 			alert.showAndWait();
 		}
@@ -231,8 +230,8 @@ public class SafariViewController {
 		Safari safari = safariTable.getSelectionModel().getSelectedItem();
 		if (selectedIndex >= 0) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Bekrï¿½fta");
-			alert.setHeaderText("Bekrï¿½fta borttagning");
+			alert.setTitle("Bekräfta");
+			alert.setHeaderText("Bekräfta borttagning");
 			alert.setContentText(
 					"Vill du verkligen ta bort " + safari.getLocation().getLocationName() + " den " + safari.getDate());
 
@@ -246,7 +245,7 @@ public class SafariViewController {
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Inget safari markerad");
-			alert.setContentText("Vï¿½nligen markera ett safari som du vill radera");
+			alert.setContentText("Vänligen markera ett safari som du vill radera");
 
 			alert.showAndWait();
 		}
@@ -282,7 +281,7 @@ public class SafariViewController {
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Inget safari markerad");
-			alert.setContentText("Vï¿½nligen markera ett safari som du vill skicka");
+			alert.setContentText("Vänligen markera ett safari som du vill skicka");
 
 			alert.showAndWait();
 		}
