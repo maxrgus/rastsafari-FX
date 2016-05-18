@@ -5,7 +5,13 @@ import com.rastsafari.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-
+/**
+ * Controller for the root layout
+ * <p>
+ * @author Team14
+ * 
+ *
+ */
 public class RootLayoutController {
 
 	@FXML
@@ -38,26 +44,37 @@ public class RootLayoutController {
 	private void handleFileExit() {
 		System.exit(1);
 	}
-
+/**
+ * When button is pressed. It takes the user to customer register
+ */
 	@FXML
 	private void handleCustomerRegister() {
 		mainApp.showCustomerRegisterView();
 	}
-
+/**
+ * When the button is pressed. It takes the user to the customer category
+ */
 	@FXML
 	private void handleCustomerCategory() {
 		mainApp.showCustomerCategoryView();
 	}
-
+/**
+ * When the button is pressed. It takes the user to the report generate
+ */
 	@FXML
 	private void handleGenerateReport() {
 		mainApp.showGenereateReportView();
 	}
-
+/**
+ * When the button is pressed. It takes the user to the gear view
+ */
 	@FXML
 	private void handleGearView() {
 		mainApp.showGearListView();
 	}
+	/**
+	 * When the button is pressed. It takes the user to the guide view
+	 */
 
 	@FXML
 	private void handleGuideView() {

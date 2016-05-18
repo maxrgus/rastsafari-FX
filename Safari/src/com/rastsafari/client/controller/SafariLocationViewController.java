@@ -16,7 +16,12 @@ import com.rastsafari.server.model.Gear;
 import com.rastsafari.server.model.SafariLocation;
 import com.rastsafari.server.storage.Storage;
 import com.rastsafari.server.storage.StorageFactory;
-
+/**
+ * Controller for the safarilocation
+ * <p>
+ * @author Team14
+ *
+ */
 public class SafariLocationViewController {
 	@FXML
 	private TableView<SafariLocation> safariLocationTable;

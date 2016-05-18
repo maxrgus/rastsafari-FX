@@ -17,7 +17,12 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.paint.Color;
-
+/**
+ * Controller for the main frame
+ * <p>
+ * @author Team14
+ *
+ */
 public class MainFrameController {
 	@FXML
 	private TableView<Safari> safariTable;
@@ -92,13 +97,17 @@ public class MainFrameController {
 		setLineGraph();
 		
 	}
+	
+	/**
+	 * Showing the graph in the main frame
+	 */
 	private void setLineGraph() {
-		chartCategories.setLabel("Månad");
+		chartCategories.setLabel("Mï¿½nad");
 		chart.setTitle("Bokningsstatistik");
 		chart.setCreateSymbols(false);
 		
 		XYChart.Series<String, Number> lake1 = new XYChart.Series<String, Number>();
-		lake1.setName("Storsjön");
+		lake1.setName("Storsjï¿½n");
 		lake1.getData().add(new XYChart.Data<String, Number>("Jan", 4));
 		lake1.getData().add(new XYChart.Data<String, Number>("Feb", 5));
 		lake1.getData().add(new XYChart.Data<String, Number>("Mars", 3));
@@ -107,7 +116,7 @@ public class MainFrameController {
 		lake1.getData().add(new XYChart.Data<String, Number>("Juni", 22));
 		
 		XYChart.Series<String, Number> lake2 = new XYChart.Series<String, Number>();
-		lake2.setName("Byasjön");
+		lake2.setName("Byasjï¿½n");
 		lake2.getData().add(new XYChart.Data<String, Number>("Jan", 0));
 		lake2.getData().add(new XYChart.Data<String, Number>("Feb", 2));
 		lake2.getData().add(new XYChart.Data<String, Number>("Mars", 4));
@@ -116,7 +125,7 @@ public class MainFrameController {
 		lake2.getData().add(new XYChart.Data<String, Number>("Juni", 16));
 		
 		XYChart.Series<String, Number> lake3 = new XYChart.Series<String, Number>();
-		lake3.setName("Lokasjön");
+		lake3.setName("Lokasjï¿½n");
 		lake3.getData().add(new XYChart.Data<String, Number>("Jan", 3));
 		lake3.getData().add(new XYChart.Data<String, Number>("Feb", 4));
 		lake3.getData().add(new XYChart.Data<String, Number>("Mars", 2));
@@ -125,7 +134,7 @@ public class MainFrameController {
 		lake3.getData().add(new XYChart.Data<String, Number>("Juni", 21));
 		
 		XYChart.Series<String, Number> lake4 = new XYChart.Series<String, Number>();
-		lake4.setName("Helge å");
+		lake4.setName("Helge ï¿½");
 		lake4.getData().add(new XYChart.Data<String, Number>("Jan", 6));
 		lake4.getData().add(new XYChart.Data<String, Number>("Feb", 8));
 		lake4.getData().add(new XYChart.Data<String, Number>("Mars", 5));

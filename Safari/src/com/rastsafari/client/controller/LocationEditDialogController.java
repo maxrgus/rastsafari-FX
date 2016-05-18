@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 /**
  * Dialog to edit details or add a new object of SafariLocation
  * 
- * @author maxrg
+ * @author Team14
  *
  */
 public class LocationEditDialogController {
@@ -146,7 +146,7 @@ public class LocationEditDialogController {
 			alert.initOwner(dialogStage);
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen utrustning markerad");
-			alert.setContentText("Vänligen markera utrustningen som du vill radera");
+			alert.setContentText("Vï¿½nligen markera utrustningen som du vill radera");
 
 			alert.showAndWait();
 		}

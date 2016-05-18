@@ -16,7 +16,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
-
+/**
+ * Controller for gear view
+ * <p>
+ * 
+ * @author Team14
+ *
+ */
 public class GearViewController {
 	@FXML
 	private TableView<Gear> gearTable;
@@ -54,6 +60,10 @@ public class GearViewController {
 
 	}
 
+	/**
+	 * 
+	 * Methods that handles new gear 
+	 */
 	@FXML
 	private void handleNewGear() {
 		Gear tempGear = new Gear();
@@ -65,7 +75,9 @@ public class GearViewController {
 
 		}
 	}
-
+/**
+ * Method that handles editing gear. If gear is not chosen then errormessage appears 
+ */
 	@FXML
 	private void handleEditGear() {
 		Gear selectedGear = gearTable.getSelectionModel().getSelectedItem();
@@ -84,7 +96,9 @@ public class GearViewController {
 			alert.showAndWait();
 		}
 	}
-
+/**
+ * Method that handles deleting gear. If gear is not chosen then errormessage appears. 
+ */
 	@FXML
 	private void handleDeleteGear() {
 		int selectedIndex = gearTable.getSelectionModel().getSelectedIndex();

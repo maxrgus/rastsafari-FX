@@ -9,7 +9,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-
+/**
+ * Controller for editing guide  
+ * <p>
+ * 
+ * @author Team14
+ * 
+ *
+ */
 public class EditGuideDialogController {
 	@FXML
 	private Label headerLabel;
@@ -61,6 +68,9 @@ public class EditGuideDialogController {
 	}
 
 	@FXML
+	/**
+	 * Setting input if the input is correct. 
+	 */
 	private void handleOk() {
 		if (isInputValid()) {
 			guide.setGivenName(givenNameField.getText());
@@ -76,7 +86,10 @@ public class EditGuideDialogController {
 	private void handleCancel() {
 		guideStage.close();
 	}
-
+/**
+ * Method checking if input is valid. If not, errormessage appears. 
+ * @return
+ */
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (givenNameField.getText() == null || givenNameField.getText().length() == 0) {

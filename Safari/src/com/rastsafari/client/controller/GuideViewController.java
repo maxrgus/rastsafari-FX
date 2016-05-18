@@ -14,7 +14,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-
+/**
+ * Controller for guide view
+ * <p>
+ * 
+ * @author Team14
+ * 
+ *
+ */
 public class GuideViewController {
 	@FXML
 	private TableView<Guide> guideTable;
@@ -51,7 +58,10 @@ public class GuideViewController {
 		this.mainApp = mainApp;
 		guideTable.setItems(mainApp.getGuideList());
 	}
-
+/**
+ * 
+ * Method that handles editing guide
+ */
 	@FXML
 	private void handleEditGuide() {
 		Guide selectedGuide = guideTable.getSelectionModel().getSelectedItem();
@@ -69,7 +79,9 @@ public class GuideViewController {
 			alert.showAndWait();
 		}
 	}
-
+/**
+ * Method that handles create a new guide
+ */
 	@FXML
 	private void handleNewGuide() {
 		Guide tempGuide = new Guide();
@@ -80,7 +92,9 @@ public class GuideViewController {
 			storage.addGuide(tempGuide);
 		}
 	}
-
+/**
+ * Method that handles the removing of the guide 
+ */
 	@FXML
 	private void handleDeleteGuide() {
 		int selectedIndex = guideTable.getSelectionModel().getSelectedIndex();

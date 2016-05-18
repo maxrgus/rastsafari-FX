@@ -9,7 +9,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-
+/**
+ * Controller for choosing gear
+ * <p>
+ * 
+ * @author Team14
+ * 
+ *
+ */
 public class GearChooserDialogController {
 	@FXML
 	private TableView<Gear> gearTable;
@@ -53,6 +60,9 @@ public class GearChooserDialogController {
 		return okClicked;
 	}
 	
+	/**
+	 * Method that handles the ok button. If the input is missing or is wrong. Errormessage
+	 */
 	@FXML
 	private void handleOk() {
 		int selectedIndex = gearTable.getSelectionModel().getSelectedIndex();
@@ -65,7 +75,7 @@ public class GearChooserDialogController {
 			alert.initOwner(dialogStage);
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Ingen utrustning markerad");
-			alert.setContentText("Vänligen markera utrustningen du vill lägga till");
+			alert.setContentText("Vï¿½nligen markera utrustningen du vill lï¿½gga till");
 
 			alert.showAndWait();
 		}
