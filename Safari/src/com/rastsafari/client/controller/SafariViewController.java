@@ -22,6 +22,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 
+/**
+ * Controller for the safari view
+ * @author Team14
+ *
+ */
 public class SafariViewController {
 	@FXML
 	private TableView<Safari> safariTable;
@@ -111,7 +116,10 @@ public class SafariViewController {
 		safariTable.getSortOrder().add(dateColumn);
 
 	}
-
+/**
+ * Method which shows the safari details
+ * @param safari
+ */
 	private void showSafariDetails(Safari safari) {
 		if (safari != null) {
 			idLabel.setText(Integer.toString(safari.getId()));
@@ -138,7 +146,9 @@ public class SafariViewController {
 			bookingsTable.setItems(null);
 		}
 	}
-
+/**
+ * Method that handles editing of the safari. User needs to first choose which safari to edit
+ */
 	@FXML
 	private void handleEditSafari() {
 		Safari selectedSafari = safariTable.getSelectionModel().getSelectedItem();
@@ -156,7 +166,9 @@ public class SafariViewController {
 			alert.showAndWait();
 		}
 	}
-
+/**
+ * Method which creates a new safari
+ */
 	@FXML
 	private void handleNewSafari() {
 		Safari tempSafari = new Safari();
@@ -167,7 +179,9 @@ public class SafariViewController {
 			storage.addSafari(tempSafari);
 		}
 	}
-
+/**
+ * Method which deletes safari when called. User needs to choose which safari to delete
+ */
 	@FXML
 	private void handleDeleteSafari() {
 		int selectedIndex = safariTable.getSelectionModel().getSelectedIndex();
@@ -194,7 +208,9 @@ public class SafariViewController {
 			alert.showAndWait();
 		}
 	}
-	
+	/**
+	 * Method that handles the briefeing to the guides about safari
+	 */
 	@FXML
 	private void handleSendGuideBriefing() {
 		Safari selectedSafari = safariTable.getSelectionModel().getSelectedItem();
@@ -223,7 +239,7 @@ public class SafariViewController {
 			alert.initOwner(mainApp.getPrimaryStage());
 			alert.setTitle("Inget markerat");
 			alert.setHeaderText("Inget safari markerad");
-			alert.setContentText("Vänligen markera ett safari som du vill skicka");
+			alert.setContentText("Vï¿½nligen markera ett safari som du vill skicka");
 
 			alert.showAndWait();
 		}

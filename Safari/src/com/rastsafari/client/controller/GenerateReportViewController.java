@@ -19,7 +19,14 @@ import javafx.scene.control.DatePicker;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-
+/**
+ * Controller for generating report 
+ * <p>
+ * 
+ * @author Team14
+ * 
+ *
+ */
 public class GenerateReportViewController {
 	private FileChooser fileChooser;
 
@@ -44,6 +51,10 @@ public class GenerateReportViewController {
 	private void initialize() {
 		
 	}
+	
+	/**
+	 * Method when selecting guide from the combobox 
+	 */
 	public void setGuideBox() {
 		guideBox.getItems().addAll(mainApp.getGuideList());
 		guideBox.setConverter(new StringConverter<Guide>() {
@@ -68,7 +79,10 @@ public class GenerateReportViewController {
 	public void setStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}
-
+/**
+ * Method that handles the generating report to a PDF file
+ * 
+ */
 	@FXML
 	public void handleGenerate() {
 		ArrayList<GuideSalary> salaryObjects = null;
@@ -79,8 +93,8 @@ public class GenerateReportViewController {
 		} catch (NullPointerException e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.initOwner(primaryStage);
-			alert.setHeaderText("Ogiltlig förfrågan");
-			alert.setContentText("Allt är inte ifyllt");
+			alert.setHeaderText("Ogiltlig fï¿½rfrï¿½gan");
+			alert.setContentText("Allt ï¿½r inte ifyllt");
 			alert.showAndWait();
 		}
 		fileChooser = new FileChooser();

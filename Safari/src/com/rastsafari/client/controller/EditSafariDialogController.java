@@ -19,7 +19,15 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-
+/**
+ * Controller for editing safari
+ * <p>
+ * 
+ * 
+ * @author Team14
+ * 
+ *
+ */
 public class EditSafariDialogController {
 
 	@FXML
@@ -57,7 +65,11 @@ public class EditSafariDialogController {
 	private void initialize() {
 
 	}
-
+	
+	/**
+	 * Method that sets safari information
+	 * @param safari
+	 */
 	public void setSafari(Safari safari) {
 		this.safari = safari;
 
@@ -144,7 +156,9 @@ public class EditSafariDialogController {
 	public boolean isOkClicked() {
 		return okClicked;
 	}
-
+/**
+ * Handles the ok button. 
+ */
 	@FXML
 	private void handleOk() {
 		if (isInputValid()) {
@@ -172,6 +186,10 @@ public class EditSafariDialogController {
 		safariStage.close();
 	}
 
+	/**
+	 * Method that checks if input is correct. If not, errormessage
+	 * @return
+	 */
 	private boolean isInputValid() {
 		String errorMessage = "";
 		if (priceField.getText() == null || priceField.getText().length() == 0) {
