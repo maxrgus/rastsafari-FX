@@ -16,8 +16,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.paint.Color;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -97,6 +100,16 @@ public class SafariViewController {
 				.addListener((observable, oldValue, newValue) -> showSafariDetails(newValue));
 		progress.setVisible(false);
 		mailStatusLabel.setVisible(false);
+		
+		bookingsTable.setRowFactory(tv -> {
+			TableRow<Booking> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					mainApp.showEditBookingDialog(row.getItem(), "Visa bokning", true);
+				}
+			});
+			return row;
+		});
 	}
 
 	public void setMainApp(MainApp mainApp) {
@@ -124,6 +137,36 @@ public class SafariViewController {
 			guideLabel.setText(safari.getGuide().getGivenName() + " " + safari.getGuide().getFamilyName());
 
 			bookingsTable.setItems(safari.getBookedCustomers());
+			customerColumn.setCellFactory(column -> {
+				return new TableCell <Booking, String>() {
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						Booking b = (Booking) getTableRow().getItem();
+						boolean isPayed = false;
+						try {
+							isPayed = b.getIsPayed();
+						} catch (NullPointerException e) {
+						
+						}
+						if (item == null || empty) {
+							setStyle("");
+							setText(null);
+						} else {
+							if (!isPayed) {
+								setTextFill(Color.WHITE);
+								setStyle("");
+								getStyleClass().add("table-cell-warning");
+								setText(item);
+							} else {
+								setTextFill(Color.WHITE);
+								getStyleClass().add(".table-row-cell");
+								setText(item);
+							}
+						}
+					}
+				};
+			});
 
 		} else {
 			idLabel.setText("");

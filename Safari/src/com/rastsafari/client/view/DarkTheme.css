@@ -149,6 +149,9 @@
 .table-cell-alert {
 	-fx-background-color: derive(red, 50%);
 }
+.table-cell-warning {
+	-fx-background-color: derive(orange, 50%);
+}
 .chart {
     -fx-padding: 10px;
 }

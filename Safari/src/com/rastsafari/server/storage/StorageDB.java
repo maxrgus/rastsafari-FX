@@ -117,12 +117,17 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void addBooking(Booking b) {
-		
+		int isPayed;
+		if (b.getIsPayed()) {
+			isPayed = 1;
+		} else {
+			isPayed = 0;
+		}
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
-			String sql = "INSERT INTO Booking (customerId,safariId,priceIndex) " + "VALUES (" + b.getCustomer().getid()
-					+ "," + b.getSafari().getId() + ",0);";
+			String sql = "INSERT INTO Booking (customerId,safariId,isPayed,priceIndex) " + "VALUES (" + b.getCustomer().getid()
+					+ "," + b.getSafari().getId() + "," + isPayed + ",0);";
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -240,12 +245,17 @@ public class StorageDB implements Storage {
 
 	@Override
 	public void updateBooking(Booking b) {
-		
+		int isPayed;
+		if (b.getIsPayed()) {
+			isPayed = 1;
+		} else {
+			isPayed = 0;
+		}
 		Connection c = sd.createConnection();
 		try {
 			Statement st = c.createStatement();
 			String sql = "UPDATE Booking SET customerId = " + b.getCustomer().getid() + ", safariId = "
-					+ b.getSafari().getId() + " " + "WHERE bookingNr == " + b.getId() + ";";
+					+ b.getSafari().getId() + ", isPayed = " + isPayed + " " + "WHERE bookingNr == " + b.getId() + ";";
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -539,7 +549,7 @@ public class StorageDB implements Storage {
 			String sql = "SELECT Booking.bookingNr,customer.id, customer.customerCatID, customer.SSID, "
 					+ "customer.givenName, customer.familyName,"
 					+ "customer.email, customer.adress, customer.phoneDay, customer.phoneNight,safari.id,safariLocation.*,"
-					+ "safari.date,safari.hour,safari.endHour,safari.price,guide.* "
+					+ "safari.date,safari.hour,safari.endHour,safari.price,guide.*,Booking.isPayed "
 					+ "FROM Booking,customer,safari,safariLocation,guide " + "WHERE Booking.customerId == customer.id "
 					+ "AND Booking.safariId == safari.id " + "AND safari.safariLocationId == safariLocation.id "
 					+ "AND safari.guideId == guide.id;";
@@ -553,7 +563,8 @@ public class StorageDB implements Storage {
 								new SafariLocation(rs.getInt(12), rs.getString(13), rs.getString(14), rs.getString(15),
 										rs.getInt(16), rs.getInt(17), rs.getInt(18)),
 								rs.getString(19), rs.getString(20), rs.getString(21), rs.getInt(22),
-								new Guide(rs.getInt(23), rs.getString(24), rs.getString(25), rs.getString(26)))));
+								new Guide(rs.getInt(23), rs.getString(24), rs.getString(25), rs.getString(26))),
+						rs.getInt(27)));
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -616,7 +627,7 @@ public class StorageDB implements Storage {
 			String sql = "SELECT Booking.bookingNr,customer.id, customer.customerCatID, customer.SSID, "
 					+ "customer.givenName, customer.familyName,"
 					+ "customer.email, customer.adress, customer.phoneDay, customer.phoneNight,safari.id,safariLocation.*,"
-					+ "safari.date,safari.hour,safari.endHour,safari.price,guide.* "
+					+ "safari.date,safari.hour,safari.endHour,safari.price,guide.*,Booking.isPayed "
 					+ "FROM Booking,customer,safari,safariLocation,guide " + "WHERE Booking.customerId == customer.id "
 					+ "AND Booking.safariId == safari.id " + "AND safari.safariLocationId == safariLocation.id "
 					+ "AND safari.guideId == guide.id " + "AND Booking.safariId == " + safariId + ";";
@@ -630,7 +641,8 @@ public class StorageDB implements Storage {
 								new SafariLocation(rs.getInt(12), rs.getString(13), rs.getString(14), rs.getString(15),
 										rs.getInt(16), rs.getInt(17), rs.getInt(18)),
 								rs.getString(19), rs.getString(20), rs.getString(21), rs.getInt(22),
-								new Guide(rs.getInt(23), rs.getString(24), rs.getString(25), rs.getString(26)))));
+								new Guide(rs.getInt(23), rs.getString(24), rs.getString(25), rs.getString(26))),
+						rs.getInt(27)));
 			}
 			rs.close();
 		} catch (Exception e) {

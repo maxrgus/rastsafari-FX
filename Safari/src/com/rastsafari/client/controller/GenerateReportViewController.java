@@ -73,40 +73,66 @@ public class GenerateReportViewController {
 	public void handleGenerate() {
 		ArrayList<GuideSalary> salaryObjects = null;
 		Guide tempGuide = null;
-		try {
-			salaryObjects = storage.getGuideSalaryFromStorage(guideBox.getValue().getId(), startDate.getValue().toString(), endDate.getValue().toString());
-			tempGuide = guideBox.getValue();
-		} catch (NullPointerException e) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.initOwner(primaryStage);
-			alert.setHeaderText("Ogiltlig förfrågan");
-			alert.setContentText("Allt är inte ifyllt");
-			alert.showAndWait();
-		}
-		fileChooser = new FileChooser();
-		fileChooser.setTitle("Spara rapport");
-		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
-		fileChooser.setInitialFileName(Integer.toString(tempGuide.getId()) + "." + tempGuide.getFamilyName() +
-									   "." + Character.toString(tempGuide.getGivenName().charAt(0)) +
-									   "." + startDate.getValue().toString() + "-" + endDate.getValue().toString());
-		File file = fileChooser.showSaveDialog(primaryStage);
-		String path = file.getPath();
+		if (isInputValid()) {
+			try {
+				salaryObjects = storage.getGuideSalaryFromStorage(guideBox.getValue().getId(), startDate.getValue().toString(), endDate.getValue().toString());
+				tempGuide = guideBox.getValue();
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
 		
-		try {
-			report.generateSalaryReport(path,tempGuide,salaryObjects);
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.initOwner(primaryStage);
-			alert.setHeaderText("Allt gick bra!");
-			alert.setContentText("Rapport genererad");
-			alert.showAndWait();
-		} catch (DocumentException e) {
-			e.printStackTrace();
+			fileChooser = new FileChooser();
+			fileChooser.setTitle("Spara rapport");
+			fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+			fileChooser.setInitialFileName(Integer.toString(tempGuide.getId()) + "." + tempGuide.getFamilyName() +
+										   "." + Character.toString(tempGuide.getGivenName().charAt(0)) +
+										   "." + startDate.getValue().toString() + "-" + endDate.getValue().toString());
+			File file = fileChooser.showSaveDialog(primaryStage);
+			String path = file.getPath();
+			
+			try {
+				report.generateSalaryReport(path,tempGuide,salaryObjects);
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.initOwner(primaryStage);
+				alert.setHeaderText("Allt gick bra!");
+				alert.setContentText("Rapport genererad");
+				alert.showAndWait();
+			} catch (DocumentException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
 	@FXML
 	public void handleDispose() {
 		primaryStage.close();
+	}
+	private boolean isInputValid() {
+		String errorMessage = "";
+		boolean dateSelected = true;
+		
+		if (startDate.getValue() == null || endDate.getValue() == null) {
+			errorMessage += "Inga datum valda\n";
+			dateSelected = false;
+		}
+		if (dateSelected) {
+			if (startDate.getValue().isAfter(endDate.getValue())) {
+				errorMessage += "Slutdatumet måste vara efter startdatumet\n";
+			}
+		}
+		if (guideBox.getValue() == null) {
+			errorMessage += "Ingen guide vald\n";
+		}
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(primaryStage);
+			alert.setHeaderText("Ogiltlig förfrågan");
+			alert.setContentText(errorMessage);
+			alert.showAndWait();
+			return false;
+		}
 	}
 
 }

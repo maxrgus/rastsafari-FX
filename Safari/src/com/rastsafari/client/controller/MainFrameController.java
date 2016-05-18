@@ -1,10 +1,13 @@
 package com.rastsafari.client.controller;
 
 import com.rastsafari.MainApp;
+import com.rastsafari.server.model.Booking;
 import com.rastsafari.server.model.Safari;
 import com.rastsafari.server.storage.Storage;
 import com.rastsafari.server.storage.StorageFactory;
 
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -76,7 +79,8 @@ public class MainFrameController {
 							setStyle("");
 							getStyleClass().add("table-cell-alert");
 							setText(Integer.toString(item));
-						} else {
+						} 
+							else {
 							setTextFill(Color.WHITE);
 							setStyle("-fx-background-color: #2b2b2b");
 							setText(Integer.toString(item));
@@ -168,7 +172,7 @@ public class MainFrameController {
 
 	@FXML
 	private void handleApplicationExit() {
-		System.exit(1);
+		Platform.exit();
 	}
 
 	@FXML

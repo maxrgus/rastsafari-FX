@@ -338,9 +338,10 @@ public class MainApp extends Application {
 	 * Show the dialog to edit a Booking
 	 * @param booking
 	 * @param label
+	 * @param readOnly
 	 * @return boolean
 	 */
-	public boolean showEditBookingDialog(Booking booking, String label) {
+	public boolean showEditBookingDialog(Booking booking, String label, boolean readOnly) {
 		try {
 			FXMLLoader uiLoader = new FXMLLoader();
 			uiLoader.setLocation(MainApp.class.getResource("client/view/BookingDialogView.fxml"));
@@ -355,6 +356,9 @@ public class MainApp extends Application {
 
 			BookingDialogController controller = uiLoader.getController();
 			controller.setMainApp(this);
+			if (readOnly) {
+				controller.setToReadOnlyMode();
+			}
 			controller.setHeaderLabel(label);
 			controller.setStage(editBookingStage);
 			controller.setBooking(booking);

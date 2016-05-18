@@ -78,7 +78,7 @@ public class BookingViewController {
 		Booking selectedBooking = bookingTable.getSelectionModel().getSelectedItem();
 		int selectedIndex = bookingTable.getSelectionModel().getSelectedIndex();
 		if (selectedBooking != null) {
-			boolean okClicked = mainApp.showEditBookingDialog(selectedBooking, "Redigera bokning");
+			boolean okClicked = mainApp.showEditBookingDialog(selectedBooking, "Redigera bokning", false);
 			if (okClicked) {
 				storage.updateBooking(selectedBooking);
 				bookingTable.getColumns().get(0).setVisible(false);
@@ -101,7 +101,7 @@ public class BookingViewController {
 	@FXML
 	private void handleNewBooking() {
 		Booking tempBooking = new Booking();
-		boolean okClicked = mainApp.showEditBookingDialog(tempBooking, "Ny bokning");
+		boolean okClicked = mainApp.showEditBookingDialog(tempBooking, "Ny bokning", false);
 		if (okClicked) {
 			tempBooking.setId(storage.generateBookingId());
 			mainApp.getBookingList().add(tempBooking);

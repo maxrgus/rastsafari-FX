@@ -13,11 +13,14 @@ public class Booking {
 	private IntegerProperty id;
 	private Customer customer;
 	private Safari safari;
+	private boolean isPayed;
+	private double price;
 	/**
 	 * Null constructor
 	 */
 	public Booking() {
-		this(0, null, null);
+		this(0, null, null,0);
+		this.price = 0;
 	}
 	/**
 	 * Default constructor
@@ -25,10 +28,21 @@ public class Booking {
 	 * @param customer
 	 * @param safari
 	 */
-	public Booking(int id, Customer customer, Safari safari) {
+	public Booking(int id, Customer customer, Safari safari, int payed) {
 		this.id = new SimpleIntegerProperty(id);
 		this.customer = customer;
 		this.safari = safari;
+		if (payed == 0) {
+			this.isPayed = false; 
+		} else {
+			this.isPayed = true;
+		}
+		if(safari != null) {
+			this.price = safari.getPrice();
+		} else {
+			this.price = 0;
+		}
+		
 
 	}
 
@@ -58,5 +72,17 @@ public class Booking {
 
 	public void setSafari(Safari s) {
 		this.safari = s;
+	}
+	public boolean getIsPayed() {
+		return isPayed;
+	}
+	public void setIsPayed(boolean isPayed) {
+		this.isPayed = isPayed;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
 	}
 }
